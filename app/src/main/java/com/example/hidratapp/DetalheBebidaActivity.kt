@@ -3,6 +3,7 @@ package com.example.hidratapp
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
 
 class DetalheBebidaActivity : AppCompatActivity() {
 
@@ -19,7 +21,7 @@ class DetalheBebidaActivity : AppCompatActivity() {
     private lateinit var tvNome: TextView
     private lateinit var tvInfo: TextView
     private lateinit var tvObservacao: TextView
-    private lateinit var btnFavorito: Button
+    private lateinit var btnFavorito: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +42,19 @@ class DetalheBebidaActivity : AppCompatActivity() {
         val btnEditar = findViewById<Button>(R.id.btnEditar)
         val btnExcluir = findViewById<Button>(R.id.btnExcluir)
         val btnVoltar = findViewById<Button>(R.id.btnVoltar)
+        val btnHeaderVoltar = findViewById<ImageButton>(R.id.btnHeaderVoltar)
+
+        btnHeaderVoltar.setOnClickListener { finish() }
 
         btnFavorito.setOnClickListener {
             val atual = bebida ?: return@setOnClickListener
-            BancoHelper(this).atualizar(atual.copy(favorito = !atual.favorito))
+            val novoEstado = !atual.favorito
+            BancoHelper(this).atualizar(atual.copy(favorito = novoEstado))
+            Toast.makeText(
+                this,
+                if (novoEstado) "Adicionado aos favoritos" else "Removido dos favoritos",
+                Toast.LENGTH_SHORT
+            ).show()
             carregar()
         }
 
@@ -56,13 +67,13 @@ class DetalheBebidaActivity : AppCompatActivity() {
         btnExcluir.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Excluir bebida?")
-                .setMessage("Essa ação não pode ser desfeita.")
-                .setPositiveButton("EXCLUIR") { _, _ ->
+                .setMessage("Essa ação removerá o registro do histórico.")
+                .setPositiveButton("Excluir") { _, _ ->
                     BancoHelper(this).excluir(id)
-                    Toast.makeText(this, "Bebida excluída", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Registro excluído", Toast.LENGTH_SHORT).show()
                     finish()
                 }
-                .setNegativeButton("CANCELAR", null)
+                .setNegativeButton("Cancelar", null)
                 .show()
         }
 
@@ -82,8 +93,14 @@ class DetalheBebidaActivity : AppCompatActivity() {
             return
         }
         tvNome.text = "${b.tipo} • ${b.ml} ml"
-        tvInfo.text = b.data
-        tvObservacao.text = if (b.observacao.isEmpty()) "Sem observações" else b.observacao
-        btnFavorito.text = if (b.favorito) "⭐ DESFAVORITAR" else "☆ FAVORITAR"
+        tvInfo.text = "Registrado em ${b.data}"
+        tvObservacao.text = if (b.observacao.isEmpty()) "Nenhuma observação informada." else b.observacao
+        if (b.favorito) {
+            btnFavorito.text = "Desfavoritar"
+            btnFavorito.setIconResource(R.drawable.ic_star)
+        } else {
+            btnFavorito.text = "Favoritar"
+            btnFavorito.setIconResource(R.drawable.ic_star_border)
+        }
     }
 }

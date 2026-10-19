@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvTotal: TextView
     private lateinit var tvPercentual: TextView
     private lateinit var tvAviso: TextView
+    private lateinit var cardAviso: View
     private lateinit var pbMeta: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         tvTotal = findViewById(R.id.tvTotal)
         tvPercentual = findViewById(R.id.tvPercentual)
         tvAviso = findViewById(R.id.tvAviso)
+        cardAviso = findViewById(R.id.cardAviso)
         pbMeta = findViewById(R.id.pbMeta)
 
         val btnNova = findViewById<Button>(R.id.btnNovaBebida)
@@ -75,16 +77,16 @@ class MainActivity : AppCompatActivity() {
 
         val seguidas = Calculos.alcoolSeguidos(listaHoje)
         if (seguidas >= 2) {
-            tvAviso.text = "⚠️ Você registrou $seguidas bebidas alcoólicas seguidas. Que tal beber uma água?"
-            tvAviso.visibility = View.VISIBLE
+            tvAviso.text = "Você registrou $seguidas bebidas alcoólicas seguidas. Que tal beber água agora?"
+            cardAviso.visibility = View.VISIBLE
         } else {
-            tvAviso.visibility = View.GONE
+            cardAviso.visibility = View.GONE
         }
 
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
         if (!prefs.contains("peso")) {
             tvTotal.text = "$totalMl ml"
-            tvPercentual.text = "Preencha seu PERFIL para calcular a meta."
+            tvPercentual.text = "Preencha seu perfil para calcular sua meta diária."
             pbMeta.progress = 0
             return
         }
@@ -97,6 +99,7 @@ class MainActivity : AppCompatActivity() {
         tvTotal.text = "$totalMl / $meta ml"
         pbMeta.max = meta
         pbMeta.progress = if (totalMl > meta) meta else totalMl
-        tvPercentual.text = "${totalMl * 100 / meta}% da meta de hoje"
+        val pct = if (meta > 0) (totalMl * 100 / meta) else 0
+        tvPercentual.text = "$pct% da meta diária de hoje"
     }
 }

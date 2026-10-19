@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -23,11 +24,14 @@ class PerfilActivity : AppCompatActivity() {
             insets
         }
 
+        val btnHeaderVoltar = findViewById<ImageButton>(R.id.btnHeaderVoltar)
         val etPeso = findViewById<EditText>(R.id.etPeso)
         val etAltura = findViewById<EditText>(R.id.etAltura)
         val etIdade = findViewById<EditText>(R.id.etIdade)
         val rgSexo = findViewById<RadioGroup>(R.id.rgSexo)
         val btnSalvar = findViewById<Button>(R.id.btnSalvarPerfil)
+
+        btnHeaderVoltar.setOnClickListener { finish() }
 
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
 
@@ -77,7 +81,7 @@ class PerfilActivity : AppCompatActivity() {
             val imc = Calculos.imc(peso, altura)
             Toast.makeText(
                 this,
-                "Meta: $meta ml por dia • IMC: ${"%.1f".format(imc)}",
+                "Perfil salvo! Meta: $meta ml/dia • IMC: ${"%.1f".format(imc)}",
                 Toast.LENGTH_LONG
             ).show()
             finish()
