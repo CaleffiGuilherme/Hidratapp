@@ -6,16 +6,25 @@ import java.util.Locale
 
 object Calculos {
 
-    fun metaAgua(peso: Double, idade: Int, masculino: Boolean): Int {
+    fun metaAgua(peso: Double, idade: Int, masculino: Boolean, nivelEsporte: Int = 0): Int {
         var mlPorKg = 35
         if (idade < 18) {
             mlPorKg = 40
         } else if (idade > 55) {
             mlPorKg = 30
         }
+
+        // Adiciona ml/kg de acordo com o nível de esporte
+        mlPorKg += when (nivelEsporte) {
+            1 -> 5   // Leve (1-2x semana)
+            2 -> 10  // Moderado (3-4x semana)
+            3 -> 15  // Intenso (5+x semana / Atleta)
+            else -> 0 // Sedentário
+        }
+
         var meta = peso * mlPorKg
         if (masculino) {
-            meta = meta * 1.05
+            meta *= 1.05
         }
         return meta.toInt()
     }

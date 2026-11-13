@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@color/wellness_bg">
+    android:background="@drawable/bg_wizard_gradient">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="24dp">
 
         <!-- Top Bar Header -->
         <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
+            android:layout_marginBottom="12dp">
 
             <ImageButton
                 android:id="@+id/btnHeaderVoltar"
@@ -28,153 +28,761 @@
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:contentDescription="Voltar"
                 android:src="@drawable/ic_arrow_back"
-                app:tint="@color/teal_primary" />
+                app:tint="@color/white" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvTituloHeader"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Seu Perfil"
-                    android:textColor="@color/teal_primary"
+                    android:textColor="@color/white"
                     android:textSize="22sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvEtapaIndicador"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Calcule sua meta diária ideal"
-                    android:textColor="@color/text_secondary"
+                    android:text="Resumo"
+                    android:textColor="#B2EBF2"
                     android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Form Card -->
-        <com.google.android.material.card.MaterialCardView
+        <!-- Barra de Progresso Branca (Visível apenas durante o Wizard) -->
+        <ProgressBar
+            android:id="@+id/pbWizard"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="#E2E8F0"
-            app:cardBackgroundColor="@color/wellness_card_bg">
+            android:layout_height="8dp"
+            android:layout_marginBottom="20dp"
+            android:max="4"
+            android:progress="0"
+            android:progressDrawable="@drawable/custom_progress_bar"
+            android:progressTint="@color/white"
+            android:visibility="gone" />
 
+        <!-- Container de Telas do Perfil -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <!-- TELA RESUMO: Perfil Ativo (Exibida quando já tem perfil salvo) -->
             <LinearLayout
+                android:id="@+id/layoutPerfilResumo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:visibility="visible">
 
-                <!-- Peso -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                <!-- Avatar e Título -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="20dp">
+
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginBottom="12dp"
+                        android:contentDescription="Perfil"
+                        android:src="@drawable/ic_person"
+                        app:tint="@color/white" />
+
+                    <TextView
+                        android:id="@+id/tvResumoBoasVindas"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Seu Perfil de Saúde"
+                        android:textColor="@color/white"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Card Meta Diária e IMC -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Peso (kg)"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="@color/teal_primary">
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etPeso"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:textColor="@color/text_primary" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                <!-- Altura -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Meta Diária Recomendada"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvResumoMeta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="2500 ml / dia"
+                            android:textColor="@color/blue_primary"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginVertical="12dp"
+                            android:background="#F1F5F9" />
+
+                        <TextView
+                            android:id="@+id/tvResumoIMC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="IMC: --"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card Informações Físicas -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Altura (cm)"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="@color/teal_primary">
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etAltura"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:textColor="@color/text_primary" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:orientation="vertical"
+                        android:padding="20dp">
 
-                <!-- Idade -->
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:text="Dados Físicos &amp; Atividade"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvResumoPesoAltura"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="Peso: -- kg • Altura: -- cm"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tvResumoIdadeSexo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="Idade: -- anos • Sexo: --"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:id="@+id/tvResumoEsporte"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Atividade Física: Sedentário"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Card Condições de Saúde -->
+                <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:hint="Idade"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
-                    app:boxStrokeColor="@color/teal_primary">
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etIdade"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:textColor="@color/text_primary" />
-                </com.google.android.material.textfield.TextInputLayout>
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="6dp"
+                            android:text="Histórico de Saúde"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="13sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvResumoSaude"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Nenhuma condição cadastrada"
+                            android:textColor="@color/text_primary"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Botão Editar Perfil -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditarPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Editar Dados do Perfil"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="16dp"
+                    app:icon="@drawable/ic_edit"
+                    app:iconGravity="textStart"
+                    app:iconPadding="8dp"
+                    app:iconTint="@color/blue_primary" />
+
+            </LinearLayout>
+
+            <!-- ETAPA 0: Boas-Vindas (Wizard / Onboarding) -->
+            <LinearLayout
+                android:id="@+id/layoutStep0Welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_marginBottom="20dp"
+                    android:contentDescription="Logo"
+                    android:src="@drawable/ic_water_drop"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="Sexo"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp"
+                    android:text="Vamos te conhecer!"
+                    android:textColor="@color/white"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
-                <RadioGroup
-                    android:id="@+id/rgSexo"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="32dp"
+                    android:gravity="center"
+                    android:text="Responda a 4 perguntas rápidas para calcularmos sua meta diária exata e recomendações médicas."
+                    android:textColor="#E0F2F1"
+                    android:textSize="15sp"
+                    android:lineSpacingExtra="4dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIniciarCadastro"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Iniciar cadastro"
+                    android:textColor="@color/teal_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="16dp" />
+            </LinearLayout>
+
+            <!-- ETAPA 1: Gênero / Sexo -->
+            <LinearLayout
+                android:id="@+id/layoutStep1Genero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="Sexo"
+                    android:src="@drawable/ic_person"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Qual o seu sexo / gênero?"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="Ajusta a taxa de retenção hídrica do seu organismo."
+                    android:textColor="#E0F2F1"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <RadioGroup
+                        android:id="@+id/rgSexo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rbFeminino"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:text="Feminino"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbMasculino"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:text="Masculino"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbOutro"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:text="Outro / Prefiro não responder"
+                            android:textColor="@color/text_primary"
+                            android:textSize="16sp" />
+                    </RadioGroup>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep1Proximo"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:text="Próximo"
+                    android:textColor="@color/teal_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:backgroundTint="@color/white"
+                    app:cornerRadius="16dp" />
+
+            </LinearLayout>
+
+            <!-- ETAPA 2: Dados Físicos (Peso, Altura, Idade) -->
+            <LinearLayout
+                android:id="@+id/layoutStep2Fisico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="Balança"
+                    android:src="@drawable/ic_scale"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Fale um pouco sobre você"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="Informe seu peso, altura e idade:"
+                    android:textColor="#E0F2F1"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:hint="Peso (kg)"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etPeso"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="numberDecimal"
+                                android:textColor="@color/text_primary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="14dp"
+                            android:hint="Altura (cm)"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etAltura"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/text_primary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="Idade"
+                            app:boxCornerRadiusBottomEnd="12dp"
+                            app:boxCornerRadiusBottomStart="12dp"
+                            app:boxCornerRadiusTopEnd="12dp"
+                            app:boxCornerRadiusTopStart="12dp">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etIdade"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="number"
+                                android:textColor="@color/text_primary" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rbFeminino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Feminino"
-                        android:textColor="@color/text_primary" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStep2Voltar"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="Voltar"
+                        android:textColor="@color/white"
+                        app:strokeColor="@color/white"
+                        app:cornerRadius="16dp" />
 
-                    <RadioButton
-                        android:id="@+id/rbMasculino"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="24dp"
-                        android:text="Masculino"
-                        android:textColor="@color/text_primary" />
-                </RadioGroup>
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStep2Proximo"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="Próximo"
+                        android:textColor="@color/teal_primary"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="16dp" />
+                </LinearLayout>
 
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSalvarPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:text="Salvar Perfil"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:cornerRadius="12dp" />
+            <!-- ETAPA 3: Prática de Esportes -->
+            <LinearLayout
+                android:id="@+id/layoutStep3Esporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="Esporte"
+                    android:src="@drawable/ic_fitness"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Você pratica esportes?"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="Ajusta sua meta conforme o suor gasto em treinos:"
+                    android:textColor="#E0F2F1"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <RadioGroup
+                        android:id="@+id/rgEsporte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:orientation="vertical">
+
+                        <RadioButton
+                            android:id="@+id/rbEsporteSedentario"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:checked="true"
+                            android:text="Não pratico / Sedentário"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbEsporteLeve"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Leve (1 a 2x por semana)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbEsporteModerado"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Moderado (3 a 4x por semana)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <RadioButton
+                            android:id="@+id/rbEsporteIntenso"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:text="Intenso (5+ vezes / Atleta)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+                    </RadioGroup>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStep3Voltar"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="Voltar"
+                        android:textColor="@color/white"
+                        app:strokeColor="@color/white"
+                        app:cornerRadius="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStep3Proximo"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="Próximo"
+                        android:textColor="@color/teal_primary"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="16dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- ETAPA 4: Condições de Saúde -->
+            <LinearLayout
+                android:id="@+id/layoutStep4Saude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="Saúde"
+                    android:src="@drawable/ic_heart_health"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Histórico &amp; Saúde"
+                    android:textColor="@color/white"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="24dp"
+                    android:gravity="center"
+                    android:text="Selecione caso possua alguma destas condições:"
+                    android:textColor="#E0F2F1"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/white">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <CheckBox
+                            android:id="@+id/cbDiabetes"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Diabetes ou pré-diabetes"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <CheckBox
+                            android:id="@+id/cbHipertensao"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Hipertensão (Pressão alta)"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <CheckBox
+                            android:id="@+id/cbAlcoolismo"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Histórico com álcool / Alcoolismo"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                        <CheckBox
+                            android:id="@+id/cbPedrasRins"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Pedras nos rins / Problemas renais"
+                            android:textColor="@color/text_primary"
+                            android:textSize="15sp" />
+
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnStep4Voltar"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:text="Voltar"
+                        android:textColor="@color/white"
+                        app:strokeColor="@color/white"
+                        app:cornerRadius="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnSalvarPerfil"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="Concluir"
+                        android:textColor="@color/teal_primary"
+                        android:textStyle="bold"
+                        app:backgroundTint="@color/white"
+                        app:cornerRadius="16dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 </ScrollView>
