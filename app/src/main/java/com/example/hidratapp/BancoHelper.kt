@@ -7,11 +7,11 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 class BancoHelper(context: Context) :
-    SQLiteOpenHelper(context, "hidrata.db", null, 1) {
+    SQLiteOpenHelper(context, "hidrata.db", null, 2) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
-            CREATE TABLE bebidas (
+            CREATE TABLE IF NOT EXISTS bebidas (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 tipo TEXT NOT NULL,
                 ml INTEGER NOT NULL,
@@ -20,9 +20,31 @@ class BancoHelper(context: Context) :
                 favorito INTEGER DEFAULT 0
             )
         """.trimIndent())
+
+        db.execSQL("""
+            CREATE TABLE IF NOT EXISTS sintomas (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                data TEXT NOT NULL,
+                sintomas TEXT NOT NULL,
+                nivel_sede INTEGER NOT NULL,
+                observacao TEXT
+            )
+        """.trimIndent())
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { }
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < 2) {
+            db.execSQL("""
+                CREATE TABLE IF NOT EXISTS sintomas (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    data TEXT NOT NULL,
+                    sintomas TEXT NOT NULL,
+                    nivel_sede INTEGER NOT NULL,
+                    observacao TEXT
+                )
+            """.trimIndent())
+        }
+    }
 
     fun inserir(bebida: Bebida): Long {
         val valores = ContentValues().apply {
@@ -97,6 +119,58 @@ class BancoHelper(context: Context) :
     fun excluir(id: Int): Int {
         return writableDatabase.delete(
             "bebidas", "id = ?", arrayOf(id.toString())
+        )
+    }
+
+    // Métodos para Sintoma
+    fun inserirSintoma(sintoma: Sintoma): Long {
+        val valores = ContentValues().apply {
+            put("data", sintoma.data)
+            put("sintomas", sintoma.sintomasText)
+            put("nivel_sede", sintoma.nivelSede)
+            put("observacao", sintoma.observacao)
+        }
+        return writableDatabase.insert("sintomas", null, valores)
+    }
+
+    private fun lerSintoma(cursor: Cursor): Sintoma {
+        return Sintoma(
+            id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
+            data = cursor.getString(cursor.getColumnIndexOrThrow("data")),
+            sintomasText = cursor.getString(cursor.getColumnIndexOrThrow("sintomas")),
+            nivelSede = cursor.getInt(cursor.getColumnIndexOrThrow("nivel_sede")),
+            observacao = cursor.getString(cursor.getColumnIndexOrThrow("observacao"))
+        )
+    }
+
+    fun listarSintomas(): MutableList<Sintoma> {
+        val lista = mutableListOf<Sintoma>()
+        val cursor = readableDatabase.rawQuery(
+            "SELECT * FROM sintomas ORDER BY id DESC", null
+        )
+        while (cursor.moveToNext()) {
+            lista.add(lerSintoma(cursor))
+        }
+        cursor.close()
+        return lista
+    }
+
+    fun listarSintomasPorData(data: String): MutableList<Sintoma> {
+        val lista = mutableListOf<Sintoma>()
+        val cursor = readableDatabase.rawQuery(
+            "SELECT * FROM sintomas WHERE data = ? ORDER BY id DESC",
+            arrayOf(data)
+        )
+        while (cursor.moveToNext()) {
+            lista.add(lerSintoma(cursor))
+        }
+        cursor.close()
+        return lista
+    }
+
+    fun excluirSintoma(id: Int): Int {
+        return writableDatabase.delete(
+            "sintomas", "id = ?", arrayOf(id.toString())
         )
     }
 }
