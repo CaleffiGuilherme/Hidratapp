@@ -1,9 +1,11 @@
 package com.example.hidratapp
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -36,28 +38,47 @@ class MainActivity : AppCompatActivity() {
         cardAviso = findViewById(R.id.cardAviso)
         pbMeta = findViewById(R.id.pbMeta)
 
-        val btnNova = findViewById<Button>(R.id.btnNovaBebida)
-        val btnLista = findViewById<Button>(R.id.btnLista)
-        val btnPerfil = findViewById<Button>(R.id.btnPerfil)
-        val btnSobre = findViewById<Button>(R.id.btnSobre)
+        // Botão Principal (+ Adicionar água)
+        findViewById<Button>(R.id.btnNovaBebida).setOnClickListener {
+            abrirActivity(CadastroBebidaActivity::class.java)
+        }
 
-        btnNova.setOnClickListener {
-            startActivity(Intent(this, CadastroBebidaActivity::class.java))
+        // Ícone Notificação
+        findViewById<View>(R.id.btnNotificacoes).setOnClickListener {
+            abrirActivity(DicasActivity::class.java)
         }
-        btnLista.setOnClickListener {
-            startActivity(Intent(this, ListaActivity::class.java))
+
+        // 5 Cards do Menu
+        findViewById<View>(R.id.btnMenuMeta).setOnClickListener {
+            abrirActivity(PerfilActivity::class.java)
         }
-        btnPerfil.setOnClickListener {
-            startActivity(Intent(this, PerfilActivity::class.java))
+        findViewById<View>(R.id.btnMenuEstatisticas).setOnClickListener {
+            abrirActivity(ListaActivity::class.java)
         }
-        btnSobre.setOnClickListener {
-            startActivity(Intent(this, SobreActivity::class.java))
+        findViewById<View>(R.id.btnMenuLembretes).setOnClickListener {
+            abrirActivity(DicasActivity::class.java)
+        }
+        findViewById<View>(R.id.btnMenuHabitos).setOnClickListener {
+            abrirActivity(SintomasActivity::class.java)
+        }
+        findViewById<View>(R.id.btnMenuPerfil).setOnClickListener {
+            abrirActivity(PerfilActivity::class.java)
+        }
+
+        // Área Secundária: Sobre o App
+        findViewById<View>(R.id.btnSobre).setOnClickListener {
+            abrirActivity(SobreActivity::class.java)
         }
 
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
         if (!prefs.contains("peso")) {
-            startActivity(Intent(this, PerfilActivity::class.java))
+            abrirActivity(PerfilActivity::class.java)
         }
+    }
+
+    private fun abrirActivity(clazz: Class<*>) {
+        startActivity(Intent(this, clazz))
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
     }
 
     override fun onResume() {
@@ -85,21 +106,31 @@ class MainActivity : AppCompatActivity() {
 
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
         if (!prefs.contains("peso")) {
-            tvTotal.text = "$totalMl ml"
-            tvPercentual.text = "Preencha seu perfil para calcular sua meta diária."
-            pbMeta.progress = 0
+            tvTotal.text = "$totalMl / 2000 ml"
+            tvPercentual.text = "Preencha seu perfil"
+            animarProgressBar(0)
             return
         }
 
         val peso = prefs.getFloat("peso", 0f).toDouble()
         val idade = prefs.getInt("idade", 0)
         val masculino = prefs.getBoolean("masculino", false)
-        val meta = Calculos.metaAgua(peso, idade, masculino)
+        val esporte = prefs.getInt("esporte", 0)
+        val meta = Calculos.metaAgua(peso, idade, masculino, esporte)
 
         tvTotal.text = "$totalMl / $meta ml"
         pbMeta.max = meta
-        pbMeta.progress = if (totalMl > meta) meta else totalMl
+        val targetProgress = if (totalMl > meta) meta else totalMl
+        animarProgressBar(targetProgress)
+
         val pct = if (meta > 0) (totalMl * 100 / meta) else 0
-        tvPercentual.text = "$pct% da meta diária de hoje"
+        tvPercentual.text = "$pct% da meta"
+    }
+
+    private fun animarProgressBar(targetProgress: Int) {
+        val animation = ObjectAnimator.ofInt(pbMeta, "progress", pbMeta.progress, targetProgress)
+        animation.duration = 750
+        animation.interpolator = DecelerateInterpolator()
+        animation.start()
     }
 }

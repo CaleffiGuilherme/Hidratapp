@@ -4,7 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/wellness_bg"
+    android:background="@drawable/bg_wizard_gradient"
     android:orientation="vertical"
     android:padding="20dp">
 
@@ -23,7 +23,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Voltar"
             android:src="@drawable/ic_arrow_back"
-            app:tint="@color/teal_primary" />
+            app:tint="@color/white" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Minhas Bebidas"
-                android:textColor="@color/teal_primary"
+                android:textColor="@color/white"
                 android:textSize="22sp"
                 android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Histórico e detalhes dos seus registros"
-                android:textColor="@color/text_secondary"
+                android:textColor="#E0F2F1"
                 android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
@@ -54,8 +54,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Nenhuma bebida registrada ainda.\nToque em Nova Bebida para começar."
-        android:textColor="@color/text_secondary"
+        android:text="Nenhuma bebida registrada ainda.\nToque em Adicionar bebida para começar."
+        android:textColor="#E0F2F1"
         android:textSize="15sp"
         android:visibility="gone" />
 
@@ -74,9 +74,9 @@
         android:layout_height="50dp"
         android:layout_marginTop="12dp"
         android:text="Voltar ao Início"
-        android:textColor="@color/text_secondary"
+        android:textColor="@color/white"
         android:textSize="15sp"
-        app:cornerRadius="12dp"
-        app:strokeColor="#CBD5E1" />
+        app:cornerRadius="16dp"
+        app:strokeColor="@color/white" />
 
 </LinearLayout>

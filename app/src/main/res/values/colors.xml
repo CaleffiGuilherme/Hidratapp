@@ -3,19 +3,25 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Wellness Hydration Palette -->
-    <color name="teal_primary">#007791</color>
-    <color name="teal_primary_dark">#004D61</color>
-    <color name="teal_light">#E0F2F1</color>
-    <color name="teal_accent">#0097A7</color>
-    <color name="wellness_bg">#F4F8FA</color>
+    <!-- Palette inspirada no aplicativo Flo (Hidratação) -->
+    <color name="blue_primary">#568FE0</color>
+    <color name="blue_pastel">#B8DCFA</color>
+    <color name="blue_light">#EAF5FF</color>
+    <color name="blue_dark_text">#203E73</color>
+    <color name="blue_gray_text">#7C91B0</color>
+    <color name="wellness_bg">#EAF5FF</color>
     <color name="wellness_card_bg">#FFFFFF</color>
 
-    <!-- Typography -->
-    <color name="text_primary">#1E293B</color>
-    <color name="text_secondary">#64748B</color>
+    <!-- Compatibilidade com nomes anteriores -->
+    <color name="teal_primary">#568FE0</color>
+    <color name="teal_primary_dark">#203E73</color>
+    <color name="teal_light">#EAF5FF</color>
+    <color name="teal_accent">#B8DCFA</color>
 
-    <!-- Alerts & Badges -->
+    <!-- Typography & Alerts -->
+    <color name="text_primary">#203E73</color>
+    <color name="text_secondary">#7C91B0</color>
+
     <color name="alert_bg">#FEF2F2</color>
     <color name="alert_text">#DC2626</color>
     <color name="alert_border">#FCA5A5</color>

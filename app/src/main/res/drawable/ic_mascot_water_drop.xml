@@ -1,0 +1,79 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Sparkle / Estrelinha Esquerda -->
+    <path
+        android:fillColor="#B8DCFA"
+        android:pathData="M24,40 L26,45 L31,47 L26,49 L24,54 L22,49 L17,47 L22,45 Z" />
+
+    <!-- Sparkle / Estrelinha Direita -->
+    <path
+        android:fillColor="#B8DCFA"
+        android:pathData="M96,48 L98,52 L102,54 L98,56 L96,60 L94,56 L90,54 L94,52 Z" />
+
+    <!-- Corpo da Gota de Água -->
+    <path
+        android:fillColor="#81B4F2"
+        android:pathData="M60,12 C40,40 22,62 22,80 C22,100 39,112 60,112 C81,112 98,100 98,80 C98,62 80,40 60,12 Z" />
+
+    <path
+        android:fillColor="#9BC2F5"
+        android:pathData="M60,16 C43,42 27,63 27,80 C27,97 42,108 60,108 C78,108 93,97 93,80 C93,63 77,42 60,16 Z" />
+
+    <!-- Olhos felizes fechados (Arcos) -->
+    <path
+        android:strokeColor="#203E73"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M44,68 C47,63 53,63 56,68" />
+
+    <path
+        android:strokeColor="#203E73"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:pathData="M64,68 C67,63 73,63 76,68" />
+
+    <!-- Bochechas Coradas / Rosa -->
+    <path
+        android:fillColor="#FFB0B0"
+        android:pathData="M40,73 C40,71 44,71 44,73 C44,75 40,75 40,73 Z" />
+
+    <path
+        android:fillColor="#FFB0B0"
+        android:pathData="M76,73 C76,71 80,71 80,73 C80,75 76,75 76,73 Z" />
+
+    <!-- Sorrisinho fofo -->
+    <path
+        android:strokeColor="#203E73"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:pathData="M56,76 C58,79 62,79 64,76" />
+
+    <!-- Copinho de Água segurado pelo mascote -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#568FE0"
+        android:strokeWidth="2"
+        android:pathData="M50,82 L70,82 L67,104 L53,104 Z" />
+
+    <path
+        android:fillColor="#B8DCFA"
+        android:pathData="M52,87 L68,87 L66,102 L54,102 Z" />
+
+    <!-- Mãozinhas fofas do mascote segurando o copo -->
+    <path
+        android:fillColor="#81B4F2"
+        android:strokeColor="#203E73"
+        android:strokeWidth="2"
+        android:pathData="M44,84 C47,82 50,85 49,88 C48,91 44,91 43,87 Z" />
+
+    <path
+        android:fillColor="#81B4F2"
+        android:strokeColor="#203E73"
+        android:strokeWidth="2"
+        android:pathData="M76,84 C73,82 70,85 71,88 C72,91 76,91 77,87 Z" />
+
+</vector>

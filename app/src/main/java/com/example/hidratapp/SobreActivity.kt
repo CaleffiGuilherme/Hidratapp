@@ -19,7 +19,12 @@ class SobreActivity : AppCompatActivity() {
             insets
         }
 
-        findViewById<ImageButton>(R.id.btnHeaderVoltar).setOnClickListener { finish() }
-        findViewById<Button>(R.id.btnVoltar).setOnClickListener { finish() }
+        fun fecharComAnimacao() {
+            finish()
+            overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+        }
+
+        findViewById<ImageButton>(R.id.btnHeaderVoltar).setOnClickListener { fecharComAnimacao() }
+        findViewById<Button>(R.id.btnVoltar).setOnClickListener { fecharComAnimacao() }
     }
 }

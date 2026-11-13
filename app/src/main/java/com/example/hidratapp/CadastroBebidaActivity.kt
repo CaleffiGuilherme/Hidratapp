@@ -65,9 +65,16 @@ class CadastroBebidaActivity : AppCompatActivity() {
         etData.setOnClickListener { abrirDatePicker() }
         tilData.setEndIconOnClickListener { abrirDatePicker() }
 
-        findViewById<Button>(R.id.btn200).setOnClickListener { etMl.setText("200") }
-        findViewById<Button>(R.id.btn300).setOnClickListener { etMl.setText("300") }
-        findViewById<Button>(R.id.btn500).setOnClickListener { etMl.setText("500") }
+        fun adicionarMl(quantidade: Int) {
+            val mlAtual = etMl.text.toString().trim().toIntOrNull() ?: 0
+            val novoTotal = (mlAtual + quantidade).coerceAtMost(5000)
+            etMl.setText(novoTotal.toString())
+            etMl.setSelection(etMl.text.length)
+        }
+
+        findViewById<Button>(R.id.btn200).setOnClickListener { adicionarMl(200) }
+        findViewById<Button>(R.id.btn300).setOnClickListener { adicionarMl(300) }
+        findViewById<Button>(R.id.btn500).setOnClickListener { adicionarMl(500) }
 
         val id = intent.getIntExtra("bebida_id", -1)
         val bebidaEditada = if (id != -1) BancoHelper(this).buscarPorId(id) else null
