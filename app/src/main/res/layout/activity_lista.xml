@@ -1,82 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_wizard_gradient"
-    android:orientation="vertical"
-    android:padding="20dp">
-
-    <!-- Top Bar Header -->
+    android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
-
-        <ImageButton
-            android:id="@+id/btnHeaderVoltar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Voltar"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="@color/white" />
-
+        android:orientation="vertical"
+        android:layout_marginBottom="12dp">
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:orientation="vertical">
-
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+            <ImageButton
+                android:id="@+id/btnHeaderVoltar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:background="@drawable/bg_white_round"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="@color/blue_primary"
+                android:contentDescription="Voltar" />
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Minhas Bebidas"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Histórico e detalhes dos seus registros"
-                android:textColor="#E0F2F1"
-                android:textSize="13sp" />
+                android:text="SEU HÁBITO EM PERSPECTIVA"
+                android:layout_marginStart="14dp"
+                android:textColor="@color/text_secondary"
+                android:textSize="10sp"
+                android:letterSpacing="0.12"
+                android:fontFamily="sans-serif-medium" />
+            <ImageView
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:padding="8dp"
+                android:background="@drawable/bg_soft_blue"
+                android:src="@drawable/ic_chart_bar"
+                app:tint="@color/blue_primary"
+                android:importantForAccessibility="no" />
         </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sua evolução"
+            android:textSize="27sp"
+            android:letterSpacing="-0.035"
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cada dia conta. Veja seu caminho até aqui."
+            android:textSize="14sp"
+            android:textColor="@color/text_secondary"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginTop="10dp" />
     </LinearLayout>
-
+    <ScrollView
+        android:id="@+id/resumoScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/bg_white_round"
+        android:fillViewport="true">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+            <TextView
+                android:id="@+id/tvMediaSemanal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/blue_primary"
+                android:layout_marginBottom="6dp" />
+            <TextView
+                android:id="@+id/resumoSemana"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp" />
+            <com.example.hidratapp.GraficoSemanal
+                android:id="@+id/graficoSemanal"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:importantForAccessibility="yes" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_round"
+        android:layout_marginTop="12dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Spinner
+                android:id="@+id/filtroPeriodo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:contentDescription="Filtrar por período"
+                android:popupBackground="@drawable/bg_white_round" />
+            <Spinner
+                android:id="@+id/filtroTipo"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="48dp"
+                android:contentDescription="Filtrar por bebida"
+                android:popupBackground="@drawable/bg_white_round" />
+        </LinearLayout>
+        <CheckBox
+            android:id="@+id/filtroFavoritos"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Somente favoritos"
+            android:textColor="@color/text_primary" />
+    </LinearLayout>
     <TextView
         android:id="@+id/tvEmptyState"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Nenhuma bebida registrada ainda.\nToque em Adicionar bebida para começar."
-        android:textColor="#E0F2F1"
+        android:text="Nenhum registro para os filtros selecionados."
+        android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:visibility="gone" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBebidas"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp" />
-
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVoltar"
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
-        android:text="Voltar ao Início"
-        android:textColor="@color/white"
-        android:textSize="15sp"
+        android:layout_height="48dp"
+        android:text="Voltar para hoje"
+        android:textColor="@color/text_primary"
         app:cornerRadius="16dp"
-        app:strokeColor="@color/white" />
-
+        app:strokeColor="@color/line_soft" />
 </LinearLayout>

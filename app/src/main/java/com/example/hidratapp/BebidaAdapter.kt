@@ -30,12 +30,16 @@ class BebidaAdapter(
         val bebida = bebidas[position]
         holder.titulo.text = "${bebida.tipo} • ${bebida.ml} ml"
         holder.data.text = if (bebida.observacao.isNotBlank()) {
-            "${bebida.data} • ${bebida.observacao}"
+            "${bebida.data} ${bebida.hora} • ${bebida.observacao}"
         } else {
-            bebida.data
+            "${bebida.data} ${bebida.hora}"
         }
 
         val context = holder.itemView.context
+        holder.ivTipoIcon.setBackgroundResource(if (Calculos.ehAlcool(bebida.tipo)) R.drawable.bg_soft_lavender else R.drawable.bg_soft_blue)
+        val padding = (10 * context.resources.displayMetrics.density).toInt()
+        holder.ivTipoIcon.setPadding(padding,padding,padding,padding)
+        configurarInteracoes(holder.itemView)
         if (bebida.favorito) {
             holder.ivFavorito.setImageResource(R.drawable.ic_star)
             holder.ivFavorito.setColorFilter(ContextCompat.getColor(context, R.color.star_gold))
