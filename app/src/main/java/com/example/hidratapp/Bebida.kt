@@ -6,7 +6,8 @@ data class Bebida(
     val ml: Int,
     val data: String,
     val observacao: String,
-    val favorito: Boolean = false
+    val favorito: Boolean = false,
+    val hora: String = ""
 )
 
 val TIPOS = listOf(

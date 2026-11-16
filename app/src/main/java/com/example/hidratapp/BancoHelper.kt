@@ -6,8 +6,8 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
-class BancoHelper(context: Context) :
-    SQLiteOpenHelper(context, "hidrata.db", null, 2) {
+class BancoHelper(context: Context, nomeBanco: String = "hidrata.db") :
+    SQLiteOpenHelper(context, nomeBanco, null, 3) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("""
@@ -17,6 +17,7 @@ class BancoHelper(context: Context) :
                 ml INTEGER NOT NULL,
                 data TEXT,
                 observacao TEXT,
+                hora TEXT NOT NULL DEFAULT '',
                 favorito INTEGER DEFAULT 0
             )
         """.trimIndent())
@@ -33,6 +34,9 @@ class BancoHelper(context: Context) :
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+        if (oldVersion < 3) {
+            db.execSQL("ALTER TABLE bebidas ADD COLUMN hora TEXT NOT NULL DEFAULT ''")
+        }
         if (oldVersion < 2) {
             db.execSQL("""
                 CREATE TABLE IF NOT EXISTS sintomas (
@@ -48,6 +52,7 @@ class BancoHelper(context: Context) :
 
     fun inserir(bebida: Bebida): Long {
         val valores = ContentValues().apply {
+            put("hora", bebida.hora)
             put("tipo", bebida.tipo)
             put("ml", bebida.ml)
             put("data", bebida.data)
@@ -59,6 +64,7 @@ class BancoHelper(context: Context) :
 
     private fun lerBebida(cursor: Cursor): Bebida {
         return Bebida(
+            hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),
             id = cursor.getInt(cursor.getColumnIndexOrThrow("id")),
             tipo = cursor.getString(cursor.getColumnIndexOrThrow("tipo")),
             ml = cursor.getInt(cursor.getColumnIndexOrThrow("ml")),
@@ -71,7 +77,7 @@ class BancoHelper(context: Context) :
     fun listar(): MutableList<Bebida> {
         val lista = mutableListOf<Bebida>()
         val cursor = readableDatabase.rawQuery(
-            "SELECT * FROM bebidas ORDER BY id DESC", null
+            "SELECT * FROM bebidas ORDER BY substr(data,7,4) DESC, substr(data,4,2) DESC, substr(data,1,2) DESC, hora DESC, id DESC", null
         )
         while (cursor.moveToNext()) {
             lista.add(lerBebida(cursor))
@@ -83,7 +89,7 @@ class BancoHelper(context: Context) :
     fun listarPorData(data: String): MutableList<Bebida> {
         val lista = mutableListOf<Bebida>()
         val cursor = readableDatabase.rawQuery(
-            "SELECT * FROM bebidas WHERE data = ? ORDER BY id DESC",
+            "SELECT * FROM bebidas WHERE data = ? ORDER BY hora DESC, id DESC",
             arrayOf(data)
         )
         while (cursor.moveToNext()) {
@@ -105,6 +111,7 @@ class BancoHelper(context: Context) :
 
     fun atualizar(bebida: Bebida): Int {
         val valores = ContentValues().apply {
+            put("hora", bebida.hora)
             put("tipo", bebida.tipo)
             put("ml", bebida.ml)
             put("data", bebida.data)

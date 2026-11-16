@@ -34,8 +34,19 @@ object Calculos {
         return peso / (metros * metros)
     }
 
+    fun horaAgora(): String = SimpleDateFormat("HH:mm", Locale.ROOT).format(Date())
+
+    fun totalValido(lista: List<Bebida>): Int = lista.filter { !ehAlcool(it.tipo) }.sumOf { it.ml }
+
+    fun datasSemana(): List<String> {
+        val cal = java.util.Calendar.getInstance()
+        cal.add(java.util.Calendar.DAY_OF_YEAR, -6)
+        val formato = SimpleDateFormat("dd/MM/yyyy", Locale.ROOT)
+        return (0..6).map { formato.format(cal.time).also { cal.add(java.util.Calendar.DAY_OF_YEAR, 1) } }
+    }
+
     fun hoje(): String {
-        return SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date())
+        return SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(Date())
     }
 
     fun ehAlcool(tipo: String): Boolean {
