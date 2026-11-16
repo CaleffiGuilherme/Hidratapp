@@ -25,6 +25,7 @@ class SintomasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sintomas)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -42,6 +43,11 @@ class SintomasActivity : AppCompatActivity() {
             val cb = CheckBox(this).apply {
                 text = sintomaNome
                 textSize = 14f
+                val d = resources.displayMetrics.density
+                minHeight = (52*d).toInt()
+                setPadding((12*d).toInt(),(4*d).toInt(),(12*d).toInt(),(4*d).toInt())
+                setBackgroundResource(R.drawable.bg_choice)
+                layoutParams = LinearLayout.LayoutParams(-1,-2).apply { bottomMargin=(8*d).toInt() }
                 setTextColor(getColor(R.color.text_primary))
             }
             checkboxesSintomas.add(cb)
@@ -72,7 +78,11 @@ class SintomasActivity : AppCompatActivity() {
             )
 
             val banco = BancoHelper(this)
-            banco.inserirSintoma(novoSintoma)
+            val salvo = runCatching { banco.use { it.inserirSintoma(novoSintoma) } }.getOrDefault(-1)
+            if (salvo <= 0) {
+                Toast.makeText(this, "Não foi possível salvar o relato. Tente novamente.", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
             // Reseta form
             checkboxesSintomas.forEach { it.isChecked = false }
@@ -80,7 +90,7 @@ class SintomasActivity : AppCompatActivity() {
             rgSede.check(R.id.rbSede3)
 
             // Mostra alerta preventivo
-            val mensagemFeedback = buildFeedbackMessage(selecionados, nivelSede)
+            val mensagemFeedback = buildFeedbackMessage()
             AlertDialog.Builder(this)
                 .setTitle("Relato Salvo com Sucesso!")
                 .setMessage(mensagemFeedback)
@@ -95,35 +105,18 @@ class SintomasActivity : AppCompatActivity() {
         carregarHistorico()
     }
 
-    private fun buildFeedbackMessage(sintomas: List<String>, nivelSede: Int): String {
-        val sb = java.lang.StringBuilder()
-        sb.append("Seus sintomas foram registrados.\n\n")
-
-        val temBocaSecaOuCabeca = sintomas.any { it.contains("Dor de cabeça") || it.contains("Boca seca") }
-        val temUrinaEscura = sintomas.any { it.contains("Urina escura") }
-        val temTonturaOuFadiga = sintomas.any { it.contains("Tontura") || it.contains("Fadiga") }
-
-        if (nivelSede >= 4 || temBocaSecaOuCabeca || temUrinaEscura) {
-            sb.append("⚠️ Recomendação Imediata: Seus relatos indicam possíveis sinais de desidratação leve a moderada.\n")
-            sb.append("• Procure beber de 300ml a 500ml de água pura imediatamente.\n")
-            sb.append("• Evite bebidas alcoólicas, café ou refrigerantes no momento.\n")
-        } else {
-            sb.append("💡 Dica: Mantenha garrafas de água por perto e continue monitorando como seu corpo se sente.")
-        }
-
-        if (temTonturaOuFadiga) {
-            sb.append("\n• Descanse em um local arejado.")
-        }
-
-        return sb.toString()
+    private fun buildFeedbackMessage(): String {
+        return "Seus sintomas foram registrados.\n\nEste registro não é um diagnóstico. Os sintomas podem ter várias causas. Respeite orientações de saúde e eventuais restrições de líquidos. Se os sintomas forem intensos, persistirem ou piorarem, procure atendimento de saúde."
     }
 
     private fun carregarHistorico() {
         val containerHistorico = findViewById<LinearLayout>(R.id.containerHistoricoSintomas)
         containerHistorico.removeAllViews()
 
-        val banco = BancoHelper(this)
-        val listaSintomas = banco.listarSintomas()
+        val listaSintomas = runCatching { BancoHelper(this).use { it.listarSintomas() } }.getOrElse {
+            Toast.makeText(this, "Não foi possível carregar os relatos", Toast.LENGTH_LONG).show()
+            return
+        }
 
         if (listaSintomas.isEmpty()) {
             val tvVazio = TextView(this).apply {
@@ -163,7 +156,10 @@ class SintomasActivity : AppCompatActivity() {
                     .setTitle("Excluir Relato")
                     .setMessage("Deseja remover este relato de sintomas?")
                     .setPositiveButton("Sim") { _, _ ->
-                        banco.excluirSintoma(sintoma.id)
+                        if (runCatching { BancoHelper(this).use { it.excluirSintoma(sintoma.id) } }.getOrDefault(0) != 1) {
+                            Toast.makeText(this, "Não foi possível excluir o relato", Toast.LENGTH_LONG).show()
+                            return@setPositiveButton
+                        }
                         carregarHistorico()
                     }
                     .setNegativeButton("Não", null)

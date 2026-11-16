@@ -20,6 +20,7 @@ class DicasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_dicas)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -57,6 +58,15 @@ class DicasActivity : AppCompatActivity() {
 
             tvTitulo.text = dica.titulo
             tvDescricao.text = dica.descricao
+            val expandir = itemView.findViewById<android.widget.Button>(R.id.btnExpandirDica)
+            var aberto = false
+            expandir.setOnClickListener {
+                aberto = !aberto
+                android.transition.TransitionManager.beginDelayedTransition(containerDicas, android.transition.AutoTransition().setDuration(180))
+                tvDescricao.maxLines = if (aberto) Int.MAX_VALUE else 3
+                tvDescricao.ellipsize = if (aberto) null else android.text.TextUtils.TruncateAt.END
+                expandir.text = if (aberto) "Recolher  ↑" else "Ler dica  ↓"
+            }
 
             when (dica.nivelAlerta) {
                 NivelAlerta.PERIGO -> {
@@ -67,22 +77,23 @@ class DicasActivity : AppCompatActivity() {
                     ivIcone.setColorFilter(Color.parseColor("#C53030"))
                 }
                 NivelAlerta.ALERTA -> {
-                    cardDica.setCardBackgroundColor(Color.parseColor("#FFFAF0"))
-                    cardDica.strokeColor = Color.parseColor("#FBD38D")
-                    tvTitulo.setTextColor(Color.parseColor("#C05621"))
+                    cardDica.setCardBackgroundColor(Color.parseColor("#FFF6ED"))
+                    cardDica.strokeColor = Color.parseColor("#F0DFC9")
+                    tvTitulo.setTextColor(Color.parseColor("#985421"))
                     ivIcone.setImageResource(R.drawable.ic_warning)
-                    ivIcone.setColorFilter(Color.parseColor("#C05621"))
+                    ivIcone.setColorFilter(Color.parseColor("#985421"))
                 }
                 NivelAlerta.INFO -> {
-                    cardDica.setCardBackgroundColor(Color.parseColor("#F0FDF4"))
-                    cardDica.strokeColor = Color.parseColor("#BBF7D0")
-                    tvTitulo.setTextColor(Color.parseColor("#15803D"))
+                    cardDica.setCardBackgroundColor(Color.parseColor("#EBF6FB"))
+                    cardDica.strokeColor = Color.parseColor("#D9EAF5")
+                    tvTitulo.setTextColor(Color.parseColor("#2879B8"))
                     ivIcone.setImageResource(R.drawable.ic_water_drop)
-                    ivIcone.setColorFilter(Color.parseColor("#15803D"))
+                    ivIcone.setColorFilter(Color.parseColor("#2879B8"))
                 }
             }
 
             containerDicas.addView(itemView)
+            configurarInteracoes(itemView)
         }
     }
 }

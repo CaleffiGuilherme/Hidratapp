@@ -13,6 +13,7 @@ class SobreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_sobre)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -25,6 +26,7 @@ class SobreActivity : AppCompatActivity() {
         }
 
         findViewById<ImageButton>(R.id.btnHeaderVoltar).setOnClickListener { fecharComAnimacao() }
+        findViewById<android.view.View>(R.id.btnSobreRegras).setOnClickListener { startActivity(android.content.Intent(this, RegrasActivity::class.java)) }
         findViewById<Button>(R.id.btnVoltar).setOnClickListener { fecharComAnimacao() }
     }
 }

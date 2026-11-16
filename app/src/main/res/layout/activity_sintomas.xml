@@ -1,89 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/bg_wizard_gradient">
-
+    android:background="@drawable/bg_wizard_gradient"
+    android:scrollbars="none">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
-
-        <!-- Top Bar Header -->
+        android:padding="24dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:layout_marginBottom="20dp">
-
-            <ImageButton
-                android:id="@+id/btnHeaderVoltar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Voltar"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="@color/white" />
-
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:orientation="vertical">
-
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="24dp">
+                <ImageButton
+                    android:id="@+id/btnHeaderVoltar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="12dp"
+                    android:background="@drawable/bg_white_round"
+                    android:src="@drawable/ic_arrow_back"
+                    app:tint="@color/blue_primary"
+                    android:contentDescription="Voltar" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Relatar Sintomas"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Acompanhe sinais de alerta do corpo"
-                    android:textColor="#E0F2F1"
-                    android:textSize="13sp" />
+                    android:text="UM ESPAÇO PARA VOCÊ"
+                    android:layout_marginStart="14dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.12"
+                    android:fontFamily="sans-serif-medium" />
+                <ImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:padding="8dp"
+                    android:background="@drawable/bg_soft_blue"
+                    android:src="@drawable/ic_heart_health"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
             </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Como você se sente hoje?"
+                android:textSize="30sp"
+                android:letterSpacing="-0.035"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Observe seu corpo com calma. Registre o que quiser acompanhar."
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginTop="10dp" />
         </LinearLayout>
-
-        <!-- Form Card -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/white">
-
+            app:cardCornerRadius="24dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/white"
+            app:strokeWidth="1dp"
+            app:strokeColor="@color/line_soft">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="O que você está sentindo hoje?"
                     android:textColor="@color/teal_primary"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
-
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="2dp" />
                 <LinearLayout
                     android:id="@+id/containerCheckboxes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:orientation="vertical" />
-
-                <!-- Nivel de Sede -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -92,28 +105,25 @@
                     android:text="Nível de Sede (1 = Nenhuma, 5 = Extrema)"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
-                    android:textStyle="bold" />
-
+                    android:textStyle="bold"
+                    android:lineSpacingExtra="2dp" />
                 <RadioGroup
                     android:id="@+id/rgSede"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
-
                     <RadioButton
                         android:id="@+id/rbSede1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1" />
-
                     <RadioButton
                         android:id="@+id/rbSede2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:text="2" />
-
                     <RadioButton
                         android:id="@+id/rbSede3"
                         android:layout_width="wrap_content"
@@ -121,14 +131,12 @@
                         android:layout_marginStart="12dp"
                         android:text="3"
                         android:checked="true" />
-
                     <RadioButton
                         android:id="@+id/rbSede4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:text="4" />
-
                     <RadioButton
                         android:id="@+id/rbSede5"
                         android:layout_width="wrap_content"
@@ -136,20 +144,17 @@
                         android:layout_marginStart="12dp"
                         android:text="5" />
                 </RadioGroup>
-
-                <!-- Observação -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:hint="Observação adicional (opcional)"
-                    app:boxCornerRadiusBottomEnd="12dp"
-                    app:boxCornerRadiusBottomStart="12dp"
-                    app:boxCornerRadiusTopEnd="12dp"
-                    app:boxCornerRadiusTopStart="12dp"
+                    app:boxCornerRadiusBottomEnd="18dp"
+                    app:boxCornerRadiusBottomStart="18dp"
+                    app:boxCornerRadiusTopEnd="18dp"
+                    app:boxCornerRadiusTopStart="18dp"
                     app:boxStrokeColor="@color/teal_primary">
-
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etObsSintoma"
                         android:layout_width="match_parent"
@@ -157,36 +162,32 @@
                         android:inputType="textCapSentences"
                         android:textColor="@color/text_primary" />
                 </com.google.android.material.textfield.TextInputLayout>
-
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSalvarSintoma"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:layout_marginTop="20dp"
-                    android:text="Registrar Sintomas"
+                    android:text="Salvar como estou me sentindo"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    app:cornerRadius="12dp" />
-
+                    app:cornerRadius="22dp"
+                    android:textAllCaps="false" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
-
-        <!-- Titulo Historico -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:text="Histórico de Relatos"
-            android:textColor="@color/white"
+            android:text="Seus relatos"
+            android:textColor="@color/text_primary"
             android:textSize="18sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"
+            android:lineSpacingExtra="2dp" />
         <LinearLayout
             android:id="@+id/containerHistoricoSintomas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
     </LinearLayout>
 </ScrollView>
