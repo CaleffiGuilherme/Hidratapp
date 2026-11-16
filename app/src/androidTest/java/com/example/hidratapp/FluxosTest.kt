@@ -189,6 +189,29 @@ class FluxosTest {
             assertEquals("11:15",bebida.hora);assertEquals("Pausa",bebida.observacao)
         }
     }
+    @Test fun enumCriaOpcoesESalvaValorEstavelMesmoComOutroRotulo() {
+        ActivityScenario.launch(CadastroBebidaActivity::class.java).use { scenario ->
+            scenario.onActivity { a ->
+                val grupo = a.findViewById<com.google.android.material.chip.ChipGroup>(R.id.chipTipos)
+                assertEquals(TipoBebida.entries.size, grupo.childCount)
+                TipoBebida.entries.forEach { tipo ->
+                    val chip = a.findViewById<com.google.android.material.chip.Chip>(tipo.chipId)
+                    assertEquals(tipo.nome, chip.text.toString())
+                    assertEquals(tipo, chip.tag)
+                }
+                val chip = a.findViewById<com.google.android.material.chip.Chip>(TipoBebida.SUCO.chipId)
+                chip.text = "Suco natural"
+                chip.performClick()
+                a.findViewById<EditText>(R.id.etMl).setText("250")
+                a.findViewById<EditText>(R.id.etData).setText("14/11/2026")
+                a.findViewById<EditText>(R.id.etHoraConsumo).setText("10:00")
+                a.findViewById<Button>(R.id.btnSalvar).performClick()
+            }
+            val novo = BancoHelper(context).use { it.listar().single { b -> b.id !in ids } }
+            assertEquals(TipoBebida.SUCO.valorBanco, novo.tipo)
+            assertEquals(250, novo.ml)
+        }
+    }
     @Test fun cadastroVisualSomaAtalhosESelecionaBebida() {
         ActivityScenario.launch(CadastroBebidaActivity::class.java).use { scenario ->
             scenario.onActivity { a ->

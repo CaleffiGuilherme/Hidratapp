@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tvAviso: TextView
     private lateinit var cardAviso: View
     private lateinit var pbMeta: ProgressBar
-    private var paginasConsumo = listOf(PaginaConsumo("Água",0))
-    private var bebidaSelecionada = "Água"
+    private var paginasConsumo = listOf(PaginaConsumo(TipoBebida.AGUA.valorBanco,0))
+    private var bebidaSelecionada = TipoBebida.AGUA.valorBanco
     private var animacaoProgresso: ObjectAnimator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         cardAviso = findViewById(R.id.cardAviso)
         pbMeta = findViewById(R.id.pbMeta)
 
-        bebidaSelecionada = savedInstanceState?.getString("bebidaSelecionada") ?: "Água"
+        bebidaSelecionada = savedInstanceState?.getString("bebidaSelecionada") ?: TipoBebida.AGUA.valorBanco
         findViewById<SwipeConsumoLayout>(R.id.areaConsumo).aoDeslizar = { moverBebida(it) }
         findViewById<View>(R.id.btnBebidaAnterior).setOnClickListener { moverBebida(-1) }
         findViewById<View>(R.id.btnProximaBebida).setOnClickListener { moverBebida(1) }
@@ -85,11 +85,11 @@ class MainActivity : AppCompatActivity() {
         findViewById<View>(R.id.btnRegras).setOnClickListener { abrirActivity(RegrasActivity::class.java) }
         listOf(R.id.agua200 to 200, R.id.agua300 to 300, R.id.agua500 to 500).forEach { (id, ml) ->
             findViewById<View>(id).setOnClickListener {
-                val registro = runCatching { BancoHelper(this).use { it.inserir(Bebida(tipo = "Água", ml = ml,
+                val registro = runCatching { BancoHelper(this).use { it.inserir(Bebida(tipo = TipoBebida.AGUA.valorBanco, ml = ml,
                     data = Calculos.hoje(), hora = Calculos.horaAgora(), observacao = "Registro rápido")) } }.getOrDefault(-1)
                 if (registro <= 0) android.widget.Toast.makeText(this, "Não foi possível salvar. Tente novamente.", android.widget.Toast.LENGTH_LONG).show()
                 else {
-                    bebidaSelecionada = "Água"
+                    bebidaSelecionada = TipoBebida.AGUA.valorBanco
                     atualizarTela()
                     com.google.android.material.snackbar.Snackbar.make(findViewById(R.id.main), "$ml ml registrados", 6000)
                         .setBackgroundTint(getColor(R.color.text_primary))
@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         paginasConsumo = ConsumoDoDia.paginas(listaHoje)
-        if (paginasConsumo.none { it.chave == bebidaSelecionada }) bebidaSelecionada = "Água"
+        if (paginasConsumo.none { it.chave == bebidaSelecionada }) bebidaSelecionada = TipoBebida.AGUA.valorBanco
         exibirConsumo()
     }
 
@@ -159,12 +159,8 @@ class MainActivity : AppCompatActivity() {
         val alcool = pagina.tipo?.let { Calculos.ehAlcool(it) } ?: false
         val titulo = findViewById<TextView>(R.id.tvBebidaAtual)
         titulo.text = pagina.titulo
-        val icone = when (pagina.tipo) {
-            null -> R.drawable.ic_chart_bar
-            "Água" -> R.drawable.ic_water_drop
-            "Café" -> R.drawable.ic_coffee
-            else -> R.drawable.ic_drink_glass
-        }
+        val icone = if (pagina.tipo == null) R.drawable.ic_chart_bar
+            else TipoBebida.doBanco(pagina.tipo)?.icone ?: R.drawable.ic_drink_glass
         findViewById<android.widget.ImageView>(R.id.ivBebidaAtual).setImageResource(icone)
         tvTotal.text = "${java.text.NumberFormat.getIntegerInstance(java.util.Locale.forLanguageTag("pt-BR")).format(pagina.ml)} ml"
         val descricao = findViewById<TextView>(R.id.tvMetaDia)
@@ -190,8 +186,8 @@ class MainActivity : AppCompatActivity() {
                 tvPercentual.text = if (pagina.tipo == null) "$pct% da meta" else "$pct% da meta total"
                 incentivo.text = when {
                     pagina.ml >= meta -> "Meta alcançada. Um cuidado para celebrar!"
-                    pagina.ml == 0 && pagina.tipo == "Água" -> "Seu próximo gole pode ser agora."
-                    pagina.tipo == "Água" || pagina.tipo == null -> "Cada gole conta. Você está no seu ritmo."
+                    pagina.ml == 0 && pagina.tipo == TipoBebida.AGUA.valorBanco -> "Seu próximo gole pode ser agora."
+                    pagina.tipo == TipoBebida.AGUA.valorBanco || pagina.tipo == null -> "Cada gole conta. Você está no seu ritmo."
                     else -> "${pagina.titulo} de hoje. Veja também seu total diário."
                 }
                 animarProgressBar(pagina.ml.coerceAtMost(meta))

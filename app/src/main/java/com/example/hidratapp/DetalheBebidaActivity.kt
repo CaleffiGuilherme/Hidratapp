@@ -103,7 +103,7 @@ class DetalheBebidaActivity : AppCompatActivity() {
             finish()
             return
         }
-        tvNome.text = "${b.tipo} • ${b.ml} ml"
+        tvNome.text = "${TipoBebida.nomeExibido(b.tipo)} • ${b.ml} ml"
         tvInfo.text = "Registrado em ${b.data} ${b.hora.ifBlank { "(horário não registrado)" }}"
         tvObservacao.text = if (b.observacao.isEmpty()) "Nenhuma observação informada." else b.observacao
         if (b.favorito) {

@@ -12,7 +12,7 @@ object DicasEngine {
         val alcool = bebidasHoje.filter { Calculos.ehAlcool(it.tipo) }
         if (alcool.isNotEmpty()) dicas.add(Dica("Consumo de álcool",
             "Você registrou ${alcool.size} bebida(s) alcoólica(s). Água não neutraliza o álcool nem torna o consumo seguro. Evite dirigir após beber. Se há histórico de problemas com álcool, busque apoio profissional.", NivelAlerta.ALERTA))
-        if (bebidasHoje.any { it.tipo == "Café" || it.tipo == "Energético" }) dicas.add(Dica("Bebidas com cafeína",
+        if (bebidasHoje.any { TipoBebida.doBanco(it.tipo)?.cafeinada == true }) dicas.add(Dica("Bebidas com cafeína",
             "Essas bebidas também contribuem com líquidos. Observe a quantidade de cafeína e açúcar no rótulo e priorize água no cotidiano.", NivelAlerta.INFO))
         if (bebidasHoje.any { it.tipo == "Suco" || it.tipo == "Refrigerante" }) dicas.add(Dica("Confira o açúcar",
             if (prefs.getBoolean("diabetes", false)) "Bebidas podem conter açúcar. Siga seu plano de cuidados e a orientação do profissional que acompanha sua glicemia."

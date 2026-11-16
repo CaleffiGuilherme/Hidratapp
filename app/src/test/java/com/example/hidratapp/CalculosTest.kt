@@ -21,7 +21,7 @@ class CalculosTest {
     @Test fun progressoSomaBebidasSemAlcool() {
         assertEquals(0, Calculos.totalValido(emptyList()))
         assertEquals(600, Calculos.totalValido(listOf(bebida("Água"), bebida("Café"), bebida("Cerveja"))))
-        assertEquals(0, Calculos.totalValido(TIPOS_ALCOOL.map { bebida(it) }))
+        assertEquals(0, Calculos.totalValido(TipoBebida.entries.filter { it.alcoolica }.map { bebida(it.valorBanco) }))
     }
     @Test fun alertaConsideraApenasSequenciaMaisRecente() {
         assertEquals(0, Calculos.alcoolSeguidos(emptyList()))

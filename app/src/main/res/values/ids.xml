@@ -1,1 +1,12 @@
-<resources><item name="etHoraConsumo" type="id" /></resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="etHoraConsumo" type="id" />
+    <item name="chipAgua" type="id" />
+    <item name="chipSuco" type="id" />
+    <item name="chipRefrigerante" type="id" />
+    <item name="chipCafe" type="id" />
+    <item name="chipEnergetico" type="id" />
+    <item name="chipCerveja" type="id" />
+    <item name="chipVinho" type="id" />
+    <item name="chipDestilado" type="id" />
+</resources>

@@ -36,8 +36,17 @@ class CadastroBebidaActivity : AppCompatActivity() {
         val tvTitulo = findViewById<TextView>(R.id.tvTituloCadastro)
         val btnHeaderVoltar = findViewById<ImageButton>(R.id.btnHeaderVoltar)
         val tipos = findViewById<ChipGroup>(R.id.chipTipos)
-        val idsTipos = listOf(R.id.chipAgua, R.id.chipSuco, R.id.chipRefrigerante, R.id.chipCafe,
-            R.id.chipEnergetico, R.id.chipCerveja, R.id.chipVinho, R.id.chipDestilado)
+        TipoBebida.entries.forEach { tipo ->
+            val chip = layoutInflater.inflate(R.layout.item_tipo_bebida, tipos, false) as Chip
+            chip.id = tipo.chipId
+            chip.tag = tipo
+            chip.text = tipo.nome
+            chip.setChipIconResource(tipo.icone)
+            tipos.addView(chip)
+        }
+        tipos.check(TipoBebida.AGUA.chipId)
+        fun tipoSelecionado(): TipoBebida =
+            findViewById<Chip>(tipos.checkedChipId)?.tag as? TipoBebida ?: TipoBebida.AGUA
         val etMl = findViewById<EditText>(R.id.etMl)
         val etData = findViewById<EditText>(R.id.etData)
         val tilData = findViewById<TextInputLayout>(R.id.tilData)
@@ -88,7 +97,7 @@ class CadastroBebidaActivity : AppCompatActivity() {
 
         if (bebidaEditada != null) {
             tvTitulo.text = "Um ajuste no seu registro."
-            if (savedInstanceState == null) tipos.check(idsTipos[TIPOS.indexOf(bebidaEditada.tipo).coerceAtLeast(0)])
+            if (savedInstanceState == null) tipos.check((TipoBebida.doBanco(bebidaEditada.tipo) ?: TipoBebida.AGUA).chipId)
             etMl.setText(bebidaEditada.ml.toString())
             etData.setText(bebidaEditada.data)
             etObservacao.setText(bebidaEditada.observacao)
@@ -103,7 +112,7 @@ class CadastroBebidaActivity : AppCompatActivity() {
                 partes.getOrNull(0)?.toIntOrNull() ?: 12,partes.getOrNull(1)?.toIntOrNull() ?: 0,true).show()
         }
         fun atualizarResumo() {
-            val tipo=findViewById<Chip>(tipos.checkedChipId)?.text?.toString() ?: TIPOS.first()
+            val tipo=tipoSelecionado().nome
             val ml=etMl.text.toString().toIntOrNull() ?: 0
             findViewById<TextView>(R.id.tvResumoRegistro).text=if (ml>0) "$tipo · $ml ml" else "$tipo · escolha a quantidade"
             btnSalvar.text=if (bebidaEditada != null) "Salvar alterações" else if (ml>0) "Registrar $ml ml" else "Salvar meu registro"
@@ -117,7 +126,7 @@ class CadastroBebidaActivity : AppCompatActivity() {
             val ml = etMl.text.toString().trim().toIntOrNull()
             val data = etData.text.toString().trim()
             val observacao = etObservacao.text.toString().trim()
-            val tipo = findViewById<Chip>(tipos.checkedChipId)?.text?.toString() ?: TIPOS.first()
+            val tipo = tipoSelecionado().valorBanco
 
             if (ml == null || ml <= 0 || ml > 5000) {
                 etMl.error = "Informe a quantidade em ml (1 a 5000)"

@@ -31,7 +31,7 @@ class ListaActivity : AppCompatActivity() {
         tipo = findViewById(R.id.filtroTipo)
         favoritos = findViewById(R.id.filtroFavoritos)
         periodo.adapter = ArrayAdapter(this, R.layout.item_filtro_spinner, listOf("Todo o histórico", "Hoje", "Últimos 7 dias"))
-        tipo.adapter = ArrayAdapter(this, R.layout.item_filtro_spinner, listOf("Todas as bebidas") + TIPOS)
+        tipo.adapter = ArrayAdapter(this, R.layout.item_filtro_spinner, listOf("Todas as bebidas") + TipoBebida.entries.map { it.nome })
         val listener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) { atualizar() }
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -56,7 +56,7 @@ class ListaActivity : AppCompatActivity() {
             "\nA linha indica sua meta atual · Dias sem registros = 0"
         val filtradas = todas.filter {
             (when (periodo.selectedItemPosition) { 1 -> it.data == Calculos.hoje(); 2 -> it.data in datas; else -> true }) &&
-                (tipo.selectedItemPosition <= 0 || it.tipo == TIPOS[tipo.selectedItemPosition - 1]) &&
+                (tipo.selectedItemPosition <= 0 || it.tipo == TipoBebida.entries[tipo.selectedItemPosition - 1].valorBanco) &&
                 (!favoritos.isChecked || it.favorito)
         }
         findViewById<TextView>(R.id.tvEmptyState).apply {

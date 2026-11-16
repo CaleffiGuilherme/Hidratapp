@@ -50,7 +50,7 @@ object Calculos {
     }
 
     fun ehAlcool(tipo: String): Boolean {
-        return TIPOS_ALCOOL.contains(tipo)
+        return TipoBebida.doBanco(tipo)?.alcoolica == true
     }
 
     fun alcoolSeguidos(lista: List<Bebida>): Int {

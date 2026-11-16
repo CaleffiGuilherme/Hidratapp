@@ -35,7 +35,8 @@ app/src/main/
 ├── AndroidManifest.xml
 ├── java/com/example/hidratapp/
 │   ├── BancoHelper.kt            # Criação e operações CRUD no banco SQLite (hidrata.db)
-│   ├── Bebida.kt                 # Modelo de dados da bebida e listas de tipos
+│   ├── Bebida.kt                 # Modelo de dados da bebida
+│   ├── TipoBebida.kt             # Enum com nomes, ícones e regras das categorias
 │   ├── BebidaAdapter.kt          # Adaptador para exibição na RecyclerView
 │   ├── Calculos.kt               # Lógica de cálculo de meta de água, IMC e alertas
 │   ├── MainActivity.kt           # Tela principal com progresso diário e atalhos
@@ -127,3 +128,9 @@ O teste de primeiro acesso percorre as quatro etapas, salva o perfil e verifica 
 ### Consumo por bebida na tela inicial
 
 Deslize horizontalmente no círculo de consumo ou use as setas para alternar entre Água, os outros tipos registrados hoje e o Total do dia. Registros do mesmo tipo são somados. Água permanece como primeira página; as demais aparecem quando há registros. O total segue a regra existente de excluir álcool da meta. A seleção é preservada ao recriar a tela, e os atalhos rápidos continuam registrando água. A rolagem vertical permanece disponível.
+
+### Tipos de bebida centralizados
+
+`TipoBebida` reúne o valor permanente do banco (`valorBanco`), o nome exibido (`nome`), o ícone, o ID do chip e as classificações de álcool e cafeína. O cadastro percorre o enum e infla `item_tipo_bebida.xml`; as cores continuam nos seletores `drink_chip_*`. Não existem listas paralelas de nomes e IDs.
+
+Para renomear uma opção, altere `nome` e preserve `valorBanco`. Os registros atuais continuam válidos no SQLite versão 3, sem migração. Filtros, carrossel, detalhes e regras consultam o enum; categorias desconhecidas continuam visíveis pelo texto original. Para uma nova categoria, inclua sua entrada e declare um ID em `res/values/ids.xml`.

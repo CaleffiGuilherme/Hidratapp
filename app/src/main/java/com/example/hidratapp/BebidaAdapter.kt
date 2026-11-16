@@ -28,7 +28,7 @@ class BebidaAdapter(
 
     override fun onBindViewHolder(holder: BebidaViewHolder, position: Int) {
         val bebida = bebidas[position]
-        holder.titulo.text = "${bebida.tipo} • ${bebida.ml} ml"
+        holder.titulo.text = "${TipoBebida.nomeExibido(bebida.tipo)} • ${bebida.ml} ml"
         holder.data.text = if (bebida.observacao.isNotBlank()) {
             "${bebida.data} ${bebida.hora} • ${bebida.observacao}"
         } else {

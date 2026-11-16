@@ -9,10 +9,3 @@ data class Bebida(
     val favorito: Boolean = false,
     val hora: String = ""
 )
-
-val TIPOS = listOf(
-    "Água", "Suco", "Refrigerante", "Café",
-    "Energético", "Cerveja", "Vinho", "Destilado"
-)
-
-val TIPOS_ALCOOL = listOf("Cerveja", "Vinho", "Destilado")

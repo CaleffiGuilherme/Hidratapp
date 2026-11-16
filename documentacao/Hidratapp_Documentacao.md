@@ -1,10 +1,16 @@
+Autores: Guilherme Caleffi Pellens Pereira e Gabriel Cardoso Gonçalves.
+
+Professor: Armando Augusto Piva.
+
+Disciplina: Desenvolvimento de Aplicativos Móveis.
+
 # HIDRATAPP
 
 # HIDRATAPP
 
 # RESUMO
 
-O Hidratapp é um aplicativo Android para registrar bebidas e acompanhar uma meta diária estimada de ingestão de líquidos. O projeto integra conteúdos de desenvolvimento mobile por meio de interfaces XML, lógica em Kotlin, persistência SQLite e preferências locais. A versão atual reúne configuração inicial em quatro etapas, cadastro visual com horário, histórico filtrável, favoritos, estatísticas semanais, registro de sintomas, dicas educativas e lembretes por notificações. Na tela inicial, o indicador circular permite alternar por gesto entre água, outros tipos registrados no dia e o total que participa da meta. Este relatório descreve arquitetura, banco versão 3, regras, decisões de interface e procedimentos de reprodução. A verificação registra compilação do APK, análise estática sem erros, quinze testes unitários e quatorze testes instrumentados aprovados em emulador Android 17. Os cenários abrangem cálculos, migrações, cadastro, edição, preservação de estado, filtros, primeiro acesso, notificações e gestos. Permanecem limitações relacionadas a bases extensas, diferentes aparelhos, acessibilidade, backup e validação clínica das estimativas. O aplicativo se destina à organização pessoal e não constitui instrumento de diagnóstico nem prescrição individual.
+O Hidratapp é um aplicativo Android para registrar bebidas e acompanhar uma meta diária estimada de ingestão de líquidos. O projeto integra conteúdos de desenvolvimento mobile por meio de interfaces XML, lógica em Kotlin, persistência SQLite e preferências locais. A versão atual reúne configuração inicial em quatro etapas, cadastro visual com horário, histórico filtrável, favoritos, estatísticas semanais, registro de sintomas, dicas educativas e lembretes por notificações. Na tela inicial, o indicador circular permite alternar por gesto entre água, outros tipos registrados no dia e o total que participa da meta. Este relatório descreve arquitetura, banco versão 3, regras, decisões de interface e procedimentos de reprodução. A verificação registra compilação do APK, análise estática sem erros, dezoito testes unitários e quinze testes instrumentados aprovados em emulador Android 17. Os cenários abrangem cálculos, migrações, cadastro, edição, preservação de estado, filtros, primeiro acesso, notificações e gestos. Permanecem limitações relacionadas a bases extensas, diferentes aparelhos, acessibilidade, backup e validação clínica das estimativas. O aplicativo se destina à organização pessoal e não constitui instrumento de diagnóstico nem prescrição individual.
 
 # LISTA DE ILUSTRAÇÕES
 
@@ -16,7 +22,7 @@ O Hidratapp organiza registros diários de bebidas em uma aplicação Android de
 
 Esta atualização descreve o estado atual do aplicativo, incluindo recursos que não existiam na primeira versão do relatório: lembretes agendados, gráficos semanais, filtros, horário de consumo, cadastro por opções visuais e carrossel de bebidas. As imagens e as conclusões anteriores sobre testes de exemplo e divergência de meta foram substituídas pelas evidências atuais.
 
-A revisão de referência do repositório é e6a24ed. A identificação declarada do aplicativo permanece 1.0, e o banco local utiliza a versão 3. A exposição considera comportamentos presentes no código e verificações executadas, sem atribuir à dupla experiências, esforço em horas ou validações não registrados.
+A revisão de referência do repositório é cf9835a+enum. A revisão inclui a refatoração local TipoBebida ainda sem commit próprio. A identificação declarada do aplicativo permanece 1.0, e o banco local utiliza a versão 3. A exposição considera comportamentos presentes no código e verificações executadas, sem atribuir à dupla experiências, esforço em horas ou validações não registrados.
 
 Conservamos a apresentação acadêmica do relatório anterior: papel A4, margens superior e esquerda de 3 cm, inferior e direita de 2 cm, corpo em Times New Roman 12 e espaçamento de 1,5. A organização reúne proposta, requisitos, arquitetura, explicação do código, telas, resultados e manual. Os modelos da biblioteca do COTUCA são indicados nas referências como apoio à normalização institucional.
 
@@ -66,7 +72,7 @@ O sistema utiliza Activities para telas e eventos, modelos para os registros e a
 
 Bebida e Sintoma representam os registros. BancoHelper cria o esquema, executa consultas parametrizadas e converte as linhas. Calculos concentra fórmulas e regras de domínio. PerfilRepository lê as preferências e fornece a mesma meta ao início, ao resumo do perfil, às estatísticas e às dicas.
 
-ConsumoDoDia monta páginas agrupadas por categoria. SwipeConsumoLayout reconhece movimento lateral preservando a rolagem vertical. HydrationProgressView desenha o indicador e o preenchimento de água com base no valor de progresso do controle nativo.
+TipoBebida centraliza as oito categorias. O cadastro percorre suas entradas e infla item_tipo_bebida.xml, mantendo IDs estáveis na recriação. Não há listas paralelas de nomes e IDs. ConsumoDoDia monta páginas agrupadas por categoria. SwipeConsumoLayout reconhece movimento lateral preservando a rolagem vertical. HydrationProgressView desenha o indicador e o preenchimento de água com base no valor de progresso do controle nativo.
 
 Lembretes utiliza AlarmManager, PendingIntent e notificações. LembreteReceiver recebe o alarme e eventos do sistema, publica o aviso quando permitido e agenda o próximo horário. DicasEngine produz mensagens educativas; a Activity correspondente organiza os cartões e permite expandir o texto.
 
@@ -90,11 +96,11 @@ Consultas por data e identificador usam parâmetros separados do SQL. Inserçõe
 
 ## 7 EXPLICAÇÃO DOS BLOCOS DO CÓDIGO
 
-### 7.1 Modelos e meta centralizada
+### 7.1 Modelos enum e meta centralizada
 
-![Figura 1 - Modelo atual de bebida com horário](capturas/atualizadas/codigo-modelo.png)
+![Figura 1 - Enum de bebidas com identificação estável](capturas/atualizadas/codigo-modelo.png)
 
-Bebida utiliza propriedades val e o método copy para preservar campos não alterados na edição. O horário vazio mantém compatibilidade com registros antigos. A lista TIPOS organiza a escolha de categorias; TIPOS_ALCOOL concentra a classificação usada no total e nos avisos.
+Bebida utiliza val e copy para preservar campos na edição. TipoBebida é o enum que reúne valorBanco, nome, ícone, ID do chip e indicadores de álcool e cafeína. valorBanco conserva as strings existentes; nome pode mudar sem renomear registros. doBanco reconhece categorias conhecidas e nomeExibido preserva textos desconhecidos.
 
 ![Figura 2 - Leitura compartilhada das entradas de cálculo](capturas/atualizadas/codigo-meta.png)
 
@@ -108,7 +114,7 @@ ALTER TABLE adiciona horário sem remover bebidas. A criação de sintomas perma
 
 ![Figura 4 - Seleção dos campos e validação do volume](capturas/atualizadas/codigo-cadastro.png)
 
-O tipo vem de uma seleção visual única e obrigatória. Os atalhos somam volume. Data e horário são interpretados com formato estrito, e instantes futuros são recusados. Inserir deve retornar um identificador positivo; atualizar deve afetar uma linha. O uso de copy mantém favorito e identificador na edição. O IMC converte centímetros em metros; para 70 kg e 175 cm, o resultado aproximado é 22,86. Menores de 20 anos não recebem classificação adulta.
+O cadastro cria os chips a partir de TipoBebida. A seleção é única e obrigatória; a tag guarda o enum, e salvar usa valorBanco, sem ler o texto do botão. Os atalhos somam volume. Data e horário são interpretados com formato estrito, e instantes futuros são recusados. Inserir deve retornar um identificador positivo; atualizar deve afetar uma linha. O uso de copy mantém favorito e identificador na edição. O IMC usa altura em metros; menores de 20 anos não recebem classificação adulta.
 
 ### 7.3 Carrossel lembretes e dicas
 
@@ -168,20 +174,21 @@ A fórmula e as mensagens não têm validação clínica individual. As referên
 
 ## 10 VERIFICAÇÃO E RESULTADOS
 
-A revisão e6a24ed foi compilada em depuração. assembleDebug terminou com BUILD SUCCESSFUL e lintDebug não registrou erros. O projeto possui avisos de análise estática; o resultado não significa ausência de todos os problemas potenciais.
+A revisão cf9835a+enum foi compilada em depuração. assembleDebug terminou com BUILD SUCCESSFUL e lintDebug não registrou erros. O projeto possui avisos de análise estática; o resultado não significa ausência de todos os problemas potenciais.
 
-A execução consolidada registra 15 testes unitários e 14 instrumentados aprovados no emulador Medium_Phone com Android 17. Os antigos testes de exemplo foram substituídos. O quadro resume as suítes atuais.
+A execução consolidada registra 18 testes unitários e 15 instrumentados aprovados no emulador Medium_Phone com Android 17. Os antigos testes de exemplo foram substituídos. O quadro resume as suítes atuais.
 
 | Suíte | Testes | Resultado |
 |---|---|---|
 | CalculosTest | 10 | Aprovados |
 | ConsumoDoDiaTest | 5 | Aprovados |
+| TipoBebidaTest | 3 | Aprovados |
 | BancoMigrationTest | 3 | Aprovados |
-| FluxosTest | 10 | Aprovados |
+| FluxosTest | 11 | Aprovados |
 | NotificacaoTest | 1 | Aprovado |
-| Total | 29 | Sem falhas |
+| Total | 33 | Sem falhas |
 
-As regras unitárias abrangem meta, IMC, sequência de álcool, soma válida, horários de lembretes e páginas de consumo. Os testes de banco verificam migrações das versões 1 e 2 e operações CRUD. Os fluxos cobrem primeiro acesso, perfil, cadastro, edição, favorito preservado, filtros, Desfazer, coerência de meta, gestos, setas e recriação.
+As regras unitárias abrangem meta, IMC, sequência de álcool, soma válida, lembretes e páginas de consumo. TipoBebidaTest verifica valores legados, classificações e categorias desconhecidas. Um fluxo troca o rótulo de um chip e confirma a gravação do valor estável. Os testes de banco verificam migrações das versões 1 e 2 e operações CRUD. Os fluxos cobrem primeiro acesso, perfil, cadastro, edição, favorito preservado, filtros, Desfazer, coerência de meta, gestos, setas e recriação.
 
 NotificacaoTest verifica a publicação de uma notificação pelo serviço do Android. Não comprova pontualidade em repouso prolongado. Não foram medidos cobertura percentual de código, desempenho ou eficácia clínica. As capturas utilizam dados de teste removidos ao final dos cenários.
 
@@ -191,7 +198,7 @@ Abra no Android Studio a pasta que contém settings.gradle.kts. Sincronize o Gra
 
 No Windows, execute .\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --console=plain. O APK é gerado em app/build/outputs/apk/debug/app-debug.apk. O relatório unitário fica em app/build/reports/tests/testDebugUnitTest/index.html, e o de lint em app/build/reports/lint-results-debug.html.
 
-Com um emulador de teste conectado, utilize .\gradlew.bat :app:connectedDebugAndroidTest. A alternativa usada na consolidação instala os APKs principal e de teste e executa am instrument com AndroidJUnitRunner. O registro está em app/build/qa/validacao_documentacao.txt.
+Com um emulador de teste conectado, utilize .\gradlew.bat :app:connectedDebugAndroidTest. A alternativa usada na consolidação instala os APKs principal e de teste e executa am instrument com AndroidJUnitRunner. O registro está em app/build/qa/validacao_enum_instrumentados.txt.
 
 No primeiro acesso, toque em Vamos começar e percorra as quatro etapas. Informe medidas válidas, escolha a atividade e marque cuidados apenas se desejar. Confira o resumo e toque em Ir para meu dia. O perfil pode ser editado depois pela navegação inferior.
 
@@ -217,7 +224,7 @@ As principais correções em relação ao documento anterior são a unificação
 
 A evolução visual reorganizou abertura, configuração e menus. O cadastro utiliza escolhas por categoria e volume destacado; o painel permite percorrer registros agrupados por bebida. O gráfico e os filtros ampliam a consulta. Os lembretes possuem configuração própria e teste de publicação.
 
-A avaliação reúne 29 testes aprovados e inspeção de imagens da execução. Isso sustenta a demonstração dos cenários exercitados, sem constituir certificação de qualidade, segurança ou adequação clínica. As limitações da seção 9 continuam relevantes antes de uma distribuição pública.
+A refatoração substitui listas paralelas pelo enum, compartilhado pelo cadastro, filtros, carrossel, detalhes e regras de álcool e cafeína. As cores continuam nos recursos XML e no selector de seleção. O SQLite permanece na versão 3, sem migração nesta alteração. A avaliação reúne 33 testes aprovados e inspeção de imagens da execução. Isso sustenta a demonstração dos cenários exercitados, sem constituir certificação de qualidade, segurança ou adequação clínica. As limitações da seção 9 continuam relevantes antes de uma distribuição pública.
 
 O parecer é favorável à apresentação acadêmica dos recursos implementados e testados. As prioridades futuras são avaliar acessibilidade e mais aparelhos, medir desempenho em bases maiores, revisar backup e proteção dos dados e ampliar as camadas de persistência conforme a escala do sistema.
 
@@ -239,9 +246,9 @@ GOOGLE. Schedule alarms. Android Developers, s.d.b. Disponível em: https://deve
 
 GOOGLE. Notification runtime permission. Android Developers, s.d.c. Disponível em: https://developer.android.com/develop/ui/compose/notifications/notification-permission. Acesso em: 15 nov. 2026.
 
-HIDRATAPP. Código-fonte do aplicativo. Versão 1.0, revisão e6a24ed. Curitiba, 2026. Disponível em: https://github.com/CaleffiGuilherme/Hidratapp. Analisado em: 15/11/2026.
+HIDRATAPP. Código-fonte do aplicativo. Versão 1.0, revisão cf9835a+enum. Curitiba, 2026. Disponível em: https://github.com/CaleffiGuilherme/Hidratapp. Analisado em: 16/11/2026.
 
-HIDRATAPP. Relatórios de testes e análise estática. 2026. Arquivos locais: app/build/test-results/testDebugUnitTest, app/build/qa/validacao_documentacao.txt e app/build/reports/lint-results-debug.xml.
+HIDRATAPP. Relatórios de testes e análise estática. 2026. Arquivos locais: app/build/test-results/testDebugUnitTest, app/build/qa/validacao_enum_instrumentados.txt e app/build/reports/lint-results-debug.xml.
 
 NATIONAL HEALTH SERVICE. Water drinks and hydration. NHS, s.d. Disponível em: https://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/water-drinks-nutrition/. Acesso em: 15 nov. 2026.
 
