@@ -58,6 +58,7 @@ class PerfilActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_perfil)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -108,6 +109,7 @@ class PerfilActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnStep4Voltar).setOnClickListener { irParaEtapa(3) }
         findViewById<Button>(R.id.btnSalvarPerfil).setOnClickListener { salvarPerfilFinal() }
 
+        findViewById<Button>(R.id.btnConcluirPerfil).setOnClickListener { finish() }
         btnEditarPerfil.setOnClickListener {
             irParaEtapa(1)
         }
@@ -122,7 +124,16 @@ class PerfilActivity : AppCompatActivity() {
             }
         })
 
-        carregarDadosExistentes()
+        if (savedInstanceState == null) carregarDadosExistentes()
+        else {
+            val etapa = savedInstanceState.getInt("etapa", 0)
+            if (etapa == -1) exibirResumo() else irParaEtapa(etapa, animar = false)
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("etapa", currentStep)
+        super.onSaveInstanceState(outState)
     }
 
     private fun voltarOuFechar() {
@@ -175,6 +186,7 @@ class PerfilActivity : AppCompatActivity() {
 
     private fun exibirResumo() {
         currentStep = -1
+        findViewById<android.widget.ScrollView>(R.id.main).post { findViewById<android.widget.ScrollView>(R.id.main).smoothScrollTo(0,0) }
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
 
         pbWizard.visibility = View.GONE
@@ -194,10 +206,11 @@ class PerfilActivity : AppCompatActivity() {
         val masculino = prefs.getBoolean("masculino", false)
         val esporte = prefs.getInt("esporte", 0)
 
-        val meta = Calculos.metaAgua(peso, idade, masculino, esporte)
+        val meta = PerfilRepository.meta(this)
         val imc = Calculos.imc(peso, altura)
 
         val classificacaoImc = when {
+            idade < 20 -> "Avaliação por idade requer profissional"
             imc < 18.5 -> "Abaixo do peso"
             imc < 25.0 -> "Peso normal"
             imc < 30.0 -> "Sobrepeso"
@@ -234,9 +247,12 @@ class PerfilActivity : AppCompatActivity() {
 
     private fun irParaEtapa(novaEtapa: Int, animar: Boolean = true) {
         currentStep = novaEtapa
+        findViewById<android.widget.ScrollView>(R.id.main).post {
+            findViewById<android.widget.ScrollView>(R.id.main).smoothScrollTo(0,0)
+        }
 
         layoutPerfilResumo.visibility = View.GONE
-        pbWizard.visibility = View.VISIBLE
+        pbWizard.visibility = if (novaEtapa == 0) View.GONE else View.VISIBLE
 
         val layouts = listOf(
             layoutStep0Welcome,

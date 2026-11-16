@@ -1,64 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/wellness_bg">
-
+    android:background="@drawable/bg_flo_gradient">
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:gravity="center"
-        android:orientation="vertical">
-
-        <!-- Card da Logo Oficial do App -->
-        <com.google.android.material.card.MaterialCardView
+        android:orientation="vertical"
+        android:padding="28dp">
+        <FrameLayout
             android:id="@+id/cardLogo"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="8dp"
-            app:strokeWidth="2dp"
-            app:strokeColor="@color/teal_primary">
-
-            <ImageView
-                android:id="@+id/ivLogoSplash"
+            android:layout_width="240dp"
+            android:layout_height="240dp">
+            <com.example.hidratapp.WaterIllustrationView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:contentDescription="Logo Hidratapp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/logo_hidratapp" />
-        </com.google.android.material.card.MaterialCardView>
-
+                android:importantForAccessibility="no" />
+        </FrameLayout>
         <TextView
             android:id="@+id/tvTituloSplash"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Hidratapp"
-            android:textColor="@color/teal_primary"
-            android:textSize="32sp"
-            android:textStyle="bold" />
-
+            android:gravity="center"
+            android:text="hidratapp"
+            android:textSize="46sp"
+            android:letterSpacing="-0.04"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/text_primary" />
         <TextView
             android:id="@+id/tvSubtituloSplash"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Seu acompanhante de saúde e hidratação"
-            android:textColor="@color/text_secondary"
-            android:textSize="14sp" />
-
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="Um gole de cada vez."
+            android:textSize="17sp"
+            android:textColor="@color/text_secondary" />
     </LinearLayout>
-
-    <ProgressBar
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="48dp"
-        android:indeterminateTint="@color/teal_primary" />
-
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
+        <ProgressBar
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminateTint="@color/blue_primary" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:text="SEU MOMENTO DE CUIDADO"
+            android:textSize="10sp"
+            android:letterSpacing="0.14"
+            android:textColor="@color/text_secondary" />
+    </LinearLayout>
 </RelativeLayout>

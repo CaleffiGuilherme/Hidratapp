@@ -13,11 +13,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class SplashActivity : AppCompatActivity() {
+    private val transitionHandler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_splash)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -66,10 +68,16 @@ class SplashActivity : AppCompatActivity() {
             .start()
 
         // Transição automática para a MainActivity após 1.8 segundos
-        Handler(Looper.getMainLooper()).postDelayed({
+        transitionHandler.postDelayed({
+            if (isFinishing || isDestroyed) return@postDelayed
             startActivity(Intent(this, MainActivity::class.java))
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             finish()
         }, 1800)
+    }
+
+    override fun onDestroy() {
+        transitionHandler.removeCallbacksAndMessages(null)
+        super.onDestroy()
     }
 }

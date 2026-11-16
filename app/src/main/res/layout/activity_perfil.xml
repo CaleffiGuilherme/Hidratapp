@@ -1,788 +1,874 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@drawable/bg_wizard_gradient">
-
+    android:scrollbars="none"
+    android:background="@drawable/bg_flo_gradient">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
-
-        <!-- Top Bar Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:layout_marginBottom="12dp">
-
+            android:gravity="center_vertical"
+            android:layout_marginBottom="20dp">
             <ImageButton
                 android:id="@+id/btnHeaderVoltar"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:contentDescription="Voltar"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_white_round"
+                android:padding="12dp"
                 android:src="@drawable/ic_arrow_back"
-                app:tint="@color/white" />
-
+                app:tint="@color/blue_primary"
+                android:contentDescription="Voltar" />
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="12dp">
                 <TextView
                     android:id="@+id/tvTituloHeader"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seu Perfil"
-                    android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
+                    android:text="Seu cuidado começa aqui"
+                    android:textSize="16sp"
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif-medium" />
                 <TextView
                     android:id="@+id/tvEtapaIndicador"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Resumo"
-                    android:textColor="#B2EBF2"
-                    android:textSize="13sp" />
+                    android:text="Boas-vindas"
+                    android:textSize="12sp"
+                    android:layout_marginTop="4dp"
+                    android:textColor="@color/text_secondary" />
             </LinearLayout>
         </LinearLayout>
-
-        <!-- Barra de Progresso Branca (Visível apenas durante o Wizard) -->
         <ProgressBar
             android:id="@+id/pbWizard"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="6dp"
+            android:layout_marginBottom="26dp"
             android:max="4"
-            android:progress="0"
             android:progressDrawable="@drawable/custom_progress_bar"
-            android:progressTint="@color/white"
             android:visibility="gone" />
-
-        <!-- Container de Telas do Perfil -->
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1">
-
-            <!-- TELA RESUMO: Perfil Ativo (Exibida quando já tem perfil salvo) -->
+            android:layout_height="wrap_content">
             <LinearLayout
                 android:id="@+id/layoutPerfilResumo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:visibility="visible">
-
-                <!-- Avatar e Título -->
-                <LinearLayout
+                android:visibility="gone">
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="20dp">
-
-                    <ImageView
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:layout_marginBottom="12dp"
-                        android:contentDescription="Perfil"
-                        android:src="@drawable/ic_person"
-                        app:tint="@color/white" />
-
-                    <TextView
-                        android:id="@+id/tvResumoBoasVindas"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Seu Perfil de Saúde"
-                        android:textColor="@color/white"
-                        android:textSize="24sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <!-- Card Meta Diária e IMC -->
+                    android:text="SEU CUIDADO, DO SEU JEITO"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Um plano para o seu dia."
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Aqui estão suas informações e sua meta estimada. Você pode ajustar tudo quando precisar."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
-
+                        <com.example.hidratapp.WaterIllustrationView
+                            android:layout_width="match_parent"
+                            android:layout_height="140dp"
+                            android:importantForAccessibility="no" />
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Meta Diária Recomendada"
+                            android:text="Sua meta diária estimada"
+                            android:textSize="12sp"
                             android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
+                            android:lineSpacingExtra="3dp"
+                            android:gravity="center" />
                         <TextView
                             android:id="@+id/tvResumoMeta"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="2500 ml / dia"
-                            android:textColor="@color/blue_primary"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
-
-                        <View
                             android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_marginVertical="12dp"
-                            android:background="#F1F5F9" />
-
-                        <TextView
-                            android:id="@+id/tvResumoIMC"
-                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="IMC: --"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
+                            android:textSize="32sp"
+                            android:gravity="center"
+                            android:fontFamily="sans-serif-medium"
+                            android:textColor="@color/blue_primary"
+                            android:layout_marginTop="8dp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Pequenos registros. Um hábito de cada vez."
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:lineSpacingExtra="3dp"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Card Informações Físicas -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
-
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:text="Dados Físicos &amp; Atividade"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
+                            android:text="Sobre você"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_primary"
+                            android:lineSpacingExtra="3dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginBottom="12dp" />
                         <TextView
                             android:id="@+id/tvResumoPesoAltura"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:text="Peso: -- kg • Altura: -- cm"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
+                            android:textSize="15sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginBottom="10dp" />
                         <TextView
                             android:id="@+id/tvResumoIdadeSexo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:text="Idade: -- anos • Sexo: --"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
+                            android:textSize="15sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginBottom="10dp" />
                         <TextView
                             android:id="@+id/tvResumoEsporte"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Atividade Física: Sedentário"
                             android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
+                            android:textSize="15sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginBottom="10dp" />
+                        <TextView
+                            android:id="@+id/tvResumoIMC"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/text_primary"
+                            android:textSize="13sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginBottom="10dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Card Condições de Saúde -->
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
-
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="6dp"
-                            android:text="Histórico de Saúde"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
+                            android:text="Cuidados registrados"
+                            android:textSize="15sp"
+                            android:textColor="@color/text_primary"
+                            android:lineSpacingExtra="3dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginBottom="12dp" />
                         <TextView
                             android:id="@+id/tvResumoSaude"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Nenhuma condição cadastrada"
                             android:textColor="@color/text_primary"
-                            android:textSize="14sp" />
-
+                            android:textSize="14sp"
+                            android:lineSpacingExtra="4dp"
+                            android:layout_marginBottom="10dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <!-- Botão Editar Perfil -->
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnEditarPerfil"
+                    android:id="@+id/btnConcluirPerfil"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="Editar Dados do Perfil"
+                    android:layout_marginTop="8dp"
+                    android:text="Ir para meu dia"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditarPerfil"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Editar meu perfil"
                     android:textColor="@color/blue_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@color/white"
-                    app:cornerRadius="16dp"
-                    app:icon="@drawable/ic_edit"
-                    app:iconGravity="textStart"
-                    app:iconPadding="8dp"
-                    app:iconTint="@color/blue_primary" />
-
+                    app:cornerRadius="24dp" />
             </LinearLayout>
-
-            <!-- ETAPA 0: Boas-Vindas (Wizard / Onboarding) -->
             <LinearLayout
                 android:id="@+id/layoutStep0Welcome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:orientation="vertical"
-                android:layout_gravity="center"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="88dp"
-                    android:layout_height="88dp"
-                    android:layout_marginBottom="20dp"
-                    android:contentDescription="Logo"
-                    android:src="@drawable/ic_water_drop"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vamos te conhecer!"
-                    android:textColor="@color/white"
-                    android:textSize="28sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="32dp"
-                    android:gravity="center"
-                    android:text="Responda a 4 perguntas rápidas para calcularmos sua meta diária exata e recomendações médicas."
-                    android:textColor="#E0F2F1"
-                    android:textSize="15sp"
-                    android:lineSpacingExtra="4dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnIniciarCadastro"
+                android:visibility="visible">
+                <com.example.hidratapp.WaterIllustrationView
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="Iniciar cadastro"
-                    android:textColor="@color/teal_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@color/white"
-                    app:cornerRadius="16dp" />
-            </LinearLayout>
-
-            <!-- ETAPA 1: Gênero / Sexo -->
-            <LinearLayout
-                android:id="@+id/layoutStep1Genero"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="Sexo"
-                    android:src="@drawable/ic_person"
-                    app:tint="@color/white" />
-
+                    android:layout_height="210dp"
+                    android:importantForAccessibility="no" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Qual o seu sexo / gênero?"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
+                    android:text="BEM-VINDO AO SEU NOVO HÁBITO"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:text="Ajusta a taxa de retenção hídrica do seu organismo."
-                    android:textColor="#E0F2F1"
-                    android:textSize="14sp" />
-
+                    android:text="Seu bem-estar começa com um gole."
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Um espaço simples para acompanhar sua hidratação e cuidar de você, no seu ritmo."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <RadioGroup
-                        android:id="@+id/rgSexo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:orientation="vertical">
-
-                        <RadioButton
-                            android:id="@+id/rbFeminino"
-                            android:layout_width="match_parent"
-                            android:layout_height="52dp"
-                            android:text="Feminino"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbMasculino"
-                            android:layout_width="match_parent"
-                            android:layout_height="52dp"
-                            android:text="Masculino"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbOutro"
-                            android:layout_width="match_parent"
-                            android:layout_height="52dp"
-                            android:text="Outro / Prefiro não responder"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp" />
-                    </RadioGroup>
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnStep1Proximo"
-                    android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:text="Próximo"
-                    android:textColor="@color/teal_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:backgroundTint="@color/white"
-                    app:cornerRadius="16dp" />
-
-            </LinearLayout>
-
-            <!-- ETAPA 2: Dados Físicos (Peso, Altura, Idade) -->
-            <LinearLayout
-                android:id="@+id/layoutStep2Fisico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="Balança"
-                    android:src="@drawable/ic_scale"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Fale um pouco sobre você"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:text="Informe seu peso, altura e idade:"
-                    android:textColor="#E0F2F1"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="20dp">
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="14dp"
-                            android:hint="Peso (kg)"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etPeso"
-                                android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:src="@drawable/ic_target"
+                                app:tint="@color/blue_primary"
+                                android:importantForAccessibility="no" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
                                 android:layout_height="wrap_content"
-                                android:inputType="numberDecimal"
-                                android:textColor="@color/text_primary" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="14dp"
-                            android:hint="Altura (cm)"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etAltura"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:textColor="@color/text_primary" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="Idade"
-                            app:boxCornerRadiusBottomEnd="12dp"
-                            app:boxCornerRadiusBottomStart="12dp"
-                            app:boxCornerRadiusTopEnd="12dp"
-                            app:boxCornerRadiusTopStart="12dp">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etIdade"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="number"
-                                android:textColor="@color/text_primary" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
+                                android:orientation="vertical"
+                                android:layout_marginStart="14dp">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Uma meta feita para você"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/text_primary"
+                                    android:lineSpacingExtra="3dp"
+                                    android:fontFamily="sans-serif-medium" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Uma estimativa baseada no seu perfil."
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_secondary"
+                                    android:lineSpacingExtra="3dp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStep2Voltar"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:text="Voltar"
-                        android:textColor="@color/white"
-                        app:strokeColor="@color/white"
-                        app:cornerRadius="16dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStep2Proximo"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Próximo"
-                        android:textColor="@color/teal_primary"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/white"
-                        app:cornerRadius="16dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- ETAPA 3: Prática de Esportes -->
-            <LinearLayout
-                android:id="@+id/layoutStep3Esporte"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="Esporte"
-                    android:src="@drawable/ic_fitness"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Você pratica esportes?"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:text="Ajusta sua meta conforme o suor gasto em treinos:"
-                    android:textColor="#E0F2F1"
-                    android:textSize="14sp" />
-
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
-                    <RadioGroup
-                        android:id="@+id/rgEsporte"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="16dp"
-                        android:orientation="vertical">
-
-                        <RadioButton
-                            android:id="@+id/rbEsporteSedentario"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:checked="true"
-                            android:text="Não pratico / Sedentário"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbEsporteLeve"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="Leve (1 a 2x por semana)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbEsporteModerado"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="Moderado (3 a 4x por semana)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <RadioButton
-                            android:id="@+id/rbEsporteIntenso"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="Intenso (5+ vezes / Atleta)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-                    </RadioGroup>
-                </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStep3Voltar"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:text="Voltar"
-                        android:textColor="@color/white"
-                        app:strokeColor="@color/white"
-                        app:cornerRadius="16dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStep3Proximo"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Próximo"
-                        android:textColor="@color/teal_primary"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/white"
-                        app:cornerRadius="16dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- ETAPA 4: Condições de Saúde -->
-            <LinearLayout
-                android:id="@+id/layoutStep4Saude"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginBottom="16dp"
-                    android:contentDescription="Saúde"
-                    android:src="@drawable/ic_heart_health"
-                    app:tint="@color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Histórico &amp; Saúde"
-                    android:textColor="@color/white"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginBottom="24dp"
-                    android:gravity="center"
-                    android:text="Selecione caso possua alguma destas condições:"
-                    android:textColor="#E0F2F1"
-                    android:textSize="14sp" />
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="24dp"
-                    app:cardCornerRadius="20dp"
-                    app:cardElevation="4dp"
-                    app:cardBackgroundColor="@color/white">
-
+                    android:layout_marginBottom="16dp">
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="16dp">
-
-                        <CheckBox
-                            android:id="@+id/cbDiabetes"
+                        android:padding="20dp">
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:text="Diabetes ou pré-diabetes"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <CheckBox
-                            android:id="@+id/cbHipertensao"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:text="Hipertensão (Pressão alta)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <CheckBox
-                            android:id="@+id/cbAlcoolismo"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:text="Histórico com álcool / Alcoolismo"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
-                        <CheckBox
-                            android:id="@+id/cbPedrasRins"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:text="Pedras nos rins / Problemas renais"
-                            android:textColor="@color/text_primary"
-                            android:textSize="15sp" />
-
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="36dp"
+                                android:layout_height="36dp"
+                                android:src="@drawable/ic_chart_bar"
+                                app:tint="@color/blue_primary"
+                                android:importantForAccessibility="no" />
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="14dp">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Seu progresso, bem de perto"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/text_primary"
+                                    android:lineSpacingExtra="3dp"
+                                    android:fontFamily="sans-serif-medium" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cada registro ajuda a enxergar sua rotina."
+                                    android:textSize="12sp"
+                                    android:textColor="@color/text_secondary"
+                                    android:lineSpacingExtra="3dp" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
-
-                <LinearLayout
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnIniciarCadastro"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Vamos começar"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnStep4Voltar"
-                        style="@style/Widget.Material3.Button.OutlinedButton"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginEnd="8dp"
-                        android:layout_weight="1"
-                        android:text="Voltar"
-                        android:textColor="@color/white"
-                        app:strokeColor="@color/white"
-                        app:cornerRadius="16dp" />
-
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnSalvarPerfil"
-                        android:layout_width="0dp"
-                        android:layout_height="56dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_weight="1"
-                        android:text="Concluir"
-                        android:textColor="@color/teal_primary"
-                        android:textStyle="bold"
-                        app:backgroundTint="@color/white"
-                        app:cornerRadius="16dp" />
-                </LinearLayout>
-
+                    android:text="Sem criar conta. Seus registros ficam no aparelho."
+                    android:textSize="11sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:gravity="center"
+                    android:layout_marginTop="12dp" />
             </LinearLayout>
-
+            <LinearLayout
+                android:id="@+id/layoutStep1Genero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_soft_blue"
+                    android:src="@drawable/ic_person"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UM PERFIL QUE É SEU"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Vamos começar pelo básico."
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Selecione a informação usada na estimativa da sua meta diária."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
+                <RadioGroup
+                    android:id="@+id/rgSexo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rbFeminino"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="Feminino"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="false" />
+                    <RadioButton
+                        android:id="@+id/rbMasculino"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="Masculino"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="false" />
+                </RadioGroup>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Você pode editar seu perfil quando quiser."
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep1Proximo"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Continuar"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutStep2Fisico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_soft_blue"
+                    android:src="@drawable/ic_scale"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="CADA PESSOA TEM SEU RITMO"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Um pouco sobre você."
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Essas medidas ajudam a estimar uma meta para acompanhar seu dia."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:hint="Seu peso"
+                            app:suffixText="kg"
+                            app:boxCornerRadiusTopStart="18dp"
+                            app:boxCornerRadiusTopEnd="18dp"
+                            app:boxCornerRadiusBottomStart="18dp"
+                            app:boxCornerRadiusBottomEnd="18dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etPeso"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="60dp"
+                                android:inputType="numberDecimal"
+                                android:textColor="@color/text_primary"
+                                android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:hint="Sua altura"
+                            app:suffixText="cm"
+                            app:boxCornerRadiusTopStart="18dp"
+                            app:boxCornerRadiusTopEnd="18dp"
+                            app:boxCornerRadiusBottomStart="18dp"
+                            app:boxCornerRadiusBottomEnd="18dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etAltura"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="60dp"
+                                android:inputType="number"
+                                android:textColor="@color/text_primary"
+                                android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:hint="Sua idade"
+                            app:suffixText="anos"
+                            app:boxCornerRadiusTopStart="18dp"
+                            app:boxCornerRadiusTopEnd="18dp"
+                            app:boxCornerRadiusBottomStart="18dp"
+                            app:boxCornerRadiusBottomEnd="18dp">
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etIdade"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:minHeight="60dp"
+                                android:inputType="number"
+                                android:textColor="@color/text_primary"
+                                android:imeOptions="actionNext" />
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep2Proximo"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Continuar"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep2Voltar"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Voltar"
+                    android:textColor="@color/blue_primary"
+                    app:cornerRadius="24dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutStep3Esporte"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_soft_mint"
+                    android:src="@drawable/ic_fitness"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="O MOVIMENTO NA SUA ROTINA"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Como é o seu ritmo?"
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Escolha a opção que mais combina com sua semana."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
+                <RadioGroup
+                    android:id="@+id/rgEsporte"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RadioButton
+                        android:id="@+id/rbEsporteSedentario"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="No meu ritmo&#10;Pouca atividade física"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="true" />
+                    <RadioButton
+                        android:id="@+id/rbEsporteLeve"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="Leve&#10;1 a 2 vezes por semana"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="false" />
+                    <RadioButton
+                        android:id="@+id/rbEsporteModerado"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="Moderado&#10;3 a 4 vezes por semana"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="false" />
+                    <RadioButton
+                        android:id="@+id/rbEsporteIntenso"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="68dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="@drawable/bg_choice"
+                        android:padding="16dp"
+                        android:text="Intenso&#10;5 ou mais vezes por semana"
+                        android:textSize="15sp"
+                        android:lineSpacingExtra="4dp"
+                        android:textColor="@color/text_primary"
+                        android:buttonTint="@color/blue_primary"
+                        android:checked="false" />
+                </RadioGroup>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep3Proximo"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Continuar"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep3Voltar"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Voltar"
+                    android:textColor="@color/blue_primary"
+                    app:cornerRadius="24dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layoutStep4Saude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <ImageView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:padding="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/bg_soft_mint"
+                    android:src="@drawable/ic_heart_health"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="UM OLHAR PARA O SEU CUIDADO"
+                    android:textSize="10sp"
+                    android:textColor="@color/blue_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:letterSpacing="0.13"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Algum cuidado especial?"
+                    android:textSize="30sp"
+                    android:textColor="@color/text_primary"
+                    android:lineSpacingExtra="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:letterSpacing="-0.035"
+                    android:layout_marginBottom="10dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Esta etapa é opcional. Marque apenas o que fizer sentido para você."
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="24dp" />
+                <CheckBox
+                    android:id="@+id/cbDiabetes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_choice"
+                    android:padding="14dp"
+                    android:buttonTint="@color/blue_primary"
+                    android:text="Diabetes"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+                <CheckBox
+                    android:id="@+id/cbHipertensao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_choice"
+                    android:padding="14dp"
+                    android:buttonTint="@color/blue_primary"
+                    android:text="Hipertensão"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+                <CheckBox
+                    android:id="@+id/cbAlcoolismo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_choice"
+                    android:padding="14dp"
+                    android:buttonTint="@color/blue_primary"
+                    android:text="Histórico de problemas com álcool"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+                <CheckBox
+                    android:id="@+id/cbPedrasRins"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="60dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/bg_choice"
+                    android:padding="14dp"
+                    android:buttonTint="@color/blue_primary"
+                    android:text="Histórico de cálculos renais"
+                    android:textColor="@color/text_primary"
+                    android:textSize="14sp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Seu cuidado vem primeiro"
+                            android:textSize="14sp"
+                            android:textColor="@color/text_primary"
+                            android:lineSpacingExtra="3dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:layout_marginBottom="6dp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="A meta é uma estimativa do projeto. Respeite orientações profissionais e eventuais restrições de líquidos."
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:lineSpacingExtra="3dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSalvarPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Criar minha meta"
+                    android:textColor="@color/white"
+                    app:cornerRadius="24dp" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnStep4Voltar"
+                    style="@style/Widget.Material3.Button.TextButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Voltar"
+                    android:textColor="@color/blue_primary"
+                    app:cornerRadius="24dp" />
+            </LinearLayout>
         </FrameLayout>
-
     </LinearLayout>
 </ScrollView>
