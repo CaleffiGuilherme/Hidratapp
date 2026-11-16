@@ -43,12 +43,12 @@ object Lembretes {
     fun notificar(c: Context) {
         if (!permitido(c)) return
         if (Build.VERSION.SDK_INT >= 26) c.getSystemService(NotificationManager::class.java).createNotificationChannel(
-            NotificationChannel(CANAL, "Lembretes de hidratação", NotificationManager.IMPORTANCE_DEFAULT))
+            NotificationChannel(CANAL, c.getString(R.string.notificacao_canal), NotificationManager.IMPORTANCE_DEFAULT))
         val abrir = PendingIntent.getActivity(c, 101, Intent(c, MainActivity::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
         try {
             NotificationManagerCompat.from(c).notify(100, NotificationCompat.Builder(c, CANAL)
-                .setSmallIcon(R.drawable.ic_bell_notification).setContentTitle("Sua pausa para hidratação")
-                .setContentText("Que tal verificar seu consumo e registrar uma bebida?")
+                .setSmallIcon(R.drawable.ic_bell_notification).setContentTitle(c.getString(R.string.notificacao_titulo))
+                .setContentText(c.getString(R.string.notificacao_conteudo))
                 .setContentIntent(abrir).setAutoCancel(true).build())
         } catch (_: SecurityException) { /* Permissão pode ser revogada pelo sistema. */ }
     }

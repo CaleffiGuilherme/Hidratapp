@@ -28,14 +28,14 @@ class BebidaAdapter(
 
     override fun onBindViewHolder(holder: BebidaViewHolder, position: Int) {
         val bebida = bebidas[position]
-        holder.titulo.text = "${TipoBebida.nomeExibido(bebida.tipo)} • ${bebida.ml} ml"
+        val context = holder.itemView.context
+        holder.titulo.text = context.getString(R.string.bebida_titulo, TipoBebida.nomeExibido(bebida.tipo, context), bebida.ml)
         holder.data.text = if (bebida.observacao.isNotBlank()) {
-            "${bebida.data} ${bebida.hora} • ${bebida.observacao}"
+            context.getString(R.string.bebida_data_observacao, bebida.data, bebida.hora, bebida.observacao)
         } else {
-            "${bebida.data} ${bebida.hora}"
+            context.getString(R.string.bebida_data_hora, bebida.data, bebida.hora)
         }
 
-        val context = holder.itemView.context
         holder.ivTipoIcon.setBackgroundResource(if (Calculos.ehAlcool(bebida.tipo)) R.drawable.bg_soft_lavender else R.drawable.bg_soft_blue)
         val padding = (10 * context.resources.displayMetrics.density).toInt()
         holder.ivTipoIcon.setPadding(padding,padding,padding,padding)

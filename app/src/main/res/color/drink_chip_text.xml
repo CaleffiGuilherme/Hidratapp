@@ -1,1 +1,1 @@
-<selector xmlns:android="http://schemas.android.com/apk/res/android"><item android:state_checked="true" android:color="#205E8B"/><item android:color="#667E94"/></selector>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"><item android:state_checked="true" android:color="@color/chip_texto_selecionado"/><item android:color="@color/text_secondary"/></selector>

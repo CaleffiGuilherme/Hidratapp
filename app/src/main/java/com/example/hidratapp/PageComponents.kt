@@ -20,7 +20,7 @@ fun AppCompatActivity.cabecalhoPagina(box: LinearLayout, categoria: String, titu
     val row=LinearLayout(this).apply { gravity=Gravity.CENTER_VERTICAL; layoutParams=LinearLayout.LayoutParams(-1,dp(48)).apply { bottomMargin=dp(24) } }
     row.addView(ImageButton(this).apply {
         setImageResource(R.drawable.ic_arrow_back); setBackgroundResource(R.drawable.bg_white_round)
-        setColorFilter(ContextCompat.getColor(this@cabecalhoPagina,R.color.blue_primary)); contentDescription="Voltar"
+        setColorFilter(ContextCompat.getColor(this@cabecalhoPagina,R.color.blue_primary)); contentDescription=getString(R.string.acao_voltar)
         setPadding(dp(12),dp(12),dp(12),dp(12)); layoutParams=LinearLayout.LayoutParams(dp(48),dp(48));setOnClickListener { finish() }
     })
     row.addView(textoPagina(categoria,10f,true).apply { letterSpacing=.12f; layoutParams=LinearLayout.LayoutParams(0,-2,1f).apply { marginStart=dp(14) } })

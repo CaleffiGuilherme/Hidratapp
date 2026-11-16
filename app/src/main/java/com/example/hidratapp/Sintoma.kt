@@ -9,11 +9,11 @@ data class Sintoma(
 )
 
 val SINTOMAS_DISPONIVEIS = listOf(
-    "Dor de cabeça",
-    "Boca seca / Lábios rachados",
-    "Tontura / Tonturas ao levantar",
-    "Fadiga / Cansaço excessivo",
-    "Urina escura / Concentrada",
-    "Cãibra muscular",
-    "Nausea / Enjoo"
+    R.string.sintoma_opcao_0,
+    R.string.sintoma_opcao_1,
+    R.string.sintoma_opcao_2,
+    R.string.sintoma_opcao_3,
+    R.string.sintoma_opcao_4,
+    R.string.sintoma_opcao_5,
+    R.string.sintoma_opcao_6
 )

@@ -9,12 +9,11 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.card.MaterialCardView
 
-class DicasActivity : AppCompatActivity() {
+class DicasActivity : DadosActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +39,7 @@ class DicasActivity : AppCompatActivity() {
         val containerDicas = findViewById<LinearLayout>(R.id.containerDicas)
         containerDicas.removeAllViews()
 
-        val banco = BancoHelper(this)
-        val bebidasHoje = banco.listarPorData(Calculos.hoje())
-        val sintomasHoje = banco.listarSintomasPorData(Calculos.hoje())
-
+        dados({ listarPorData(Calculos.hoje()) to listarSintomasPorData(Calculos.hoje()) }) { (bebidasHoje, sintomasHoje) ->
         val listaDicas = DicasEngine.gerarDicas(this, bebidasHoje, sintomasHoje)
 
         val inflater = LayoutInflater.from(this)
@@ -65,7 +61,7 @@ class DicasActivity : AppCompatActivity() {
                 android.transition.TransitionManager.beginDelayedTransition(containerDicas, android.transition.AutoTransition().setDuration(180))
                 tvDescricao.maxLines = if (aberto) Int.MAX_VALUE else 3
                 tvDescricao.ellipsize = if (aberto) null else android.text.TextUtils.TruncateAt.END
-                expandir.text = if (aberto) "Recolher  ↑" else "Ler dica  ↓"
+                expandir.text = if (aberto) getString(R.string.dicas_recolher) else getString(R.string.item_dica_ler_dica)
             }
 
             when (dica.nivelAlerta) {
@@ -94,6 +90,7 @@ class DicasActivity : AppCompatActivity() {
 
             containerDicas.addView(itemView)
             configurarInteracoes(itemView)
+        }
         }
     }
 }

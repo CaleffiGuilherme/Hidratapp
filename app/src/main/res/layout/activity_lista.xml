@@ -26,12 +26,12 @@
                 android:background="@drawable/bg_white_round"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/blue_primary"
-                android:contentDescription="Voltar" />
+                android:contentDescription="@string/cadastro_bebida_voltar" />
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="SEU HÁBITO EM PERSPECTIVA"
+                android:text="@string/lista_seu_habito_em_perspectiva"
                 android:layout_marginStart="14dp"
                 android:textColor="@color/text_secondary"
                 android:textSize="10sp"
@@ -49,7 +49,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sua evolução"
+            android:text="@string/lista_sua_evolucao"
             android:textSize="27sp"
             android:letterSpacing="-0.035"
             android:textColor="@color/text_primary"
@@ -57,7 +57,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Cada dia conta. Veja seu caminho até aqui."
+            android:text="@string/lista_cada_dia_conta_veja_seu_caminho_ate"
             android:textSize="14sp"
             android:textColor="@color/text_secondary"
             android:lineSpacingExtra="3dp"
@@ -111,21 +111,21 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="48dp"
-                android:contentDescription="Filtrar por período"
+                android:contentDescription="@string/lista_filtrar_por_periodo"
                 android:popupBackground="@drawable/bg_white_round" />
             <Spinner
                 android:id="@+id/filtroTipo"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="48dp"
-                android:contentDescription="Filtrar por bebida"
+                android:contentDescription="@string/lista_filtrar_por_bebida"
                 android:popupBackground="@drawable/bg_white_round" />
         </LinearLayout>
         <CheckBox
             android:id="@+id/filtroFavoritos"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Somente favoritos"
+            android:text="@string/lista_somente_favoritos"
             android:textColor="@color/text_primary" />
     </LinearLayout>
     <TextView
@@ -134,7 +134,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Nenhum registro para os filtros selecionados."
+        android:text="@string/lista_nenhum_registro_para_os_filtros_selecionados"
         android:textColor="@color/text_primary"
         android:textSize="15sp"
         android:visibility="gone" />
@@ -151,7 +151,7 @@
         style="@style/Widget.Material3.Button.OutlinedButton"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:text="Voltar para hoje"
+        android:text="@string/lista_voltar_para_hoje"
         android:textColor="@color/text_primary"
         app:cornerRadius="16dp"
         app:strokeColor="@color/line_soft" />

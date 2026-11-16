@@ -8,4 +8,4 @@ data class Bebida(
     val observacao: String,
     val favorito: Boolean = false,
     val hora: String = ""
-)
+) : java.io.Serializable

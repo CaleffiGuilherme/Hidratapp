@@ -3,7 +3,7 @@ package com.example.hidratapp
 /** Pages show volumes of recorded drinks; the total keeps the existing hydration rule. */
 data class PaginaConsumo(val tipo: String?, val ml: Int) {
     val chave: String get() = tipo ?: "__total__"
-    val titulo: String get() = tipo?.let(TipoBebida::nomeExibido) ?: "Total do dia"
+    fun titulo(context: android.content.Context): String = tipo?.let { TipoBebida.nomeExibido(it, context) } ?: context.getString(R.string.total_dia)
 }
 
 object ConsumoDoDia {

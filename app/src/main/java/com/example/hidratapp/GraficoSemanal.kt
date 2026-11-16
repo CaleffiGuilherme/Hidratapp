@@ -14,7 +14,7 @@ class GraficoSemanal(context: Context, attrs: AttributeSet? = null) : View(conte
     private var meta = 0
     fun definir(dias: List<String>, totais: List<Int>, meta: Int) {
         this.dias = dias; this.totais = totais; this.meta = meta
-        contentDescription = "Consumo semanal. " + dias.zip(totais).joinToString { "${it.first}: ${it.second} ml" } + ". Meta atual: $meta ml"
+        contentDescription = context.getString(R.string.grafico_descricao, dias.zip(totais).joinToString { context.getString(R.string.grafico_dia, it.first, it.second) }, meta)
         invalidate()
     }
     override fun onDraw(canvas: Canvas) {

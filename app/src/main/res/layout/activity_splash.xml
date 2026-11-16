@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="hidratapp"
+            android:text="@string/main_hidratapp"
             android:textSize="46sp"
             android:letterSpacing="-0.04"
             android:fontFamily="sans-serif-medium"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="12dp"
-            android:text="Um gole de cada vez."
+            android:text="@string/main_um_gole_de_cada_vez"
             android:textSize="17sp"
             android:textColor="@color/text_secondary" />
     </LinearLayout>
@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginTop="16dp"
-            android:text="SEU MOMENTO DE CUIDADO"
+            android:text="@string/splash_seu_momento_de_cuidado"
             android:textSize="10sp"
             android:letterSpacing="0.14"
             android:textColor="@color/text_secondary" />

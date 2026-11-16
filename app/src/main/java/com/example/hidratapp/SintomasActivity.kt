@@ -13,11 +13,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class SintomasActivity : AppCompatActivity() {
+class SintomasActivity : DadosActivity() {
 
     private val checkboxesSintomas = mutableListOf<CheckBox>()
 
@@ -39,7 +38,8 @@ class SintomasActivity : AppCompatActivity() {
         }
 
         val containerCheckboxes = findViewById<LinearLayout>(R.id.containerCheckboxes)
-        for (sintomaNome in SINTOMAS_DISPONIVEIS) {
+        for (sintomaRes in SINTOMAS_DISPONIVEIS) {
+            val sintomaNome = getString(sintomaRes)
             val cb = CheckBox(this).apply {
                 text = sintomaNome
                 textSize = 14f
@@ -61,7 +61,7 @@ class SintomasActivity : AppCompatActivity() {
         btnSalvar.setOnClickListener {
             val selecionados = checkboxesSintomas.filter { it.isChecked }.map { it.text.toString() }
             if (selecionados.isEmpty()) {
-                Toast.makeText(this, "Selecione pelo menos um sintoma", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.sintomas_selecione_pelo_menos_um_sintoma), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -77,13 +77,8 @@ class SintomasActivity : AppCompatActivity() {
                 observacao = obs
             )
 
-            val banco = BancoHelper(this)
-            val salvo = runCatching { banco.use { it.inserirSintoma(novoSintoma) } }.getOrDefault(-1)
-            if (salvo <= 0) {
-                Toast.makeText(this, "Não foi possível salvar o relato. Tente novamente.", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
-
+            btnSalvar.isEnabled = false
+            dados({ check(inserirSintoma(novoSintoma) > 0) }, finalizar = { btnSalvar.isEnabled = true }) {
             // Reseta form
             checkboxesSintomas.forEach { it.isChecked = false }
             etObs.setText("")
@@ -92,41 +87,38 @@ class SintomasActivity : AppCompatActivity() {
             // Mostra alerta preventivo
             val mensagemFeedback = buildFeedbackMessage()
             AlertDialog.Builder(this)
-                .setTitle("Relato Salvo com Sucesso!")
+                .setTitle(getString(R.string.sintomas_relato_salvo_com_sucesso))
                 .setMessage(mensagemFeedback)
-                .setPositiveButton("Entendido") { dialog, _ ->
+                .setPositiveButton(getString(R.string.cadastro_bebida_entendido)) { dialog, _ ->
                     dialog.dismiss()
                     carregarHistorico()
                 }
                 .setCancelable(false)
                 .show()
+            }
         }
 
         carregarHistorico()
     }
 
     private fun buildFeedbackMessage(): String {
-        return "Seus sintomas foram registrados.\n\nEste registro não é um diagnóstico. Os sintomas podem ter várias causas. Respeite orientações de saúde e eventuais restrições de líquidos. Se os sintomas forem intensos, persistirem ou piorarem, procure atendimento de saúde."
+        return getString(R.string.sintomas_seus_sintomas_foram_registrados_este_registro_nao)
     }
 
     private fun carregarHistorico() {
         val containerHistorico = findViewById<LinearLayout>(R.id.containerHistoricoSintomas)
         containerHistorico.removeAllViews()
 
-        val listaSintomas = runCatching { BancoHelper(this).use { it.listarSintomas() } }.getOrElse {
-            Toast.makeText(this, "Não foi possível carregar os relatos", Toast.LENGTH_LONG).show()
-            return
-        }
-
+        dados({ listarSintomas() }) { listaSintomas ->
         if (listaSintomas.isEmpty()) {
             val tvVazio = TextView(this).apply {
-                text = "Nenhum sintoma relatado ainda."
+                text = getString(R.string.sintomas_nenhum_sintoma_relatado_ainda)
                 setTextColor(getColor(R.color.text_secondary))
                 textSize = 14f
                 setPadding(0, 16, 0, 16)
             }
             containerHistorico.addView(tvVazio)
-            return
+            return@dados
         }
 
         val inflater = LayoutInflater.from(this)
@@ -140,12 +132,12 @@ class SintomasActivity : AppCompatActivity() {
             val tvObs = itemView.findViewById<TextView>(R.id.tvObsSintoma)
             val btnDeletar = itemView.findViewById<ImageButton>(R.id.btnDeletarSintoma)
 
-            tvData.text = "Data: ${sintoma.data}"
+            tvData.text = getString(R.string.sintomas_data, sintoma.data)
             tvLista.text = sintoma.sintomasText
-            tvNivelSede.text = "Nível de sede: ${sintoma.nivelSede}/5"
+            tvNivelSede.text = getString(R.string.sintomas_nivel_de_sede_5, sintoma.nivelSede)
 
             if (sintoma.observacao.isNotEmpty()) {
-                tvObs.text = "Obs: ${sintoma.observacao}"
+                tvObs.text = getString(R.string.sintomas_obs, sintoma.observacao)
                 tvObs.visibility = android.view.View.VISIBLE
             } else {
                 tvObs.visibility = android.view.View.GONE
@@ -153,20 +145,17 @@ class SintomasActivity : AppCompatActivity() {
 
             btnDeletar.setOnClickListener {
                 AlertDialog.Builder(this)
-                    .setTitle("Excluir Relato")
-                    .setMessage("Deseja remover este relato de sintomas?")
-                    .setPositiveButton("Sim") { _, _ ->
-                        if (runCatching { BancoHelper(this).use { it.excluirSintoma(sintoma.id) } }.getOrDefault(0) != 1) {
-                            Toast.makeText(this, "Não foi possível excluir o relato", Toast.LENGTH_LONG).show()
-                            return@setPositiveButton
-                        }
-                        carregarHistorico()
+                    .setTitle(getString(R.string.sintomas_excluir_relato))
+                    .setMessage(getString(R.string.sintomas_deseja_remover_este_relato_de_sintomas))
+                    .setPositiveButton(getString(R.string.sintomas_sim)) { _, _ ->
+                        dados({ check(excluirSintoma(sintoma.id) == 1) }) { carregarHistorico() }
                     }
-                    .setNegativeButton("Não", null)
+                    .setNegativeButton(getString(R.string.sintomas_nao), null)
                     .show()
             }
 
             containerHistorico.addView(itemView)
+        }
         }
     }
 }

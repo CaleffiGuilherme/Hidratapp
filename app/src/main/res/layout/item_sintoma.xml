@@ -34,7 +34,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:background="@drawable/bg_white_round"
-                android:contentDescription="Excluir"
+                android:contentDescription="@string/item_sintoma_excluir"
                 android:src="@drawable/ic_delete"
                 app:tint="#E53E3E"
                 android:padding="12dp" />

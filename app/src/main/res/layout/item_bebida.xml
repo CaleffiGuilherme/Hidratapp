@@ -23,7 +23,7 @@
             android:id="@+id/ivTipoIcon"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:contentDescription="Ícone Bebida"
+            android:contentDescription="@string/item_bebida_icone_bebida"
             android:src="@drawable/ic_water_drop"
             app:tint="@color/teal_primary" />
         <LinearLayout
@@ -54,7 +54,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="8dp"
-            android:contentDescription="Favorito"
+            android:contentDescription="@string/item_bebida_favorito"
             android:src="@drawable/ic_star_border"
             app:tint="@color/text_secondary" />
     </LinearLayout>

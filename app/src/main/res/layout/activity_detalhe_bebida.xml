@@ -32,12 +32,12 @@
                     android:background="@drawable/bg_white_round"
                     android:src="@drawable/ic_arrow_back"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Voltar" />
+                    android:contentDescription="@string/cadastro_bebida_voltar" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="SEU HISTÓRICO EM DETALHES"
+                    android:text="@string/detalhe_bebida_seu_historico_em_detalhes"
                     android:layout_marginStart="14dp"
                     android:textColor="@color/text_secondary"
                     android:textSize="10sp"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cada gole tem seu lugar."
+                android:text="@string/detalhe_bebida_cada_gole_tem_seu_lugar"
                 android:textSize="30sp"
                 android:letterSpacing="-0.035"
                 android:textColor="@color/text_primary"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Consulte, favorite ou ajuste este registro."
+                android:text="@string/detalhe_bebida_consulte_favorite_ou_ajuste_este_registro"
                 android:textSize="14sp"
                 android:textColor="@color/text_secondary"
                 android:lineSpacingExtra="3dp"
@@ -91,7 +91,7 @@
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:contentDescription="Bebida"
+                        android:contentDescription="@string/detalhe_bebida_bebida"
                         android:src="@drawable/ic_water_drop"
                         app:tint="@color/teal_primary" />
                     <TextView
@@ -113,7 +113,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Quando aconteceu"
+                    android:text="@string/detalhe_bebida_quando_aconteceu"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -130,7 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Observação"
+                    android:text="@string/detalhe_bebida_observacao"
                     android:textColor="@color/text_secondary"
                     android:textSize="12sp"
                     android:textStyle="bold"
@@ -150,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginBottom="12dp"
-            android:text="Favoritar"
+            android:text="@string/detalhe_bebida_favoritar"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -166,7 +166,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginBottom="12dp"
-            android:text="Editar registro"
+            android:text="@string/detalhe_bebida_editar_registro"
             android:textColor="@color/white"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -183,7 +183,7 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginBottom="12dp"
-            android:text="Excluir registro"
+            android:text="@string/detalhe_bebida_excluir_registro"
             android:textColor="@color/blue_primary"
             android:textSize="15sp"
             app:strokeColor="@color/line_soft"
@@ -198,7 +198,7 @@
             style="@style/Widget.Material3.Button.TextButton"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:text="Voltar"
+            android:text="@string/cadastro_bebida_voltar"
             android:textColor="@color/blue_primary"
             android:textSize="15sp"
             android:textAllCaps="false"

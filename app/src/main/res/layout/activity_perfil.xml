@@ -27,7 +27,7 @@
                 android:padding="12dp"
                 android:src="@drawable/ic_arrow_back"
                 app:tint="@color/blue_primary"
-                android:contentDescription="Voltar" />
+                android:contentDescription="@string/cadastro_bebida_voltar" />
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
@@ -38,7 +38,7 @@
                     android:id="@+id/tvTituloHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seu cuidado começa aqui"
+                    android:text="@string/perfil_seu_cuidado_comeca_aqui"
                     android:textSize="16sp"
                     android:textColor="@color/text_primary"
                     android:fontFamily="sans-serif-medium" />
@@ -46,7 +46,7 @@
                     android:id="@+id/tvEtapaIndicador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Boas-vindas"
+                    android:text="@string/perfil_boas_vindas"
                     android:textSize="12sp"
                     android:layout_marginTop="4dp"
                     android:textColor="@color/text_secondary" />
@@ -73,7 +73,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SEU CUIDADO, DO SEU JEITO"
+                    android:text="@string/perfil_seu_cuidado_do_seu_jeito"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -83,7 +83,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Um plano para o seu dia."
+                    android:text="@string/perfil_um_plano_para_o_seu_dia"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -93,7 +93,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Aqui estão suas informações e sua meta estimada. Você pode ajustar tudo quando precisar."
+                    android:text="@string/perfil_aqui_estao_suas_informacoes_e_sua_meta"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -114,7 +114,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sua meta diária estimada"
+                            android:text="@string/perfil_sua_meta_diaria_estimada"
                             android:textSize="12sp"
                             android:textColor="@color/text_secondary"
                             android:lineSpacingExtra="3dp"
@@ -131,7 +131,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Pequenos registros. Um hábito de cada vez."
+                            android:text="@string/perfil_pequenos_registros_um_habito_de_cada_vez"
                             android:textSize="12sp"
                             android:textColor="@color/text_secondary"
                             android:lineSpacingExtra="3dp"
@@ -151,7 +151,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sobre você"
+                            android:text="@string/perfil_sobre_voce"
                             android:textSize="15sp"
                             android:textColor="@color/text_primary"
                             android:lineSpacingExtra="3dp"
@@ -203,7 +203,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Cuidados registrados"
+                            android:text="@string/perfil_cuidados_registrados"
                             android:textSize="15sp"
                             android:textColor="@color/text_primary"
                             android:lineSpacingExtra="3dp"
@@ -224,7 +224,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Ir para meu dia"
+                    android:text="@string/perfil_ir_para_meu_dia"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
                 <com.google.android.material.button.MaterialButton
@@ -233,7 +233,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Editar meu perfil"
+                    android:text="@string/perfil_editar_meu_perfil"
                     android:textColor="@color/blue_primary"
                     app:cornerRadius="24dp" />
             </LinearLayout>
@@ -250,7 +250,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="BEM-VINDO AO SEU NOVO HÁBITO"
+                    android:text="@string/perfil_bem_vindo_ao_seu_novo_habito"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -260,7 +260,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Seu bem-estar começa com um gole."
+                    android:text="@string/perfil_seu_bem_estar_comeca_com_um_gole"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -270,7 +270,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Um espaço simples para acompanhar sua hidratação e cuidar de você, no seu ritmo."
+                    android:text="@string/perfil_um_espaco_simples_para_acompanhar_sua_hidratacao"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -304,7 +304,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Uma meta feita para você"
+                                    android:text="@string/perfil_uma_meta_feita_para_voce"
                                     android:textSize="15sp"
                                     android:textColor="@color/text_primary"
                                     android:lineSpacingExtra="3dp"
@@ -312,7 +312,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Uma estimativa baseada no seu perfil."
+                                    android:text="@string/perfil_uma_estimativa_baseada_no_seu_perfil"
                                     android:textSize="12sp"
                                     android:textColor="@color/text_secondary"
                                     android:lineSpacingExtra="3dp" />
@@ -349,7 +349,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Seu progresso, bem de perto"
+                                    android:text="@string/perfil_seu_progresso_bem_de_perto"
                                     android:textSize="15sp"
                                     android:textColor="@color/text_primary"
                                     android:lineSpacingExtra="3dp"
@@ -357,7 +357,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Cada registro ajuda a enxergar sua rotina."
+                                    android:text="@string/perfil_cada_registro_ajuda_a_enxergar_sua_rotina"
                                     android:textSize="12sp"
                                     android:textColor="@color/text_secondary"
                                     android:lineSpacingExtra="3dp" />
@@ -370,13 +370,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Vamos começar"
+                    android:text="@string/perfil_vamos_comecar"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sem criar conta. Seus registros ficam no aparelho."
+                    android:text="@string/perfil_sem_criar_conta_seus_registros_ficam_no"
                     android:textSize="11sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -401,7 +401,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="UM PERFIL QUE É SEU"
+                    android:text="@string/perfil_um_perfil_que_e_seu"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -411,7 +411,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Vamos começar pelo básico."
+                    android:text="@string/perfil_vamos_comecar_pelo_basico"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -421,7 +421,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Selecione a informação usada na estimativa da sua meta diária."
+                    android:text="@string/perfil_selecione_a_informacao_usada_na_estimativa_da"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -439,7 +439,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="Feminino"
+                        android:text="@string/perfil_feminino"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -453,7 +453,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="Masculino"
+                        android:text="@string/perfil_masculino"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -463,7 +463,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Você pode editar seu perfil quando quiser."
+                    android:text="@string/perfil_voce_pode_editar_seu_perfil_quando_quiser"
                     android:textSize="12sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -474,7 +474,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Continuar"
+                    android:text="@string/perfil_continuar"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
             </LinearLayout>
@@ -496,7 +496,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="CADA PESSOA TEM SEU RITMO"
+                    android:text="@string/perfil_cada_pessoa_tem_seu_ritmo"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -506,7 +506,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Um pouco sobre você."
+                    android:text="@string/perfil_um_pouco_sobre_voce"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -516,7 +516,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Essas medidas ajudam a estimar uma meta para acompanhar seu dia."
+                    android:text="@string/perfil_essas_medidas_ajudam_a_estimar_uma_meta"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -535,7 +535,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:hint="Seu peso"
+                            android:hint="@string/perfil_seu_peso"
                             app:suffixText="kg"
                             app:boxCornerRadiusTopStart="18dp"
                             app:boxCornerRadiusTopEnd="18dp"
@@ -555,7 +555,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:hint="Sua altura"
+                            android:hint="@string/perfil_sua_altura"
                             app:suffixText="cm"
                             app:boxCornerRadiusTopStart="18dp"
                             app:boxCornerRadiusTopEnd="18dp"
@@ -575,7 +575,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:hint="Sua idade"
+                            android:hint="@string/perfil_sua_idade"
                             app:suffixText="anos"
                             app:boxCornerRadiusTopStart="18dp"
                             app:boxCornerRadiusTopEnd="18dp"
@@ -597,7 +597,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Continuar"
+                    android:text="@string/perfil_continuar"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
                 <com.google.android.material.button.MaterialButton
@@ -606,7 +606,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Voltar"
+                    android:text="@string/cadastro_bebida_voltar"
                     android:textColor="@color/blue_primary"
                     app:cornerRadius="24dp" />
             </LinearLayout>
@@ -628,7 +628,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="O MOVIMENTO NA SUA ROTINA"
+                    android:text="@string/perfil_o_movimento_na_sua_rotina"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -638,7 +638,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Como é o seu ritmo?"
+                    android:text="@string/perfil_como_e_o_seu_ritmo"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -648,7 +648,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Escolha a opção que mais combina com sua semana."
+                    android:text="@string/perfil_escolha_a_opcao_que_mais_combina_com"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -666,7 +666,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="No meu ritmo&#10;Pouca atividade física"
+                        android:text="@string/perfil_no_meu_ritmo_pouca_atividade_fisica"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -680,7 +680,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="Leve&#10;1 a 2 vezes por semana"
+                        android:text="@string/perfil_leve_1_a_2_vezes_por_semana"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -694,7 +694,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="Moderado&#10;3 a 4 vezes por semana"
+                        android:text="@string/perfil_moderado_3_a_4_vezes_por_semana"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -708,7 +708,7 @@
                         android:layout_marginBottom="10dp"
                         android:background="@drawable/bg_choice"
                         android:padding="16dp"
-                        android:text="Intenso&#10;5 ou mais vezes por semana"
+                        android:text="@string/perfil_intenso_5_ou_mais_vezes_por_semana"
                         android:textSize="15sp"
                         android:lineSpacingExtra="4dp"
                         android:textColor="@color/text_primary"
@@ -720,7 +720,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Continuar"
+                    android:text="@string/perfil_continuar"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
                 <com.google.android.material.button.MaterialButton
@@ -729,7 +729,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Voltar"
+                    android:text="@string/cadastro_bebida_voltar"
                     android:textColor="@color/blue_primary"
                     app:cornerRadius="24dp" />
             </LinearLayout>
@@ -751,7 +751,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="UM OLHAR PARA O SEU CUIDADO"
+                    android:text="@string/perfil_um_olhar_para_o_seu_cuidado"
                     android:textSize="10sp"
                     android:textColor="@color/blue_primary"
                     android:lineSpacingExtra="3dp"
@@ -761,7 +761,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Algum cuidado especial?"
+                    android:text="@string/perfil_algum_cuidado_especial"
                     android:textSize="30sp"
                     android:textColor="@color/text_primary"
                     android:lineSpacingExtra="3dp"
@@ -771,7 +771,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Esta etapa é opcional. Marque apenas o que fizer sentido para você."
+                    android:text="@string/perfil_esta_etapa_e_opcional_marque_apenas_o"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingExtra="3dp"
@@ -785,7 +785,7 @@
                     android:background="@drawable/bg_choice"
                     android:padding="14dp"
                     android:buttonTint="@color/blue_primary"
-                    android:text="Diabetes"
+                    android:text="@string/perfil_diabetes"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp" />
                 <CheckBox
@@ -797,7 +797,7 @@
                     android:background="@drawable/bg_choice"
                     android:padding="14dp"
                     android:buttonTint="@color/blue_primary"
-                    android:text="Hipertensão"
+                    android:text="@string/perfil_hipertensao"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp" />
                 <CheckBox
@@ -809,7 +809,7 @@
                     android:background="@drawable/bg_choice"
                     android:padding="14dp"
                     android:buttonTint="@color/blue_primary"
-                    android:text="Histórico de problemas com álcool"
+                    android:text="@string/perfil_historico_de_problemas_com_alcool"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp" />
                 <CheckBox
@@ -821,7 +821,7 @@
                     android:background="@drawable/bg_choice"
                     android:padding="14dp"
                     android:buttonTint="@color/blue_primary"
-                    android:text="Histórico de cálculos renais"
+                    android:text="@string/perfil_historico_de_calculos_renais"
                     android:textColor="@color/text_primary"
                     android:textSize="14sp" />
                 <com.google.android.material.card.MaterialCardView
@@ -836,7 +836,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Seu cuidado vem primeiro"
+                            android:text="@string/perfil_seu_cuidado_vem_primeiro"
                             android:textSize="14sp"
                             android:textColor="@color/text_primary"
                             android:lineSpacingExtra="3dp"
@@ -845,7 +845,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="A meta é uma estimativa do projeto. Respeite orientações profissionais e eventuais restrições de líquidos."
+                            android:text="@string/perfil_a_meta_e_uma_estimativa_do_projeto"
                             android:textSize="12sp"
                             android:textColor="@color/text_secondary"
                             android:lineSpacingExtra="3dp" />
@@ -856,7 +856,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Criar minha meta"
+                    android:text="@string/perfil_criar_minha_meta"
                     android:textColor="@color/white"
                     app:cornerRadius="24dp" />
                 <com.google.android.material.button.MaterialButton
@@ -865,7 +865,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="8dp"
-                    android:text="Voltar"
+                    android:text="@string/cadastro_bebida_voltar"
                     android:textColor="@color/blue_primary"
                     app:cornerRadius="24dp" />
             </LinearLayout>

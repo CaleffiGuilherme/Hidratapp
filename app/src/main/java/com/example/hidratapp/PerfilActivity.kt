@@ -190,7 +190,7 @@ class PerfilActivity : AppCompatActivity() {
         val prefs = getSharedPreferences("perfil", Context.MODE_PRIVATE)
 
         pbWizard.visibility = View.GONE
-        tvEtapaIndicador.text = "Resumo"
+        tvEtapaIndicador.text = getString(R.string.perfil_resumo)
 
         layoutStep0Welcome.visibility = View.GONE
         layoutStep1Genero.visibility = View.GONE
@@ -210,38 +210,38 @@ class PerfilActivity : AppCompatActivity() {
         val imc = Calculos.imc(peso, altura)
 
         val classificacaoImc = when {
-            idade < 20 -> "Avaliação por idade requer profissional"
-            imc < 18.5 -> "Abaixo do peso"
-            imc < 25.0 -> "Peso normal"
-            imc < 30.0 -> "Sobrepeso"
-            else -> "Obesidade"
+            idade < 20 -> getString(R.string.perfil_avaliacao_por_idade_requer_profissional)
+            imc < 18.5 -> getString(R.string.perfil_abaixo_do_peso)
+            imc < 25.0 -> getString(R.string.perfil_peso_normal)
+            imc < 30.0 -> getString(R.string.perfil_sobrepeso)
+            else -> getString(R.string.perfil_obesidade)
         }
 
-        tvResumoMeta.text = "$meta ml / dia"
-        tvResumoIMC.text = "IMC: ${"%.1f".format(imc)} kg/m² ($classificacaoImc)"
+        tvResumoMeta.text = getString(R.string.volume_dia, meta)
+        tvResumoIMC.text = getString(R.string.perfil_imc_kg_m2, "%.1f".format(imc), classificacaoImc)
 
-        val sexoStr = if (masculino) "Masculino" else "Feminino"
-        tvResumoPesoAltura.text = "Peso: ${"%.1f".format(peso)} kg • Altura: $altura cm"
-        tvResumoIdadeSexo.text = "Idade: $idade anos • Sexo: $sexoStr"
+        val sexoStr = if (masculino) getString(R.string.perfil_masculino) else getString(R.string.perfil_feminino)
+        tvResumoPesoAltura.text = getString(R.string.perfil_peso_kg_altura_cm, "%.1f".format(peso), altura)
+        tvResumoIdadeSexo.text = getString(R.string.perfil_idade_anos_sexo, idade, sexoStr)
 
         val esporteStr = when (esporte) {
-            1 -> "Leve (1-2x/sem)"
-            2 -> "Moderado (3-4x/sem)"
-            3 -> "Intenso (Atleta)"
-            else -> "Sedentário / Não pratico"
+            1 -> getString(R.string.perfil_leve_1_2x_sem)
+            2 -> getString(R.string.perfil_moderado_3_4x_sem)
+            3 -> getString(R.string.perfil_intenso_atleta)
+            else -> getString(R.string.perfil_sedentario_nao_pratico)
         }
-        tvResumoEsporte.text = "Atividade Física: $esporteStr"
+        tvResumoEsporte.text = getString(R.string.perfil_atividade_fisica, esporteStr)
 
         val condicoes = mutableListOf<String>()
-        if (prefs.getBoolean("diabetes", false)) condicoes.add("Diabetes")
-        if (prefs.getBoolean("hipertensao", false)) condicoes.add("Hipertensão")
-        if (prefs.getBoolean("alcoolismo", false)) condicoes.add("Histórico c/ Álcool")
-        if (prefs.getBoolean("pedras_rins", false)) condicoes.add("Cálculo Renal / Rins")
+        if (prefs.getBoolean("diabetes", false)) condicoes.add(getString(R.string.perfil_diabetes))
+        if (prefs.getBoolean("hipertensao", false)) condicoes.add(getString(R.string.perfil_hipertensao))
+        if (prefs.getBoolean("alcoolismo", false)) condicoes.add(getString(R.string.perfil_historico_c_alcool))
+        if (prefs.getBoolean("pedras_rins", false)) condicoes.add(getString(R.string.perfil_calculo_renal_rins))
 
         if (condicoes.isNotEmpty()) {
             tvResumoSaude.text = condicoes.joinToString(" • ")
         } else {
-            tvResumoSaude.text = "Nenhuma condição específica cadastrada"
+            tvResumoSaude.text = getString(R.string.perfil_nenhuma_condicao_especifica_cadastrada)
         }
     }
 
@@ -285,17 +285,17 @@ class PerfilActivity : AppCompatActivity() {
         }
 
         if (novaEtapa == 0) {
-            tvEtapaIndicador.text = "Boas-vindas"
+            tvEtapaIndicador.text = getString(R.string.perfil_boas_vindas)
             ObjectAnimator.ofInt(pbWizard, "progress", pbWizard.progress, 0).start()
         } else {
-            tvEtapaIndicador.text = "Etapa $novaEtapa de 4"
+            tvEtapaIndicador.text = getString(R.string.perfil_etapa_de_4, novaEtapa)
             ObjectAnimator.ofInt(pbWizard, "progress", pbWizard.progress, novaEtapa).start()
         }
     }
 
     private fun validarStep1(): Boolean {
         if (rgSexo.checkedRadioButtonId == -1) {
-            Toast.makeText(this, "Por favor, selecione uma opção de sexo/gênero", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.perfil_por_favor_selecione_uma_opcao_de_sexo), Toast.LENGTH_SHORT).show()
             return false
         }
         return true
@@ -307,15 +307,15 @@ class PerfilActivity : AppCompatActivity() {
         val idade = etIdade.text.toString().trim().toIntOrNull()
 
         if (peso == null || peso < 20 || peso > 300) {
-            etPeso.error = "Informe seu peso em kg (ex: 70.5)"
+            etPeso.error = getString(R.string.perfil_informe_seu_peso_em_kg_ex_70)
             return false
         }
         if (altura == null || altura < 100 || altura > 250) {
-            etAltura.error = "Informe sua altura em cm (ex: 175)"
+            etAltura.error = getString(R.string.perfil_informe_sua_altura_em_cm_ex_175)
             return false
         }
         if (idade == null || idade < 5 || idade > 120) {
-            etIdade.error = "Informe sua idade (ex: 28)"
+            etIdade.error = getString(R.string.perfil_informe_sua_idade_ex_28)
             return false
         }
         return true
@@ -357,7 +357,7 @@ class PerfilActivity : AppCompatActivity() {
 
         Toast.makeText(
             this,
-            "Perfil atualizado com sucesso! 🎉\nMeta: $meta ml/dia • IMC: ${"%.1f".format(imc)}",
+            getString(R.string.perfil_perfil_atualizado_com_sucesso_meta_ml_dia, meta, "%.1f".format(imc)),
             Toast.LENGTH_LONG
         ).show()
 

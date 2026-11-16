@@ -21,6 +21,6 @@ class ConsumoDoDiaTest {
     }
     @Test fun ordemNaoMudaComNovoRegistroEIncluiTiposAntigos() {
         val paginas=ConsumoDoDia.paginas(listOf(bebida("Café",100),bebida("Chá",200),bebida("Suco",300)))
-        assertEquals(listOf("Água","Suco","Café","Chá","Total do dia"),paginas.map { it.titulo })
+        assertEquals(listOf("Água","Suco","Café","Chá","__total__"),paginas.map { it.chave })
     }
 }

@@ -1,3 +1,328 @@
 <resources>
     <string name="app_name">Hidratapp</string>
+    <string name="erro_dados">Não foi possível concluir a operação. Tente novamente.</string>
+    <string name="tipo_agua">Água</string>
+    <string name="tipo_suco">Suco</string>
+    <string name="tipo_refrigerante">Refrigerante</string>
+    <string name="tipo_cafe">Café</string>
+    <string name="tipo_energetico">Energético</string>
+    <string name="tipo_cerveja">Cerveja</string>
+    <string name="tipo_vinho">Vinho</string>
+    <string name="tipo_destilado">Destilado</string>
+    <string name="total_dia">Total do dia</string>
+
+    <string name="cadastro_bebida_voltar" formatted="false">Voltar</string>
+    <string name="cadastro_bebida_mais_um_gole_no_seu_dia" formatted="false">MAIS UM GOLE NO SEU DIA</string>
+    <string name="cadastro_bebida_seu_proximo_gole" formatted="false">Seu próximo gole.</string>
+    <string name="cadastro_bebida_um_pequeno_registro_mais_cuidado_com_voce" formatted="false">Um pequeno registro. Mais cuidado com você.</string>
+    <string name="cadastro_bebida_o_que_voce_bebeu" formatted="false">O que você bebeu?</string>
+    <string name="cadastro_bebida_quanto_voce_bebeu" formatted="false">Quanto você bebeu?</string>
+    <string name="cadastro_bebida_0" formatted="false">0</string>
+    <string name="cadastro_bebida_quantidade_da_bebida_em_mililitros" formatted="false">Quantidade da bebida em mililitros</string>
+    <string name="cadastro_bebida_ml" formatted="false">ml</string>
+    <string name="cadastro_bebida_toque_no_numero_ou_use_um_atalho" formatted="false">Toque no número ou use um atalho para somar.</string>
+    <string name="cadastro_bebida_200_ml" formatted="false">+200 ml</string>
+    <string name="cadastro_bebida_300_ml" formatted="false">+300 ml</string>
+    <string name="cadastro_bebida_500_ml" formatted="false">+500 ml</string>
+    <string name="cadastro_bebida_agua_escolha_a_quantidade" formatted="false">Água · escolha a quantidade</string>
+    <string name="cadastro_bebida_quando_foi_esse_gole" formatted="false">Quando foi esse gole?</string>
+    <string name="cadastro_bebida_data" formatted="false">Data</string>
+    <string name="cadastro_bebida_horario" formatted="false">Horário</string>
+    <string name="cadastro_bebida_algo_para_lembrar" formatted="false">Algo para lembrar?</string>
+    <string name="cadastro_bebida_uma_observacao_se_quiser" formatted="false">Uma observação, se quiser</string>
+    <string name="cadastro_bebida_cancelar" formatted="false">Cancelar</string>
+    <string name="cadastro_bebida_salvar_meu_registro" formatted="false">Salvar meu registro</string>
+    <string name="detalhe_bebida_seu_historico_em_detalhes" formatted="false">SEU HISTÓRICO EM DETALHES</string>
+    <string name="detalhe_bebida_cada_gole_tem_seu_lugar" formatted="false">Cada gole tem seu lugar.</string>
+    <string name="detalhe_bebida_consulte_favorite_ou_ajuste_este_registro" formatted="false">Consulte, favorite ou ajuste este registro.</string>
+    <string name="detalhe_bebida_bebida" formatted="false">Bebida</string>
+    <string name="detalhe_bebida_quando_aconteceu" formatted="false">Quando aconteceu</string>
+    <string name="detalhe_bebida_observacao" formatted="false">Observação</string>
+    <string name="detalhe_bebida_favoritar" formatted="false">Favoritar</string>
+    <string name="detalhe_bebida_editar_registro" formatted="false">Editar registro</string>
+    <string name="detalhe_bebida_excluir_registro" formatted="false">Excluir registro</string>
+    <string name="dicas_para_o_seu_dia" formatted="false">PARA O SEU DIA</string>
+    <string name="dicas_um_pouco_de_cuidado" formatted="false">Um pouco de cuidado.</string>
+    <string name="dicas_informacoes_para_acompanhar_sua_rotina_um_gole" formatted="false">Informações para acompanhar sua rotina, um gole de cada vez.</string>
+    <string name="lista_seu_habito_em_perspectiva" formatted="false">SEU HÁBITO EM PERSPECTIVA</string>
+    <string name="lista_sua_evolucao" formatted="false">Sua evolução</string>
+    <string name="lista_cada_dia_conta_veja_seu_caminho_ate" formatted="false">Cada dia conta. Veja seu caminho até aqui.</string>
+    <string name="lista_filtrar_por_periodo" formatted="false">Filtrar por período</string>
+    <string name="lista_filtrar_por_bebida" formatted="false">Filtrar por bebida</string>
+    <string name="lista_somente_favoritos" formatted="false">Somente favoritos</string>
+    <string name="lista_nenhum_registro_para_os_filtros_selecionados" formatted="false">Nenhum registro para os filtros selecionados.</string>
+    <string name="lista_voltar_para_hoje" formatted="false">Voltar para hoje</string>
+    <string name="main_hidratapp" formatted="false">hidratapp</string>
+    <string name="main_dicas_para_cuidar_de_voce" formatted="false">Dicas para cuidar de você</string>
+    <string name="main_hoje_seu_dia_de_se_cuidar" formatted="false">HOJE, SEU DIA DE SE CUIDAR</string>
+    <string name="main_um_gole_de_cada_vez" formatted="false">Um gole de cada vez.</string>
+    <string name="main_pequenos_habitos_mais_cuidado_com_voce" formatted="false">Pequenos hábitos. Mais cuidado com você.</string>
+    <string name="main_agua" formatted="false">Água</string>
+    <string name="main_0_ml" formatted="false">0 ml</string>
+    <string name="main_da_sua_meta_diaria" formatted="false">da sua meta diária</string>
+    <string name="main_0_da_meta" formatted="false">0% da meta</string>
+    <string name="main_bebida_anterior" formatted="false">Bebida anterior</string>
+    <string name="main_proxima_bebida" formatted="false">Próxima bebida</string>
+    <string name="main_seu_proximo_gole_pode_ser_agora" formatted="false">Seu próximo gole pode ser agora.</string>
+    <string name="main_um_toque_um_gole" formatted="false">Um toque, um gole</string>
+    <string name="main_minha_meta" formatted="false">Minha meta  ›</string>
+    <string name="main_como_voce_esta" formatted="false">Como você está?</string>
+    <string name="main_registre_seus_sinais" formatted="false">Registre seus sinais  ↗</string>
+    <string name="main_no_seu_ritmo" formatted="false">No seu ritmo</string>
+    <string name="main_entenda_sua_meta" formatted="false">Entenda sua meta  ↗</string>
+    <string name="main_feito_para_o_seu_bem_estar_sobre" formatted="false">Feito para o seu bem-estar · Sobre o app</string>
+    <string name="main_registrar_uma_bebida" formatted="false">Registrar uma bebida</string>
+    <string name="main_hoje" formatted="false">Hoje</string>
+    <string name="main_evolucao" formatted="false">Evolução</string>
+    <string name="main_lembretes" formatted="false">Lembretes</string>
+    <string name="main_perfil" formatted="false">Perfil</string>
+    <string name="perfil_seu_cuidado_comeca_aqui" formatted="false">Seu cuidado começa aqui</string>
+    <string name="perfil_boas_vindas" formatted="false">Boas-vindas</string>
+    <string name="perfil_seu_cuidado_do_seu_jeito" formatted="false">SEU CUIDADO, DO SEU JEITO</string>
+    <string name="perfil_um_plano_para_o_seu_dia" formatted="false">Um plano para o seu dia.</string>
+    <string name="perfil_aqui_estao_suas_informacoes_e_sua_meta" formatted="false">Aqui estão suas informações e sua meta estimada. Você pode ajustar tudo quando precisar.</string>
+    <string name="perfil_sua_meta_diaria_estimada" formatted="false">Sua meta diária estimada</string>
+    <string name="perfil_pequenos_registros_um_habito_de_cada_vez" formatted="false">Pequenos registros. Um hábito de cada vez.</string>
+    <string name="perfil_sobre_voce" formatted="false">Sobre você</string>
+    <string name="perfil_cuidados_registrados" formatted="false">Cuidados registrados</string>
+    <string name="perfil_ir_para_meu_dia" formatted="false">Ir para meu dia</string>
+    <string name="perfil_editar_meu_perfil" formatted="false">Editar meu perfil</string>
+    <string name="perfil_bem_vindo_ao_seu_novo_habito" formatted="false">BEM-VINDO AO SEU NOVO HÁBITO</string>
+    <string name="perfil_seu_bem_estar_comeca_com_um_gole" formatted="false">Seu bem-estar começa com um gole.</string>
+    <string name="perfil_um_espaco_simples_para_acompanhar_sua_hidratacao" formatted="false">Um espaço simples para acompanhar sua hidratação e cuidar de você, no seu ritmo.</string>
+    <string name="perfil_uma_meta_feita_para_voce" formatted="false">Uma meta feita para você</string>
+    <string name="perfil_uma_estimativa_baseada_no_seu_perfil" formatted="false">Uma estimativa baseada no seu perfil.</string>
+    <string name="perfil_seu_progresso_bem_de_perto" formatted="false">Seu progresso, bem de perto</string>
+    <string name="perfil_cada_registro_ajuda_a_enxergar_sua_rotina" formatted="false">Cada registro ajuda a enxergar sua rotina.</string>
+    <string name="perfil_vamos_comecar" formatted="false">Vamos começar</string>
+    <string name="perfil_sem_criar_conta_seus_registros_ficam_no" formatted="false">Sem criar conta. Seus registros ficam no aparelho.</string>
+    <string name="perfil_um_perfil_que_e_seu" formatted="false">UM PERFIL QUE É SEU</string>
+    <string name="perfil_vamos_comecar_pelo_basico" formatted="false">Vamos começar pelo básico.</string>
+    <string name="perfil_selecione_a_informacao_usada_na_estimativa_da" formatted="false">Selecione a informação usada na estimativa da sua meta diária.</string>
+    <string name="perfil_feminino" formatted="false">Feminino</string>
+    <string name="perfil_masculino" formatted="false">Masculino</string>
+    <string name="perfil_voce_pode_editar_seu_perfil_quando_quiser" formatted="false">Você pode editar seu perfil quando quiser.</string>
+    <string name="perfil_continuar" formatted="false">Continuar</string>
+    <string name="perfil_cada_pessoa_tem_seu_ritmo" formatted="false">CADA PESSOA TEM SEU RITMO</string>
+    <string name="perfil_um_pouco_sobre_voce" formatted="false">Um pouco sobre você.</string>
+    <string name="perfil_essas_medidas_ajudam_a_estimar_uma_meta" formatted="false">Essas medidas ajudam a estimar uma meta para acompanhar seu dia.</string>
+    <string name="perfil_seu_peso" formatted="false">Seu peso</string>
+    <string name="perfil_sua_altura" formatted="false">Sua altura</string>
+    <string name="perfil_sua_idade" formatted="false">Sua idade</string>
+    <string name="perfil_o_movimento_na_sua_rotina" formatted="false">O MOVIMENTO NA SUA ROTINA</string>
+    <string name="perfil_como_e_o_seu_ritmo" formatted="false">Como é o seu ritmo?</string>
+    <string name="perfil_escolha_a_opcao_que_mais_combina_com" formatted="false">Escolha a opção que mais combina com sua semana.</string>
+    <string name="perfil_no_meu_ritmo_pouca_atividade_fisica" formatted="false">No meu ritmo\nPouca atividade física</string>
+    <string name="perfil_leve_1_a_2_vezes_por_semana" formatted="false">Leve\n1 a 2 vezes por semana</string>
+    <string name="perfil_moderado_3_a_4_vezes_por_semana" formatted="false">Moderado\n3 a 4 vezes por semana</string>
+    <string name="perfil_intenso_5_ou_mais_vezes_por_semana" formatted="false">Intenso\n5 ou mais vezes por semana</string>
+    <string name="perfil_um_olhar_para_o_seu_cuidado" formatted="false">UM OLHAR PARA O SEU CUIDADO</string>
+    <string name="perfil_algum_cuidado_especial" formatted="false">Algum cuidado especial?</string>
+    <string name="perfil_esta_etapa_e_opcional_marque_apenas_o" formatted="false">Esta etapa é opcional. Marque apenas o que fizer sentido para você.</string>
+    <string name="perfil_diabetes" formatted="false">Diabetes</string>
+    <string name="perfil_hipertensao" formatted="false">Hipertensão</string>
+    <string name="perfil_historico_de_problemas_com_alcool" formatted="false">Histórico de problemas com álcool</string>
+    <string name="perfil_historico_de_calculos_renais" formatted="false">Histórico de cálculos renais</string>
+    <string name="perfil_seu_cuidado_vem_primeiro" formatted="false">Seu cuidado vem primeiro</string>
+    <string name="perfil_a_meta_e_uma_estimativa_do_projeto" formatted="false">A meta é uma estimativa do projeto. Respeite orientações profissionais e eventuais restrições de líquidos.</string>
+    <string name="perfil_criar_minha_meta" formatted="false">Criar minha meta</string>
+    <string name="sintomas_um_espaco_para_voce" formatted="false">UM ESPAÇO PARA VOCÊ</string>
+    <string name="sintomas_como_voce_se_sente_hoje" formatted="false">Como você se sente hoje?</string>
+    <string name="sintomas_observe_seu_corpo_com_calma_registre_o" formatted="false">Observe seu corpo com calma. Registre o que quiser acompanhar.</string>
+    <string name="sintomas_o_que_voce_esta_sentindo_hoje" formatted="false">O que você está sentindo hoje?</string>
+    <string name="sintomas_nivel_de_sede_1_nenhuma_5_extrema" formatted="false">Nível de Sede (1 = Nenhuma, 5 = Extrema)</string>
+    <string name="sintomas_1" formatted="false">1</string>
+    <string name="sintomas_2" formatted="false">2</string>
+    <string name="sintomas_3" formatted="false">3</string>
+    <string name="sintomas_4" formatted="false">4</string>
+    <string name="sintomas_5" formatted="false">5</string>
+    <string name="sintomas_observacao_adicional_opcional" formatted="false">Observação adicional (opcional)</string>
+    <string name="sintomas_salvar_como_estou_me_sentindo" formatted="false">Salvar como estou me sentindo</string>
+    <string name="sintomas_seus_relatos" formatted="false">Seus relatos</string>
+    <string name="sobre_conheca_o_hidratapp" formatted="false">CONHEÇA O HIDRATAPP</string>
+    <string name="sobre_feito_para_o_seu_bem_estar" formatted="false">Feito para o seu bem-estar.</string>
+    <string name="sobre_um_jeito_mais_leve_de_acompanhar_sua" formatted="false">Um jeito mais leve de acompanhar sua hidratação.</string>
+    <string name="sobre_hidratapp_logo" formatted="false">Hidratapp Logo</string>
+    <string name="sobre_hidratapp" formatted="false">Hidratapp</string>
+    <string name="sobre_versao_1_0_saude_e_bem_estar" formatted="false">Versão 1.0 • Saúde e Bem-estar</string>
+    <string name="sobre_aplicativo_para_registrar_o_seu_consumo_diario" formatted="false">Aplicativo para registrar o seu consumo diário de líquidos e acompanhar a sua meta personalizada de hidratação.</string>
+    <string name="sobre_sua_meta_e_calculada_com_base_no" formatted="false">Sua meta é calculada com base no seu peso, idade, sexo e frequência de esportes. O app também monitora o consumo de café e álcool e permite registrar sintomas e consultar informações educativas.</string>
+    <string name="sobre_nota_os_valores_calculados_sao_estimativas_para" formatted="false">Nota: Os valores calculados são estimativas para acompanhamento de hábitos e não substituem consulta com profissionais de saúde.</string>
+    <string name="sobre_regras_limites_e_fontes" formatted="false">Regras, limites e fontes</string>
+    <string name="sobre_voltar_ao_inicio" formatted="false">Voltar ao Início</string>
+    <string name="splash_seu_momento_de_cuidado" formatted="false">SEU MOMENTO DE CUIDADO</string>
+    <string name="item_bebida_icone_bebida" formatted="false">Ícone Bebida</string>
+    <string name="item_bebida_favorito" formatted="false">Favorito</string>
+    <string name="item_dica_icone_da_dica" formatted="false">Ícone da Dica</string>
+    <string name="item_dica_ler_dica" formatted="false">Ler dica  ↓</string>
+    <string name="item_sintoma_excluir" formatted="false">Excluir</string>
+    <string name="cadastro_bebida_escolha_a_quantidade">%1$s · escolha a quantidade</string>
+    <string name="cadastro_bebida_salvar_alteracoes" formatted="false">Salvar alterações</string>
+    <string name="cadastro_bebida_registrar_ml">Registrar %1$d ml</string>
+    <string name="cadastro_bebida_um_ajuste_no_seu_registro" formatted="false">Um ajuste no seu registro.</string>
+    <string name="cadastro_bebida_informe_a_quantidade_em_ml_1_a">Informe a quantidade em ml (1 a %1$d)</string>
+    <string name="cadastro_bebida_informe_a_data" formatted="false">Informe a data</string>
+    <string name="cadastro_bebida_informe_uma_data_e_horario_validos_sem" formatted="false">Informe uma data e horário válidos, sem ser no futuro</string>
+    <string name="cadastro_bebida_atencao_a_hidratacao" formatted="false">Atenção à Hidratação</string>
+    <string name="cadastro_bebida_voce_ja_registrou_bebidas_alcoolicas_seguidas_agua">Você já registrou %1$d bebidas alcoólicas seguidas. Água não neutraliza o álcool nem torna o consumo seguro. Evite dirigir após beber.</string>
+    <string name="cadastro_bebida_entendido" formatted="false">Entendido</string>
+    <string name="cadastro_bebida_bebida_salva_com_sucesso" formatted="false">Bebida salva com sucesso!</string>
+    <string name="cadastro_bebida_bebida_atualizada_com_sucesso" formatted="false">Bebida atualizada com sucesso!</string>
+    <string name="detalhe_bebida_nao_foi_possivel_atualizar_o_favorito" formatted="false">Não foi possível atualizar o favorito</string>
+    <string name="detalhe_bebida_excluir_bebida" formatted="false">Excluir bebida?</string>
+    <string name="detalhe_bebida_essa_acao_removera_o_registro_do_historico" formatted="false">Essa ação removerá o registro do histórico.</string>
+    <string name="detalhe_bebida_horario_nao_registrado" formatted="false">(horário não registrado)</string>
+    <string name="detalhe_bebida_registrado_em">Registrado em %1$s %2$s</string>
+    <string name="detalhe_bebida_nenhuma_observacao_informada" formatted="false">Nenhuma observação informada.</string>
+    <string name="detalhe_bebida_desfavoritar" formatted="false">Desfavoritar</string>
+    <string name="detalhe_bebida_registro_excluido" formatted="false">Registro excluído</string>
+    <string name="detalhe_bebida_desfazer" formatted="false">Desfazer</string>
+    <string name="detalhe_bebida_nao_foi_possivel_desfazer" formatted="false">Não foi possível desfazer</string>
+    <string name="dicas_recolher" formatted="false">Recolher  ↑</string>
+    <string name="lembretes_permita_notificacoes_nas_configuracoes_para_receber_lembretes" formatted="false">Permita notificações nas configurações para receber lembretes.</string>
+    <string name="lembretes_no_ritmo_da_sua_rotina" formatted="false">NO RITMO DA SUA ROTINA</string>
+    <string name="lembretes_uma_pausa_para_voce" formatted="false">Uma pausa para você.</string>
+    <string name="lembretes_lembretes_gentis_para_cuidar_da_sua_hidratacao" formatted="false">Lembretes gentis para cuidar da sua hidratação, nos horários que combinam com seu dia.</string>
+    <string name="lembretes_um_cuidado_que_acompanha_voce" formatted="false">Um cuidado que acompanha você</string>
+    <string name="lembretes_ativar_lembretes" formatted="false">Ativar lembretes</string>
+    <string name="lembretes_seu_momento_de_pausa" formatted="false">Seu momento de pausa</string>
+    <string name="lembretes_escolha_um_periodo_no_mesmo_dia" formatted="false">Escolha um período no mesmo dia.</string>
+    <string name="lembretes_inicio">Início\n%1$s</string>
+    <string name="lembretes_fim">Fim\n%1$s</string>
+    <string name="lembretes_intervalo_entre_lembretes" formatted="false">Intervalo entre lembretes</string>
+    <string name="lembretes_salvar_configuracoes" formatted="false">Salvar configurações</string>
+    <string name="lembretes_o_inicio_deve_ser_anterior_ao_fim" formatted="false">O início deve ser anterior ao fim.</string>
+    <string name="lembretes_tudo_pronto_para_lembrar" formatted="false">Tudo pronto para lembrar?</string>
+    <string name="lembretes_envie_um_teste_ou_ajuste_a_permissao" formatted="false">Envie um teste ou ajuste a permissão do Android.</string>
+    <string name="lembretes_enviar_notificacao_de_teste" formatted="false">Enviar notificação de teste</string>
+    <string name="lembretes_habilite_as_notificacoes_primeiro" formatted="false">Habilite as notificações primeiro.</string>
+    <string name="lembretes_permissoes_de_notificacao" formatted="false">Permissões de notificação</string>
+    <string name="lembretes_os_horarios_sao_aproximados_e_podem_atrasar" formatted="false">Os horários são aproximados e podem atrasar com a economia de bateria do Android. Toque em Salvar para aplicar alterações.</string>
+    <string name="lembretes_configuracoes_salvas" formatted="false">Configurações salvas</string>
+    <string name="lembretes_notificacoes_bloqueadas_nas_configuracoes_do_android" formatted="false">Notificações bloqueadas nas configurações do Android.</string>
+    <string name="lembretes_lembretes_programados" formatted="false">Lembretes programados.</string>
+    <string name="lembretes_lembretes_desativados" formatted="false">Lembretes desativados.</string>
+    <string name="lista_todo_o_historico" formatted="false">Todo o histórico</string>
+    <string name="lista_ultimos_7_dias" formatted="false">Últimos 7 dias</string>
+    <string name="lista_todas_as_bebidas" formatted="false">Todas as bebidas</string>
+    <string name="lista_media_dos_ultimos_sete_dias" formatted="false">Média dos últimos sete dias\n</string>
+    <string name="lista_de_7_dias_atingiram_a_meta_atual">%1$d de 7 dias atingiram a meta atual de %2$d ml</string>
+    <string name="lista_configure_seu_perfil_para_acompanhar_metas" formatted="false">Configure seu perfil para acompanhar metas</string>
+    <string name="lista_a_linha_indica_sua_meta_atual_dias" formatted="false">\nA linha indica sua meta atual · Dias sem registros = 0</string>
+    <string name="main_registro_rapido" formatted="false">Registro rápido</string>
+    <string name="main_nao_foi_possivel_salvar" formatted="false">Não foi possível salvar</string>
+    <string name="main_ml_registrados">%1$d ml registrados</string>
+    <string name="main_meta_alcancada_um_cuidado_para_celebrar" formatted="false">Meta alcançada. Um cuidado para celebrar!</string>
+    <string name="main_voce_registrou_bebidas_alcoolicas_seguidas_que_tal">Você registrou %1$d bebidas alcoólicas seguidas. Que tal beber água agora?</string>
+    <string name="main_consumo_registrado_hoje" formatted="false">Consumo registrado hoje</string>
+    <string name="main_fora_da_meta" formatted="false">Fora da meta</string>
+    <string name="main_bebidas_alcoolicas_ficam_apenas_no_historico" formatted="false">Bebidas alcoólicas ficam apenas no histórico.</string>
+    <string name="main_vamos_definir_sua_meta" formatted="false">Vamos definir sua meta?</string>
+    <string name="main_preencha_seu_perfil" formatted="false">Preencha seu perfil</string>
+    <string name="main_seus_registros_de_hoje_separados_por_bebida" formatted="false">Seus registros de hoje, separados por bebida.</string>
+    <string name="main_de_ml_para_hoje">de %1$d ml para hoje</string>
+    <string name="main_da_meta_total_de_ml">da meta total de %1$d ml</string>
+    <string name="main_da_meta">%1$d%% da meta</string>
+    <string name="main_da_meta_total">%1$d%% da meta total</string>
+    <string name="main_cada_gole_conta_voce_esta_no_seu" formatted="false">Cada gole conta. Você está no seu ritmo.</string>
+    <string name="main_de_hoje_veja_tambem_seu_total_diario">%1$s de hoje. Veja também seu total diário.</string>
+    <string name="main_de_deslize_para_os_lados">%1$d de %2$d · Deslize para os lados</string>
+    <string name="main_ver">Ver %1$s</string>
+    <string name="main_primeira_bebida" formatted="false">Primeira bebida</string>
+    <string name="main_ultima_pagina" formatted="false">Última página</string>
+    <string name="perfil_resumo" formatted="false">Resumo</string>
+    <string name="perfil_avaliacao_por_idade_requer_profissional" formatted="false">Avaliação por idade requer profissional</string>
+    <string name="perfil_abaixo_do_peso" formatted="false">Abaixo do peso</string>
+    <string name="perfil_peso_normal" formatted="false">Peso normal</string>
+    <string name="perfil_sobrepeso" formatted="false">Sobrepeso</string>
+    <string name="perfil_obesidade" formatted="false">Obesidade</string>
+    <string name="perfil_imc_kg_m2">IMC: %1$s kg/m² (%2$s)</string>
+    <string name="perfil_peso_kg_altura_cm">Peso: %1$s kg • Altura: %2$d cm</string>
+    <string name="perfil_idade_anos_sexo">Idade: %1$d anos • Sexo: %2$s</string>
+    <string name="perfil_leve_1_2x_sem" formatted="false">Leve (1-2x/sem)</string>
+    <string name="perfil_moderado_3_4x_sem" formatted="false">Moderado (3-4x/sem)</string>
+    <string name="perfil_intenso_atleta" formatted="false">Intenso (Atleta)</string>
+    <string name="perfil_sedentario_nao_pratico" formatted="false">Sedentário / Não pratico</string>
+    <string name="perfil_atividade_fisica">Atividade Física: %1$s</string>
+    <string name="perfil_historico_c_alcool" formatted="false">Histórico c/ Álcool</string>
+    <string name="perfil_calculo_renal_rins" formatted="false">Cálculo Renal / Rins</string>
+    <string name="perfil_nenhuma_condicao_especifica_cadastrada" formatted="false">Nenhuma condição específica cadastrada</string>
+    <string name="perfil_etapa_de_4">Etapa %1$d de 4</string>
+    <string name="perfil_por_favor_selecione_uma_opcao_de_sexo" formatted="false">Por favor, selecione uma opção de sexo/gênero</string>
+    <string name="perfil_informe_seu_peso_em_kg_ex_70" formatted="false">Informe seu peso em kg (ex: 70.5)</string>
+    <string name="perfil_informe_sua_altura_em_cm_ex_175" formatted="false">Informe sua altura em cm (ex: 175)</string>
+    <string name="perfil_informe_sua_idade_ex_28" formatted="false">Informe sua idade (ex: 28)</string>
+    <string name="perfil_perfil_atualizado_com_sucesso_meta_ml_dia">Perfil atualizado com sucesso! 🎉\nMeta: %1$d ml/dia • IMC: %2$s</string>
+    <string name="regras_informacao_tambem_e_cuidado" formatted="false">INFORMAÇÃO TAMBÉM É CUIDADO</string>
+    <string name="regras_no_seu_ritmo_com_clareza" formatted="false">No seu ritmo, com clareza.</string>
+    <string name="regras_entenda_o_que_sua_meta_representa_e" formatted="false">Entenda o que sua meta representa e como seus registros aparecem no aplicativo.</string>
+    <string name="regras_uma_estimativa_nao_uma_prescricao" formatted="false">Uma estimativa, não uma prescrição</string>
+    <string name="regras_a_meta_e_uma_estimativa_do_projeto" formatted="false">A meta é uma estimativa do projeto para organização de hábitos. As necessidades de líquidos variam; para menores de idade, condições de saúde ou restrição de líquidos, procure orientação profissional. Sintomas registrados não geram diagnóstico. Água não neutraliza o álcool.</string>
+    <string name="regras_como_calculamos_sua_meta" formatted="false">Como calculamos sua meta</string>
+    <string name="regras_peso_35_ml_kg_abaixo_de_18" formatted="false">Peso × 35 ml/kg. Abaixo de 18 anos: 40 ml/kg; acima de 55: 30 ml/kg. Atividade leve acrescenta 5 ml/kg; moderada, 10; intensa, 15. Para o sexo masculino, o resultado é multiplicado por 1,05 e arredondado para baixo em ml. Esses coeficientes são regras do projeto e não foram validados como recomendação médica individual.</string>
+    <string name="regras_o_que_entra_no_seu_progresso" formatted="false">O que entra no seu progresso</string>
+    <string name="regras_somamos_o_volume_de_todas_as_bebidas" formatted="false">Somamos o volume de todas as bebidas sem álcool. Água, café, suco, refrigerante e energético entram pelo volume registrado; isso não significa que tenham o mesmo valor nutricional. Álcool fica apenas no histórico. Alimentos não são contabilizados.</string>
+    <string name="regras_sua_semana_em_perspectiva" formatted="false">Sua semana em perspectiva</string>
+    <string name="regras_o_grafico_inclui_os_ultimos_sete_dias" formatted="false">O gráfico inclui os últimos sete dias, incluindo hoje. Dias sem registros contam como zero. A comparação usa sua meta atual; mudar o perfil recalcula essa comparação. Registros antigos não possuem horário. O IMC de menores de 20 anos não recebe classificação adulta.</string>
+    <string name="regras_seus_dados_perto_de_voce" formatted="false">Seus dados, perto de você</string>
+    <string name="regras_os_dados_ficam_no_aparelho_sujeitos_ao" formatted="false">Os dados ficam no aparelho, sujeitos ao backup configurado no Android. Não é necessário criar conta.</string>
+    <string name="regras_para_continuar_aprendendo" formatted="false">Para continuar aprendendo</string>
+    <string name="regras_referencias_educativas_elas_nao_validam_os_coeficientes" formatted="false">Referências educativas. Elas não validam os coeficientes da fórmula do projeto.</string>
+    <string name="regras_cdc_agua_e_bebidas_https_www_cdc" formatted="false">CDC — Água e bebidas\nhttps://www.cdc.gov/healthy-weight-growth/water-healthy-drinks/index.html</string>
+    <string name="regras_nhs_liquidos_e_hidratacao_https_www_nhs" formatted="false">NHS — Líquidos e hidratação\nhttps://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/water-drinks-nutrition/</string>
+    <string name="regras_medlineplus_agua_na_alimentacao_https_medlineplus_gov" formatted="false">MedlinePlus — Água na alimentação\nhttps://medlineplus.gov/ency/article/002471.htm</string>
+    <string name="sintomas_selecione_pelo_menos_um_sintoma" formatted="false">Selecione pelo menos um sintoma</string>
+    <string name="sintomas_relato_salvo_com_sucesso" formatted="false">Relato Salvo com Sucesso!</string>
+    <string name="sintomas_seus_sintomas_foram_registrados_este_registro_nao" formatted="false">Seus sintomas foram registrados.\n\nEste registro não é um diagnóstico. Os sintomas podem ter várias causas. Respeite orientações de saúde e eventuais restrições de líquidos. Se os sintomas forem intensos, persistirem ou piorarem, procure atendimento de saúde.</string>
+    <string name="sintomas_nenhum_sintoma_relatado_ainda" formatted="false">Nenhum sintoma relatado ainda.</string>
+    <string name="sintomas_data">Data: %1$s</string>
+    <string name="sintomas_nivel_de_sede_5">Nível de sede: %1$d/5</string>
+    <string name="sintomas_obs">Obs: %1$s</string>
+    <string name="sintomas_excluir_relato" formatted="false">Excluir Relato</string>
+    <string name="sintomas_deseja_remover_este_relato_de_sintomas" formatted="false">Deseja remover este relato de sintomas?</string>
+    <string name="sintomas_sim" formatted="false">Sim</string>
+    <string name="sintomas_nao" formatted="false">Não</string>
+    <string name="dica_consumo_de_alcool" formatted="false">Consumo de álcool</string>
+    <string name="dica_voce_registrou_bebida_s_alcoolica_s_agua">Você registrou %1$d bebida(s) alcoólica(s). Água não neutraliza o álcool nem torna o consumo seguro. Evite dirigir após beber. Se há histórico de problemas com álcool, busque apoio profissional.</string>
+    <string name="dica_bebidas_com_cafeina" formatted="false">Bebidas com cafeína</string>
+    <string name="dica_essas_bebidas_tambem_contribuem_com_liquidos_observe" formatted="false">Essas bebidas também contribuem com líquidos. Observe a quantidade de cafeína e açúcar no rótulo e priorize água no cotidiano.</string>
+    <string name="dica_suco" formatted="false">Suco</string>
+    <string name="dica_refrigerante" formatted="false">Refrigerante</string>
+    <string name="dica_confira_o_acucar" formatted="false">Confira o açúcar</string>
+    <string name="dica_bebidas_podem_conter_acucar_siga_seu_plano" formatted="false">Bebidas podem conter açúcar. Siga seu plano de cuidados e a orientação do profissional que acompanha sua glicemia.</string>
+    <string name="dica_alguns_sucos_e_refrigerantes_contem_bastante_acucar" formatted="false">Alguns sucos e refrigerantes contêm bastante açúcar. Confira o rótulo e priorize água.</string>
+    <string name="dica_sua_orientacao_de_saude_vem_primeiro" formatted="false">Sua orientação de saúde vem primeiro</string>
+    <string name="dica_as_necessidades_de_liquidos_variam_conforme_sua" formatted="false">As necessidades de líquidos variam conforme sua saúde e tratamento. Combine a meta com um profissional e respeite eventuais restrições de líquidos.</string>
+    <string name="dica_sintomas_registrados" formatted="false">Sintomas registrados</string>
+    <string name="dica_voce_relatou_sintomas_podem_ter_varias_causas">Você relatou: %1$s. Sintomas podem ter várias causas; o aplicativo não faz diagnóstico. Se forem intensos, persistirem ou piorarem, procure atendimento de saúde.</string>
+    <string name="dica_configure_seu_perfil" formatted="false">Configure seu perfil</string>
+    <string name="dica_preencha_seu_perfil_para_acompanhar_uma_meta" formatted="false">Preencha seu perfil para acompanhar uma meta estimada de consumo.</string>
+    <string name="dica_meta_alcancada" formatted="false">Meta alcançada!</string>
+    <string name="dica_seu_progresso_de_hoje" formatted="false">Seu progresso de hoje</string>
+    <string name="dica_nao_e_necessario_continuar_bebendo_para_aumentar" formatted="false">Não é necessário continuar bebendo para aumentar o percentual.</string>
+    <string name="dica_distribua_seu_consumo_ao_longo_do_dia" formatted="false">Distribua seu consumo ao longo do dia, respeitando suas necessidades e orientações de saúde.</string>
+    <string name="dica_informacoes_educativas" formatted="false">Informações educativas</string>
+    <string name="dica_a_meta_e_uma_estimativa_do_projeto" formatted="false">A meta é uma estimativa do projeto. Consulte Regras, limites e fontes na tela Sobre para entender o cálculo e suas limitações.</string>
+    <string name="acao_voltar">Voltar</string>
+    <string name="notificacao_canal">Lembretes de hidratação</string>
+    <string name="notificacao_titulo">Sua pausa para hidratação</string>
+    <string name="notificacao_conteudo">Que tal verificar seu consumo e registrar uma bebida?</string>
+    <string name="bebida_titulo">%1$s • %2$d ml</string>
+    <string name="bebida_data_observacao">%1$s %2$s • %3$s</string>
+    <string name="bebida_data_hora">%1$s %2$s</string>
+    <string name="grafico_descricao">Consumo semanal. %1$s. Meta atual: %2$d ml</string>
+    <string name="grafico_dia">%1$s: %2$d ml</string>
+    <string name="sintoma_opcao_0">Dor de cabeça</string>
+    <string name="sintoma_opcao_1">Boca seca / Lábios rachados</string>
+    <string name="sintoma_opcao_2">Tontura / Tonturas ao levantar</string>
+    <string name="sintoma_opcao_3">Fadiga / Cansaço excessivo</string>
+    <string name="sintoma_opcao_4">Urina escura / Concentrada</string>
+    <string name="sintoma_opcao_5">Cãibra muscular</string>
+    <string name="sintoma_opcao_6">Nausea / Enjoo</string>
+    <string name="meta_celebracao">Sua meta do dia foi alcançada!</string>
+    <string name="intervalo_minutos">%1$d minutos</string>
+    <string name="volume_dia">%1$d ml / dia</string>
+    <string name="volume_formatado">%1$s ml</string>
+    <string name="bebida_resumo">%1$s · %2$d ml</string>
+    <string name="atalho_quantidade">+%1$d ml</string>
 </resources>

@@ -62,6 +62,19 @@ class BancoHelper(context: Context, nomeBanco: String = "hidrata.db") :
         return writableDatabase.insert("bebidas", null, valores)
     }
 
+    fun restaurar(bebida: Bebida): Long {
+        val valores = ContentValues().apply {
+            put("id", bebida.id)
+            put("tipo", bebida.tipo)
+            put("ml", bebida.ml)
+            put("data", bebida.data)
+            put("hora", bebida.hora)
+            put("observacao", bebida.observacao)
+            put("favorito", if (bebida.favorito) 1 else 0)
+        }
+        return writableDatabase.insertOrThrow("bebidas", null, valores)
+    }
+
     private fun lerBebida(cursor: Cursor): Bebida {
         return Bebida(
             hora = cursor.getString(cursor.getColumnIndexOrThrow("hora")),

@@ -6,25 +6,26 @@ import java.util.Locale
 
 object Calculos {
 
+    // Coeficientes em AjustesDoApp; faixas de idade e ordem do cálculo neste método.
     fun metaAgua(peso: Double, idade: Int, masculino: Boolean, nivelEsporte: Int = 0): Int {
-        var mlPorKg = 35
+        var mlPorKg = AjustesDoApp.META_BASE_ML_POR_KG
         if (idade < 18) {
-            mlPorKg = 40
+            mlPorKg = AjustesDoApp.META_JOVEM_ML_POR_KG
         } else if (idade > 55) {
-            mlPorKg = 30
+            mlPorKg = AjustesDoApp.META_MAIS_55_ML_POR_KG
         }
 
         // Adiciona ml/kg de acordo com o nível de esporte
         mlPorKg += when (nivelEsporte) {
-            1 -> 5   // Leve (1-2x semana)
-            2 -> 10  // Moderado (3-4x semana)
-            3 -> 15  // Intenso (5+x semana / Atleta)
+            1 -> AjustesDoApp.ADICIONAL_ATIVIDADE_LEVE   // Leve (1-2x semana)
+            2 -> AjustesDoApp.ADICIONAL_ATIVIDADE_MODERADA  // Moderado (3-4x semana)
+            3 -> AjustesDoApp.ADICIONAL_ATIVIDADE_INTENSA  // Intenso (5+x semana / Atleta)
             else -> 0 // Sedentário
         }
 
         var meta = peso * mlPorKg
         if (masculino) {
-            meta *= 1.05
+            meta *= AjustesDoApp.FATOR_MASCULINO
         }
         return meta.toInt()
     }
@@ -34,7 +35,7 @@ object Calculos {
         return peso / (metros * metros)
     }
 
-    fun horaAgora(): String = SimpleDateFormat("HH:mm", Locale.ROOT).format(Date())
+    fun horaAgora(): String = SimpleDateFormat("HH:mm", Locale.ROOT).format(Date(RelogioDoApp.agora()))
 
     fun totalValido(lista: List<Bebida>): Int = lista.filter { !ehAlcool(it.tipo) }.sumOf { it.ml }
 
@@ -46,7 +47,7 @@ object Calculos {
     }
 
     fun hoje(): String {
-        return SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(Date())
+        return SimpleDateFormat("dd/MM/yyyy", Locale.ROOT).format(Date(RelogioDoApp.agora()))
     }
 
     fun ehAlcool(tipo: String): Boolean {

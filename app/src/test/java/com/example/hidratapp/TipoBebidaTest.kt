@@ -20,7 +20,7 @@ class TipoBebidaTest {
 
     @Test fun categoriaDesconhecidaContinuaLegivel() {
         assertNull(TipoBebida.doBanco("Chá"))
-        assertEquals("Chá", TipoBebida.nomeExibido("Chá"))
+        assertEquals("Chá", ConsumoDoDia.paginas(listOf(Bebida(tipo="Chá", ml=200, data="", observacao="")))[1].tipo)
         assertFalse(Calculos.ehAlcool("Chá"))
     }
 }

@@ -32,12 +32,12 @@
                     android:background="@drawable/bg_white_round"
                     android:src="@drawable/ic_arrow_back"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Voltar" />
+                    android:contentDescription="@string/cadastro_bebida_voltar" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="UM ESPAÇO PARA VOCÊ"
+                    android:text="@string/sintomas_um_espaco_para_voce"
                     android:layout_marginStart="14dp"
                     android:textColor="@color/text_secondary"
                     android:textSize="10sp"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Como você se sente hoje?"
+                android:text="@string/sintomas_como_voce_se_sente_hoje"
                 android:textSize="30sp"
                 android:letterSpacing="-0.035"
                 android:textColor="@color/text_primary"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Observe seu corpo com calma. Registre o que quiser acompanhar."
+                android:text="@string/sintomas_observe_seu_corpo_com_calma_registre_o"
                 android:textSize="14sp"
                 android:textColor="@color/text_secondary"
                 android:lineSpacingExtra="3dp"
@@ -86,7 +86,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="O que você está sentindo hoje?"
+                    android:text="@string/sintomas_o_que_voce_esta_sentindo_hoje"
                     android:textColor="@color/teal_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Nível de Sede (1 = Nenhuma, 5 = Extrema)"
+                    android:text="@string/sintomas_nivel_de_sede_1_nenhuma_5_extrema"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
                     android:textStyle="bold"
@@ -117,39 +117,39 @@
                         android:id="@+id/rbSede1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1" />
+                        android:text="@string/sintomas_1" />
                     <RadioButton
                         android:id="@+id/rbSede2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="2" />
+                        android:text="@string/sintomas_2" />
                     <RadioButton
                         android:id="@+id/rbSede3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="3"
+                        android:text="@string/sintomas_3"
                         android:checked="true" />
                     <RadioButton
                         android:id="@+id/rbSede4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="4" />
+                        android:text="@string/sintomas_4" />
                     <RadioButton
                         android:id="@+id/rbSede5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:text="5" />
+                        android:text="@string/sintomas_5" />
                 </RadioGroup>
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Observação adicional (opcional)"
+                    android:hint="@string/sintomas_observacao_adicional_opcional"
                     app:boxCornerRadiusBottomEnd="18dp"
                     app:boxCornerRadiusBottomStart="18dp"
                     app:boxCornerRadiusTopEnd="18dp"
@@ -167,7 +167,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
                     android:layout_marginTop="20dp"
-                    android:text="Salvar como estou me sentindo"
+                    android:text="@string/sintomas_salvar_como_estou_me_sentindo"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:textStyle="bold"
@@ -179,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:text="Seus relatos"
+            android:text="@string/sintomas_seus_relatos"
             android:textColor="@color/text_primary"
             android:textSize="18sp"
             android:textStyle="bold"

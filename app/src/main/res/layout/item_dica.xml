@@ -21,7 +21,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="2dp"
-            android:contentDescription="Ícone da Dica"
+            android:contentDescription="@string/item_dica_icone_da_dica"
             android:src="@drawable/ic_water_drop"
             app:tint="@color/teal_primary" />
         <LinearLayout
@@ -52,7 +52,7 @@
                 style="@style/Widget.Material3.Button.TextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
-                android:text="Ler dica  ↓"
+                android:text="@string/item_dica_ler_dica"
                 android:textSize="12sp"
                 android:textColor="@color/blue_primary" />
         </LinearLayout>

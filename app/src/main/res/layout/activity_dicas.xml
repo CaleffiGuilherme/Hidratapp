@@ -32,12 +32,12 @@
                     android:background="@drawable/bg_white_round"
                     android:src="@drawable/ic_arrow_back"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Voltar" />
+                    android:contentDescription="@string/cadastro_bebida_voltar" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="PARA O SEU DIA"
+                    android:text="@string/dicas_para_o_seu_dia"
                     android:layout_marginStart="14dp"
                     android:textColor="@color/text_secondary"
                     android:textSize="10sp"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Um pouco de cuidado."
+                android:text="@string/dicas_um_pouco_de_cuidado"
                 android:textSize="30sp"
                 android:letterSpacing="-0.035"
                 android:textColor="@color/text_primary"
@@ -63,7 +63,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Informações para acompanhar sua rotina, um gole de cada vez."
+                android:text="@string/dicas_informacoes_para_acompanhar_sua_rotina_um_gole"
                 android:textSize="14sp"
                 android:textColor="@color/text_secondary"
                 android:lineSpacingExtra="3dp"

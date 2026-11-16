@@ -131,6 +131,24 @@ Deslize horizontalmente no círculo de consumo ou use as setas para alternar ent
 
 ### Tipos de bebida centralizados
 
-`TipoBebida` reúne o valor permanente do banco (`valorBanco`), o nome exibido (`nome`), o ícone, o ID do chip e as classificações de álcool e cafeína. O cadastro percorre o enum e infla `item_tipo_bebida.xml`; as cores continuam nos seletores `drink_chip_*`. Não existem listas paralelas de nomes e IDs.
+`TipoBebida` reúne o valor permanente do banco (`valorBanco`), o recurso do nome exibido (`nomeRes`), o ícone, o ID do chip e as classificações de álcool e cafeína. O cadastro percorre o enum e infla `item_tipo_bebida.xml`; as cores continuam nos seletores `drink_chip_*`. Não existem listas paralelas de nomes e IDs.
 
-Para renomear uma opção, altere `nome` e preserve `valorBanco`. Os registros atuais continuam válidos no SQLite versão 3, sem migração. Filtros, carrossel, detalhes e regras consultam o enum; categorias desconhecidas continuam visíveis pelo texto original. Para uma nova categoria, inclua sua entrada e declare um ID em `res/values/ids.xml`.
+Para renomear uma opção, altere o texto `tipo_*` correspondente em `res/values/strings.xml` e preserve `valorBanco`. Os registros atuais continuam válidos no SQLite versão 3, sem migração. Filtros, carrossel, detalhes e regras consultam o enum; categorias desconhecidas continuam visíveis pelo texto original. Para uma nova categoria, inclua sua entrada e declare um ID em `res/values/ids.xml`.
+
+## Melhorias de confiabilidade e manutenção
+
+- **Desfazer exclusão:** após confirmar a exclusão, os detalhes oferecem dez segundos para desfazer. A restauração preserva identificador, favorito, data, horário e observação, inclusive após recriar a tela. Uma colisão de identificador não sobrescreve outro registro.
+- **Comemoração da meta:** um pulso discreto aparece quando o total válido atinge a meta, uma vez por data. O marcador fica nas preferências e a animação respeita a desativação de animações do sistema. A mensagem não substitui o botão Desfazer do registro rápido.
+- **Textos centralizados:** rótulos, mensagens, nomes das bebidas, opções de sintomas, notificações e descrições acessíveis ficam em `res/values/strings.xml`. Os valores permanentes do SQLite continuam separados dos rótulos exibidos.
+- **Virada do dia:** o painel agenda a próxima meia-noite conforme o fuso local, atualiza a data e consulta os registros novamente. Também reage a mudanças de hora, data e fuso e atualiza ao voltar ao primeiro plano. O agendamento da tela é cancelado quando ela deixa de estar visível.
+- **Persistência fora da interface:** `BebidaRepository` concentra as operações SQLite, e `BancoAsync` as executa numa fila em segundo plano. `DadosActivity` devolve resultados à thread principal e ignora callbacks de telas encerradas. Cadastro, edição, detalhes, filtros, dicas, sintomas e atalhos usam esse fluxo. Botões de gravação ficam desabilitados durante a operação.
+
+O banco permanece na versão 3. Estas cinco melhorias não incluem exportação ou restauração de backup em arquivo.
+
+Validação desta atualização: 21 testes unitários e 18 instrumentados aprovados em emulador Android 17, compilação concluída e lint sem erros. Os cenários novos verificam restauração após recriação, preservação dos campos, execução do repositório fora da thread principal, virada de ano e comemoração diária. Há teste unitário de mudança de horário de verão.
+
+### Pontos rápidos de alteração
+
+`AjustesDoApp.kt` reúne volumes dos atalhos, limite por registro, tempos de Desfazer, duração das animações e coeficientes da meta. Os textos dos atalhos e a mensagem do limite acompanham esses valores automaticamente. A ordem e as faixas de idade da fórmula continuam em `Calculos.metaAgua`.
+
+`strings.xml` reúne nomes e mensagens; `colors.xml` reúne a paleta e as cores dos chips selecionados. Aliases como `teal_primary` apontam para a cor principal. As tonalidades específicas dos desenhos em Canvas continuam em `HydrationProgressView.kt` e `WaterIllustrationView.kt`; as dos cartões educativos, em `DicasActivity.kt`.

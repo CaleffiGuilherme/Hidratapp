@@ -39,7 +39,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="hidratapp"
+                    android:text="@string/main_hidratapp"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="22sp"
                     android:letterSpacing="-0.03"
@@ -52,14 +52,14 @@
                     android:src="@drawable/ic_heart_health"
                     android:padding="13dp"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Dicas para cuidar de você" />
+                    android:contentDescription="@string/main_dicas_para_cuidar_de_voce" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tvDataHoje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:text="HOJE, SEU DIA DE SE CUIDAR"
+                android:text="@string/main_hoje_seu_dia_de_se_cuidar"
                 android:textSize="11sp"
                 android:letterSpacing="0.13"
                 android:fontFamily="sans-serif-medium"
@@ -68,7 +68,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Um gole de cada vez."
+                android:text="@string/main_um_gole_de_cada_vez"
                 android:textSize="30sp"
                 android:letterSpacing="-0.04"
                 android:fontFamily="sans-serif-medium"
@@ -77,7 +77,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Pequenos hábitos. Mais cuidado com você."
+                android:text="@string/main_pequenos_habitos_mais_cuidado_com_voce"
                 android:textSize="14sp"
                 android:textColor="@color/text_secondary" />
             <com.example.hidratapp.SwipeConsumoLayout
@@ -109,7 +109,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="Água"
+                        android:text="@string/main_agua"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         android:id="@+id/tvBebidaAtual" />
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="0 ml"
+                        android:text="@string/main_0_ml"
                         android:textSize="42sp"
                         android:letterSpacing="-0.05"
                         android:fontFamily="sans-serif-medium"
@@ -131,7 +131,7 @@
                         android:id="@+id/tvMetaDia"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="da sua meta diária"
+                        android:text="@string/main_da_sua_meta_diaria"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp" />
                     <TextView
@@ -140,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
                         android:background="@drawable/bg_white_round"
-                        android:text="0% da meta"
+                        android:text="@string/main_0_da_meta"
                         android:textSize="12sp"
                         android:fontFamily="sans-serif-medium"
                         android:textColor="@color/blue_primary"
@@ -166,7 +166,7 @@
                     android:src="@drawable/ic_arrow_back"
                     android:background="@drawable/bg_white_round"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Bebida anterior" />
+                    android:contentDescription="@string/main_bebida_anterior" />
                 <TextView
                     android:id="@+id/tvPaginaBebida"
                     android:layout_width="0dp"
@@ -183,14 +183,14 @@
                     android:src="@drawable/ic_chevron_right"
                     android:background="@drawable/bg_white_round"
                     app:tint="@color/blue_primary"
-                    android:contentDescription="Próxima bebida" />
+                    android:contentDescription="@string/main_proxima_bebida" />
             </LinearLayout>
             <TextView
                 android:id="@+id/tvIncentivo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Seu próximo gole pode ser agora."
+                android:text="@string/main_seu_proximo_gole_pode_ser_agora"
                 android:textSize="13sp"
                 android:textColor="@color/text_secondary" />
             <com.google.android.material.card.MaterialCardView
@@ -221,7 +221,7 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:text="Um toque, um gole"
+                    android:text="@string/main_um_toque_um_gole"
                     android:textColor="@color/text_primary"
                     android:textSize="18sp"
                     android:fontFamily="sans-serif-medium" />
@@ -230,7 +230,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:gravity="center"
-                    android:text="Minha meta  ›"
+                    android:text="@string/main_minha_meta"
                     android:textColor="@color/blue_primary"
                     android:textSize="12sp"
                     android:clickable="true"
@@ -244,15 +244,15 @@
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/agua200"
                     style="@style/HomeQuick"
-                    android:text="+200 ml" />
+                    android:text="@string/cadastro_bebida_200_ml" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/agua300"
                     style="@style/HomeQuick"
-                    android:text="+300 ml" />
+                    android:text="@string/cadastro_bebida_300_ml" />
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/agua500"
                     style="@style/HomeQuick"
-                    android:text="+500 ml" />
+                    android:text="@string/cadastro_bebida_500_ml" />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -281,7 +281,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="Como você está?"
+                        android:text="@string/main_como_voce_esta"
                         android:textSize="15sp"
                         android:fontFamily="sans-serif-medium"
                         android:textColor="@color/text_primary" />
@@ -289,7 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Registre seus sinais  ↗"
+                        android:text="@string/main_registre_seus_sinais"
                         android:textSize="11sp"
                         android:textColor="@color/aqua" />
                 </LinearLayout>
@@ -315,7 +315,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="No seu ritmo"
+                        android:text="@string/main_no_seu_ritmo"
                         android:textSize="15sp"
                         android:fontFamily="sans-serif-medium"
                         android:textColor="@color/text_primary" />
@@ -323,7 +323,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Entenda sua meta  ↗"
+                        android:text="@string/main_entenda_sua_meta"
                         android:textSize="11sp"
                         android:textColor="@color/blue_primary" />
                 </LinearLayout>
@@ -334,7 +334,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="12dp"
-                android:text="Feito para o seu bem-estar · Sobre o app"
+                android:text="@string/main_feito_para_o_seu_bem_estar_sobre"
                 android:textColor="@color/text_secondary"
                 android:textSize="11sp" />
         </LinearLayout>
@@ -350,7 +350,7 @@
             android:id="@+id/btnNovaBebida"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:text="Registrar uma bebida"
+            android:text="@string/main_registrar_uma_bebida"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:cornerRadius="28dp"
@@ -374,7 +374,7 @@
                 android:drawableTop="@drawable/ic_home"
                 android:drawablePadding="4dp"
                 android:paddingTop="10dp"
-                android:text="Hoje"
+                android:text="@string/main_hoje"
                 android:textSize="10sp"
                 android:textColor="@color/blue_primary"
                 android:fontFamily="sans-serif-medium"
@@ -389,7 +389,7 @@
                 android:drawableTop="@drawable/ic_chart_bar"
                 android:drawablePadding="4dp"
                 android:paddingTop="10dp"
-                android:text="Evolução"
+                android:text="@string/main_evolucao"
                 android:textSize="10sp"
                 android:textColor="@color/text_secondary"
                 android:clickable="true"
@@ -405,7 +405,7 @@
                 android:drawableTop="@drawable/ic_bell_notification"
                 android:drawablePadding="4dp"
                 android:paddingTop="10dp"
-                android:text="Lembretes"
+                android:text="@string/main_lembretes"
                 android:textSize="10sp"
                 android:textColor="@color/text_secondary"
                 android:clickable="true"
@@ -421,7 +421,7 @@
                 android:drawableTop="@drawable/ic_person"
                 android:drawablePadding="4dp"
                 android:paddingTop="10dp"
-                android:text="Perfil"
+                android:text="@string/main_perfil"
                 android:textSize="10sp"
                 android:textColor="@color/text_secondary"
                 android:clickable="true"
