@@ -14,3 +14,8 @@
 .cxx
 local.properties
 /.kotlin/
+
+# Arquivos locais de geração e conferência da documentação
+/documentacao/fontes/
+/documentacao/qa/
+/documentacao/~$*

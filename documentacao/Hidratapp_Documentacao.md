@@ -1,138 +1,296 @@
-Autores: Guilherme Caleffi Pellens Pereira e Gabriel Cardoso Gonçalves.
-
-Professor: Armando Augusto Piva.
-
-Disciplina: Desenvolvimento de Aplicativos Móveis.
-
 # HIDRATAPP
 
-# HIDRATAPP
+UNIVERSIDADE POSITIVO
 
-# RESUMO
+CIÊNCIA DA COMPUTAÇÃO
 
-O Hidratapp é um aplicativo Android feito para registrar bebidas e acompanhar uma meta diária estimada de líquidos. Neste trabalho, explicamos a proposta do app, como organizamos os dados, como as telas funcionam e quais testes foram realizados. O código do aplicativo foi escrito em Kotlin, com layouts XML e componentes visuais do Material Components. Os registros ficam em um banco SQLite no celular, enquanto as configurações usam SharedPreferences. A partir do perfil, o app calcula a meta e mostra o consumo por bebida, o histórico e o resumo semanal. Também permite editar registros, marcar favoritos, desfazer exclusões, anotar sintomas, consultar dicas e configurar lembretes. O código foi dividido em partes para facilitar a manutenção, e as consultas ao banco são feitas em segundo plano para não ocupar a execução da tela. O painel acompanha a mudança do dia e mostra uma pequena comemoração ao atingir a meta, uma vez por dia. Na verificação registrada, o APK foi gerado, a análise automática não encontrou erros e passaram 21 testes unitários e 18 testes executados no emulador Android 17. Isso mostra o funcionamento das situações testadas, mas não garante o mesmo resultado em todos os aparelhos. A meta é apenas uma estimativa do projeto, e o app não faz diagnósticos nem substitui orientação profissional.
+DESENVOLVIMENTO DE APLICATIVOS MÓVEIS
 
-# LISTA DE ILUSTRAÇÕES
+GUILHERME CALEFFI PELLENS PEREIRA
 
-# SUMÁRIO
+GABRIEL CARDOSO GONÇALVES
+
+HIDRATAPP
+
+Documentação Hidratapp
+Relatório Técnico
+
+Curitiba
+
+2026
+
+Universidade Positivo
+
+Ciência da computação
+
+Desenvolvimento de aplicativos móveis
+
+GUILHERME CALEFFI PELLENS PEREIRA
+
+GABRIEL CARDOSO GONÇALVES
+
+HIDRATAPP
+
+Documentação Hidratapp
+Relatório Técnico
+
+Relatório técnico apresentado à disciplina de
+Desenvolvimento de Aplicativos Móveis
+do curso de Ciência da Computação,
+da Universidade Positivo,
+como registro da proposta, implementação
+e avaliação técnica do Hidratapp.
+
+Professor: Armando Augusto Piva
+
+16/11/2026
+
+Curitiba
+
+2026
+
+RESUMO
+
+Este trabalho propõe o Hidratapp, um aplicativo para Android que registra o que o usuário bebeu e estima sua meta de líquidos diárias. Nesse trabalho, é descrita a proposta, a modelagem dos dados, as telas, os testes realizados. O app foi desenvolvido em Kotlin e utiliza Layouts em XML e elementos visuais de Material Components. Os dados de registro são persistidos em um banco SQLite no dispositivo. O perfil e as configurações são armazenados em SharedPreferences. O perfil é utilizado para calcular a meta. Em seguida, o consumo é exibido agrupado por bebida, o histórico dos registros e um resumo do consumo semanal. As funcionalidades incluídas foram: editar registro, favoritar, desfazer exclusão, anotar sintomas, ler dicas, configurar lembretes. O código foi dividido em partes para facilitar a manutenção e o banco foi consultado em segundo plano para que a tela não fique travada. O painel é atualizado com a mudança do dia e celebra a meta, uma única vez por dia. A verificação inclui geração APK, análise automática sem erros, 21 testes unitários e 18 testes no emulador do Android 17. Os testes demonstram que as situações testadas funcionam, mas não garantem que funcionará em todos os aparelhos. A meta estimada é apenas uma estimativa do projeto. O app não realiza diagnóstico e não substitui orientação profissional.
+
+Palavras-chave: aplicativo android, kotlin, hidratação, sqlite, testes de software.
+
+LISTA DE ILUSTRAÇÕES
+
+FIGURA 1 – CATÁLOGO DE BEBIDAS	11
+
+FIGURA 2 – META DIÁRIA COMPARTILHADA	11
+
+FIGURA 3 – MIGRAÇÃO DE ESQUEMA	12
+
+FIGURA 4 – VALIDAÇÃO VOLUME CADASTRADO	12
+
+FIGURA 5 – AGRUPAMENTO POR CATEGORIA	13
+
+FIGURA 6 – AGENDAR PRÓXIMO AVISO LOCAL	13
+
+FIGURA 7 – EXECUTAR TRABALHO E ENTREGAR PARA INTERFACE	14
+
+FIGURA 8 – ABRIR E MOSTRAR AO USUÁRIO PELO PRIMEIRO VEZ	15
+
+FIGURA 9 – MEDIDAS E ATIVIDADE FÍSICA	16
+
+FIGURA 10 – CADASTRO DE BEBIDA E CONSULTA DE CONSUMO POR CATEGORIA	17
+
+FIGURA 11 – CONSULTA SEMANAL E CONFIGURAÇÃO DE AVISOS	18
+
+FIGURA 12 – DETALHE DE BEBIDA E EXCLUSÃO COM DESCARTAR	19
+
+SUMÁRIO
+
+1 INTRODUÇÃO	5
+
+2 PROPOSTA E OBJETIVOS	6
+
+3 PROCESSO DE DESENVOLVIMENTO E AMBIENTE	7
+
+4 REQUISITOS DO SISTEMA	8
+
+5 ARQUITETURA E ORGANIZAÇÃO DO PROJETO	9
+
+6 MODELO DE DADOS E PERSISTÊNCIA	10
+
+7 IMPLEMENTAÇÃO DOS FLUXOS	11
+
+7.1 Modelos catálogo e cálculo da meta	11
+
+7.2 Validação gravação e manutenção do esquema	12
+
+7.3 Acompanhamento diário e lembretes	13
+
+7.4 Execução assíncrona e continuidade do uso	14
+
+8 INTERFACE E JORNADA DE USO	15
+
+8.1 Configuração do perfil	16
+
+8.2 Registro e acompanhamento	17
+
+8.3 Histórico estatísticas e lembretes	18
+
+8.4 Detalhes e recuperação de registros	19
+
+9 DECISÕES TÉCNICAS E LIMITAÇÕES	20
+
+10 VERIFICAÇÃO E RESULTADOS	21
+
+11 PROCEDIMENTOS DE EXECUÇÃO E USO	22
+
+11.1 Consulta edição e informações complementares	23
+
+12 AVALIAÇÃO TÉCNICA	24
+
+13 CONSIDERAÇÕES FINAIS	25
 
 ## 1 INTRODUÇÃO
 
-O Hidratapp foi criado para reunir em um só lugar o que a pessoa bebeu, a quantidade e o horário. Sem esse registro, fica mais difícil consultar o consumo ao longo do dia. A ideia do aplicativo é facilitar esse acompanhamento no próprio celular, mostrando os volumes registrados e uma meta diária estimada.
+O Hidratapp foi desenvolvido na intenção de reunir em um só lugar o que o usuário bebeu, quanto bebeu e em que momento. Sem que isso esteja registrado, o usuário não consegue ter fácil acesso a seu consumo ao longo do dia. O objetivo do aplicativo é ajudar o usuário a acompanhar no seu celular seus consumos de líquido e estima uma meta diárias.
 
-Neste trabalho, nosso objetivo é colocar em prática os conteúdos da disciplina: criar telas, programar as regras, salvar informações e testar o funcionamento. Ao longo do relatório, explicamos o que o aplicativo precisa fazer, como o código foi organizado e como cada parte participa do uso do app.
+O objetivo deste trabalho é aplicar os conceitos aprendidos na disciplina. Criar as telas, as funcionalidades, armazenar os dados e testar o funcionamento. O relatório descreve o que o aplicativo deve realizar, a divisão do código e como o aplicativo funciona.
 
-O uso começa pelo preenchimento do perfil. Depois, o usuário pode cadastrar bebidas e acompanhar os dados na tela principal, no histórico e nas estatísticas. Também há favoritos, registro de sintomas, dicas e lembretes. O painel separa o consumo por tipo de bebida e mostra o total que conta para a meta.
+O usuário começa preenchendo seu perfil. Em seguida, pode cadastrar suas bebidas, visualizando-as na tela principal, histórico e estatísticas. Também pode marcar favoritos, anotar sintomas, ler dicas, configurar lembretes. O painel organiza seu consumo por tipo de bebida, mostrando o total de consumo para a meta.
 
-O aplicativo serve para ajudar na organização pessoal. A meta é calculada por uma regra do projeto e não foi validada para as necessidades de cada pessoa. Da mesma forma, registrar sintomas não permite descobrir suas causas. Essas limitações aparecem no app, junto do aviso de que as dicas não substituem orientação profissional.
+O aplicativo visa ajudar a organizar-se. A meta é calculada por uma regra do projeto e não foi validada para cada indivíduo. Além disso, a anotação de sintomas não permite diagnosticar suas causas.
 
-Primeiro, apresentamos a proposta e as funções do aplicativo. Depois, explicamos o desenvolvimento, a organização do código e o funcionamento das telas. No final, mostramos como executar o projeto, os resultados dos testes e o que ainda precisa ser avaliado. Mantivemos a apresentação acadêmica em papel A4, fonte Times New Roman 12 e espaçamento de 1,5.
+Em seguida, a proposta do aplicativo e suas funcionalidades são apresentadas. Depois, o processo de desenvolvimento, a divisão do código e funcionamento das telas. Por fim, como executar o projeto, os resultados dos testes e o que ainda deve ser avaliado.
+
+O trabalho foi escrito em papel A4, em fonte Times New Roman 12, espaçamento 1,5.
 
 ## 2 PROPOSTA E OBJETIVOS
 
-Nossa proposta é juntar perfil, cadastro de bebidas e acompanhamento do consumo em um único aplicativo. Como os dados ficam no celular, as funções principais não precisam de conta nem de conexão com um servidor do projeto. Isso também permite trabalhar o armazenamento de dados dentro de um aplicativo Android.
+O objetivo proposto é criar um aplicativo para Android que reúna o perfil, cadastro de bebidas e acompanhamento de consumo. Como os dados são armazenados localmente no celular, as principais funcionalidades não necessitam de conta, nem de conexão com servidor do projeto. Além disso, permite explorar o armazenamento de dados em um aplicativo Android.
 
-O objetivo geral é desenvolver e testar um aplicativo Android para organizar o consumo de bebidas e mostrar uma meta estimada. Para isso, o app precisa permitir configurar o perfil, calcular a meta, cadastrar, consultar, editar e excluir bebidas. Também deve oferecer a opção de desfazer uma exclusão, marcar favoritos, consultar estatísticas, registrar sintomas, ler dicas e configurar lembretes.
+O objetivo geral é desenvolver e testar um aplicativo para Android que permita ao usuário organizar seu consumo de bebidas e visualizar uma meta estimada. Em particular, o aplicativo deve permitir:
 
-O aplicativo trabalha com oito tipos de bebida, e cada registro tem data e horário. Na tela inicial, o usuário pode alternar entre os tipos registrados naquele dia. O histórico oferece filtros para encontrar registros, enquanto o gráfico mostra os últimos sete dias sem ser alterado por esses filtros.
+- Configuração do perfil;
 
-Na aparência do nosso app, usamos azul, branco e detalhes em verde-água. Os cartões, títulos e botões procuram deixar as ações fáceis de entender. Essas escolhas fazem parte da proposta visual do projeto, mas ainda não foram comparadas com outras opções em uma pesquisa ou avaliação formal com usuários.
+- Estimar meta;
 
-Nesta versão, o aplicativo não tem login, sincronização entre celulares, integração com relógios ou exportação de dados. A proposta também não é definir uma quantidade de líquidos adequada clinicamente para cada pessoa.
+- Cadastrar bebida;
+
+- Consultar bebida;
+
+- Editar bebida;
+
+- Excluir bebida;
+
+- Descartar exclusão;
+
+- Favoritar;
+
+- Consultar estatísticas;
+
+- Anotar sintomas;
+
+- Ler dicas;
+
+- Configurar lembretes.
+
+O aplicativo trabalha com oito tipos de bebida. Os dados incluem data e horário. Na tela inicial, o usuário pode navegar entre os tipos de bebida do dia. É possível filtrar registros no histórico. O gráfico não é influenciado por filtros e mostra o último sete dias.
+
+O aplicativo é verde e azul, com detalhes em verde-água. As ações são facilmente entendidas por meio de cartões, títulos e botões. Esse é o estilo visual proposto para o projeto. No entanto, não foi realizado estudo comparativo com outros estilos em pesquisa ou avaliação com usuários.
+
+Nesta versão, não há login, sincronização de celulares, integração com relógios, exportação de dados. Além disso, não define quanto de líquido cada indivíduo deveria consumir clinicamente.
 
 ## 3 PROCESSO DE DESENVOLVIMENTO E AMBIENTE
 
-Para explicar o desenvolvimento, dividimos o processo em cinco partes: definir as funções, organizar os dados, montar as telas, programar as ações e verificar os resultados. Com essa divisão, a gente consegue explicar melhor como uma necessidade do usuário se transforma em uma ação no aplicativo e em uma situação de teste.
+Para descrever o processo de desenvolvimento, divide-se o trabalho em cinco etapas: definição de funcionalidades, modelagem de dados, criação das telas, implementação das ações e verificação de resultados. Com isso, é possível descrever melhor como uma necessidade de usuário converge em uma ação do aplicativo e em uma situação de teste.
 
-As funções consideradas incluem perfil, registro de bebidas, histórico e informações complementares. Tivemos o cuidado de separar os dados que precisam ser salvos das regras usadas para mostrá-los. As Activities, que são as classes responsáveis pelas telas, conectam os cliques do usuário às funções de cálculo e às operações de armazenamento.
+As funcionalidades incluem o perfil, o registro de bebida, o histórico e as informações complementares. Separar os dados que devem ser armazenados dos dados que são manipulados para mostrar os dados foi uma preocupação. As Activities (classes que controlam as telas) recebem os cliques do usuário e convergem no cálculo de funcionalidades e armazenamento de dados.
 
-O aplicativo usa Kotlin para a programação, XML para organizar os layouts e Material Components para os elementos visuais. O projeto está configurado com compileSdk e targetSdk 37 e minSdk 24, que definem as versões do Android usadas na compilação e o mínimo aceito. O Gradle usa scripts Kotlin DSL e JDK 17, com compatibilidade Java 11. Essa configuração não significa que o código do app foi escrito em Java. Os testes usam JUnit, AndroidJUnitRunner e Espresso.
+No que se refere à linguagem, o aplicativo foi desenvolvido em Kotlin. Os layouts foram organizados em XML. Os elementos visuais foram implementados com Material Components. O projeto está configurado com compileSdk, targetSdk 37 e minSdk 24. Ou seja, o código é compilado para versão 37 do Android e requer no mínimo a versão 24. O Gradle do projeto utiliza Scripts em Kotlin DSL, JDK 17 e compatibilidade Java 11.
 
-O SQLiteOpenHelper ajuda a criar e atualizar o banco de dados. No projeto, BancoHelper faz as consultas e transforma os resultados em objetos que o código consegue usar. BebidaRepository oferece essas operações às telas. Já SharedPreferences guarda configurações simples, como os dados do perfil. O uso do SQLite segue a documentação de armazenamento local do Android.
+Isso não significa que o código do aplicativo foi escrito em Java. Os testes foram realizados com JUnit, AndroidJUnitRunner e Espresso.
 
-As verificações registradas usaram o Gradle Wrapper e o emulador Medium_Phone com Android 17. As imagens das telas usam dados de teste. A seção 10 reúne os resultados da geração do app, da análise automática e dos testes.
+Para facilitar o trabalho com o banco de dados, o SQLiteOpenHelper foi utilizado. No projeto, o BancoHelper implementa as consultas e converte os resultados em objetos utilizáveis pelo código. As operações de consulta são disponibilizadas para as telas por meio de BebidaRepository. As configurações simples, como dados do perfil, são armazenados em SharedPreferences. O SQLite é utilizado seguindo a documentação de armazenamento local do Android.
 
-Ainda não foram feitos estudos com usuários, avaliação clínica, acompanhamento prolongado da bateria ou certificação de acessibilidade. Por isso, os resultados deste trabalho se referem às situações testadas e ao ambiente registrado.
+A verificação incluiu o Gradle Wrapper e o emulador Medium_Phone com Android 17. As imagens de tela utilizam dados de teste. Os resultados da geração do app, análise automática e testes estão descritos na Seção 10.
+
+Não houve estudo com usuários, avaliação clínica, monitoramento prolongido da bateria, ou certificação de acessibilidade. Os resultados referem-se às situações testadas e ao ambiente registrado.
 
 ## 4 REQUISITOS DO SISTEMA
 
-O perfil deve receber o sexo usado na fórmula, peso, altura, idade e nível de atividade física. O usuário também pode informar algumas condições de forma opcional. O formulário precisa conferir os valores, permitir alterações e fornecer a mesma meta para todas as telas que a utilizam.
+Perfil
+Sexo utilizado na fórmula, peso, altura, idade, nível de atividade física. Alguns dados serão preenchidos opcionalmente. É necessário verificar os valores inseridos, permitir a edição e garantir que a meta será disponibilizada em todas as telas que a utilizam.
 
-O cadastro deve oferecer água, suco, refrigerante, café, energético, cerveja, vinho e destilado. A quantidade deve ser um número inteiro entre 1 e 5000 ml. A data e o horário precisam ser válidos e não podem estar no futuro. Ao editar, o app deve manter o código do registro e sua marcação de favorito.
+Cadastro
+Permite o cadastro de água, suco, refrigerante, café, energético, cerveja, vinho e destilado. A quantidade deve ser um número inteiro, entre 1 e 5000 ml. A data e horário devem ser válidos e não futuros. As edições devem manter o código do registro e marcador de favorito.
 
-O histórico deve permitir filtrar por período, tipo de bebida e favorito. Antes de excluir, o app deve pedir confirmação e oferecer um tempo para desfazer a ação, recuperando as informações originais. As estatísticas devem mostrar os últimos sete dias, incluindo os dias sem registros como zero, e comparar os valores com a meta atual.
+Histórico
+Permite filtar por período, tipo de bebida e favorito. Antes de excluir, deve pedir confirmação e dar oportunidade de desfazer a ação, recuperando as informações originais. As estatísticas devem mostrar os últimos sete dias, incluindo dias sem registros (zero). Devem comparar os valores com a meta atual.
 
-O painel deve começar pela categoria Água e permitir trocar de categoria deslizando o dedo ou usando as setas. Os outros tipos aparecem quando há registros naquele dia. Bebidas alcoólicas continuam visíveis, mas não entram no total da meta. O painel também precisa acompanhar a mudança de data e comemorar a meta apenas uma vez por dia.
+Painel
+Deve iniciar sempre na categoria Água. Deve possibilitar navegação entre categorias, deslizando o dedo ou tocando as setas. Somente deve exibir outros tipos se eles tiverem sido registrados no dia. Bebidas alcoólicas devem ser exibidas, mas não contabilizadas na meta. Deve acompanhar a mudança da data, celebrando a meta uma única vez por dia.
 
-Os lembretes devem permitir escolher início, fim e intervalo dentro do mesmo dia, além de ativar, testar e acessar as permissões. As dicas e os registros de sintomas devem deixar claro que servem para informação e acompanhamento pessoal. Eles não podem fazer diagnósticos nem afirmar que beber água neutraliza o álcool.
+Lembretes
+Permite escolher início, fim e intervalo no mesmo dia. Permitir ativar, testar e acessar permissões. As dicas e registros de sintomas devem ser claros, indicando que são para fins informativos e acompanhamento pessoal. Não deve ser capaz de realizar diagnósticos e não deve afirmar que beber água neutraliza o álcool.
 
-O app também precisa conferir se os dados foram salvos, manter os registros quando o banco for atualizado e recuperar informações importantes quando uma tela for recriada pelo Android. O acesso ao banco deve acontecer em segundo plano. Textos, cores e valores usados em mais de uma tela devem ficar organizados para facilitar futuras alterações.
+O aplicativo deve verificar a persistência de dados, manter os registros se o banco for atualizado, recuperar informações importantes se a tela for recriada pelo sistema Android. O banco deve ser consultado em segundo plano. Textos, cores e valores utilizados em mais de uma tela deve ser organizado para facilitar futuras alterações.
 
 ## 5 ARQUITETURA E ORGANIZAÇÃO DO PROJETO
 
-Dividimos nosso código conforme a função de cada parte. As Activities cuidam das telas e das ações do usuário; os modelos representam os registros; e as classes auxiliares cuidam de cálculos, aparência e armazenamento. São onze Activities: abertura, início, perfil, cadastro, detalhes, histórico e estatísticas, sintomas, dicas, Sobre, lembretes e regras e fontes.
+O código foi dividido em partes de acordo com a função que cada parte desempenha. As Activities lidam com as telas e o clique do usuário. Os modelos representam os registros. Classes auxiliares lidam com cálculos, aparência e armazenamento. Foram criadas onze Activities: tela de abertura, tela de início, tela de perfil, tela de cadastro, tela de detalhes, tela de histórico, tela de estatísticas, tela de sintomas, tela de dicas, tela de Sobre, tela de lembretes e tela de regras e fontes.
 
-Bebida e Sintoma são os modelos das informações salvas. TipoBebida funciona como uma lista central dos tipos de bebida. Ela reúne o nome, ícone, código da opção de seleção e informações sobre álcool e cafeína. O cadastro, os filtros, os detalhes e o painel consultam essa mesma lista, evitando definir cada categoria novamente em várias partes do código.
+Os modelos Bebida e Sintoma representam as informações armazenadas. TipoBebeida é uma lista central de tipos de bebidas. Armazena o nome, ícone, código de opção de seleção e informações sobre álcool e cafeína. O cadastro, os filtros, os detalhes e o painel utilizam esta mesma lista. Com isso, não é necessário definir as categorias em várias partes do código.
 
-BebidaRepository reúne as operações de consultar, salvar, editar e excluir registros. Para acessar o SQLite, ele usa BancoHelper. DadosActivity liga as telas a esse processo, e BancoAsync executa as tarefas em uma fila de segundo plano. Quando o trabalho termina, o resultado volta para a parte do Android responsável por atualizar a tela.
+BebidaRepository implementa as operações para consultar, salvar, editar e excluir registros. Ele utiliza BancoHelper para acessar o SQLite. DadosActivity conecta as telas ao processo. BancoAsync executa tarefas em uma fila de segundo plano. Quando o trabalho é completo, o resultado é retornado à parte do Android que atualiza a tela.
 
-Calculos reúne funções como o cálculo da meta, e PerfilRepository consulta a meta usando o perfil salvo. AjustesDoApp guarda os valores usados nas fórmulas, nos atalhos, no limite do cadastro e nos tempos de interação. Assim, o texto do botão e a quantidade que ele registra usam a mesma configuração.
+Calculos implementa diversas funções, incluindo o cálculo de meta. PerfilRepository consulta a meta utilizando o perfil armazenado. AjustesDoApp armazena valores utilizados nas fórmulas, atalhos, limite de cadastro e tempos de interação. O texto do botão e a quantidade que ele registra utilizam a mesma configuração.
 
-Outras classes têm tarefas mais específicas. ConsumoDoDia soma as quantidades por bebida; SwipeConsumoLayout reconhece o movimento de deslizar; e HydrationProgressView desenha o progresso. Lembretes e LembreteReceiver cuidam dos avisos, e DicasEngine monta as mensagens educativas. Visual, PageComponents, PaginaSimples e WaterIllustrationView reúnem partes da aparência usadas nas telas.
+Outras classes realizam tarefas mais específicas. ConsumoDoDia soma a quantidade de bebidas. SwipeConsumoLayout detecta o gesto de deslizar. HydrationProgressView desenha o progresso. Lembretes e LembreteReceiver lidam com os avisos. DicasEngine constrói as mensagens educativas. Visual, PageComponents, PaginaSimples e WaterIllustrationView incluem partes do visual utilizadas nas telas.
 
-Com essa separação, a gente consegue organizar melhor o projeto, mas as Activities ainda concentram parte das ações e da montagem visual. O app não usa uma arquitetura MVVM completa, em que a lógica da tela seria separada em outras classes. Também não usa ViewModel, Room ou DataStore. Nesta versão, a principal separação está nas regras compartilhadas e no acesso ao banco.
+A divisão do código facilita a organização do projeto. As Activities ainda lidam com parte das ações e construção de visual. O app não utiliza MVVM completo, em que a lógica de tela é separada em outras classes. Não utiliza ViewModel, Room ou DataStore. A principal divisão é nas regras compartilhadas e no acesso ao banco.
 
 ## 6 MODELO DE DADOS E PERSISTÊNCIA
 
-Cada bebida salva tem os campos id, tipo, ml, data, hora, observacao e favorito. O id é um número gerado pelo banco para identificar o registro. A quantidade é inteira, e favorito usa 0 ou 1 para indicar não ou sim. As datas seguem dd/MM/yyyy e os horários, HH:mm. O código salvo para o tipo de bebida é separado do nome mostrado na tela, então mudar o texto visível não exige renomear os registros.
+O registro de bebida armazena: id, tipo, ml, data, hora, observacao, favorito. O id é um número gerado pelo banco que identifica o registro. A quantidade é um número inteiro. O favorito é 0 ou 1 (não ou sim). A data e hora seguem o formato dd/MM/yyyy e HH:mm, respectivamente. O código salvo para o tipo de bebida é independente do nome que é exibido na tela. Dessa forma, não é necessário renomear os registros quando o texto exibido é modificado.
 
-A tabela de sintomas guarda id, data, sintomas, nivel_sede e observacao. Os sintomas escolhidos são reunidos em um texto. As tabelas de bebidas e sintomas são independentes, sem uma ligação direta por identificador. Quando é necessário consultar informações do mesmo dia, o app usa a data.
+A tabela de sintomas armazena: id, data, sintomas, nivel_sede, observacao. Os sintomas selecionados são concatenados em um texto. As tabelas de bebidas e sintomas não estão diretamente conectadas por um identificador. Quando houver necessidade de consultar informações do mesmo dia, a data é utilizada como filtro.
 
-O banco se chama hidrata.db e está na versão 3. Quando uma instalação antiga é atualizada, o código verifica quais mudanças são necessárias. Para versões anteriores à 2, cria a tabela de sintomas; para versões anteriores à 3, adiciona o horário às bebidas. Registros antigos que não tinham horário continuam com esse campo vazio.
+O banco de dados é chamado hidrata.db e está na versão 3. Quando instalado, o código verifica se uma versão anterior foi atualizada. Se a versão antiga for menor que 2, a tabela de sintomas é criada. Se a versão antiga for menor que 3, o horário é adicionado às bebidas. Assim, os registros antigos sem horário continuarão sem horário.
 
-O histórico organiza os registros por ano, mês e dia, depois por horário e id. Como a data é guardada como texto, a consulta precisa separar suas partes para ordenar corretamente. O id permite encontrar a bebida certa mesmo quando a posição dela na lista muda.
+O histórico agrupa os registros por ano, mês, dia e horário. Em seguida, pelo id. A data foi armazenada como texto. Portanto, para que o ordenamento seja correto, a data precisa ser separada em partes para que possa ser ordenada. O id permite que o registro correto seja encontrado, mesmo que a ordem na lista tenha mudado.
 
-SharedPreferences guarda o perfil, as configurações dos lembretes e a data da última comemoração da meta. Os dados ficam no celular e seguem as regras de backup do Android. O app não tem sincronização própria nem uma proteção adicional de criptografia para o banco.
+SharedPreferences armazena o perfil, configurações de lembrete e data da última celebração da meta. Ele armazena as informações no celular e segue as regras de backup do Android.
 
-Ao salvar uma bebida, o banco devolve o id criado. Ao editar ou excluir, informa quantos registros foram alterados. O app confere essas respostas antes de mostrar que deu certo. Para desfazer uma exclusão, mantém uma cópia temporária da bebida e tenta salvá-la com o mesmo id. Se esse número já estiver ocupado, a operação não deve substituir outro registro. Os testes conferem essas operações e a atualização do banco sem perder dados.
+O banco retorna o id do registro criado quando uma bebida é salva. Quando uma bebida é editada ou excluída, retorna a quantidade de registros afetados. O app verifica se essas respostas estão corretas antes de exibir que o trabalho foi concluído. Para descartar uma exclusão, uma cópia temporária da bebida é mantida. Em seguida, ela é tentada a ser salva com o mesmo id. Se esse número já estiver sendo utilizado, não deve substituir outro registro. Os testes verificam essas operações e a atualização do banco sem perder dados.
 
 ## 7 IMPLEMENTAÇÃO DOS FLUXOS
 
 ### 7.1 Modelos catálogo e cálculo da meta
 
-![Figura 1 - Definição do catálogo de bebidas](capturas/atualizadas/codigo-modelo.png)
+FIGURA 1 – CATÁLOGO DE BEBIDAS
 
-TipoBebida é um enum, ou seja, uma lista de opções definidas no código. Para cada bebida, valorBanco guarda a identificação usada no banco, e nomeRes indica o texto em strings.xml. A lista também reúne ícone, identificação do botão e classificações. A consulta reconhece os tipos conhecidos e mantém legíveis os textos que não estão na lista. No modelo Bebida, val impede a troca direta dos campos, e copy permite criar uma versão alterada mantendo as outras informações.
+Fonte: Código-fonte do Hidratapp, TipoBebida.kt, Linhas 8 a 16.
 
-![Figura 2 - Obtenção compartilhada da meta diária](capturas/atualizadas/codigo-meta.png)
+TipoBebida é um enum. Ou seja, é composto de opções definidas no código. Cada item armazena valorBanco, que é o identificador no banco, e nomeRes, que é o texto em strings.xml. O catálogo inclui ícone, identificação do botão, classificações. A consulta reconhece os tipos conhecidos. Textos fora do catálogo permanecerão legíveis. No modelo Bebida, os campos são imutáveis (val), e a função copy permite criar uma versão com alterações, mantendo as demais informações.
 
-A conta começa com 35 ml por quilo de peso. Para menores de 18 anos, usa 40 ml/kg; acima de 55, usa 30 ml/kg. A atividade física acrescenta 0, 5, 10 ou 15 ml/kg, e a opção masculina multiplica o resultado por 1,05. Esses valores ficam em AjustesDoApp, e a conta é feita em Calculos. Uma pessoa de 70 kg, 30 anos, com opção feminina e atividade moderada tem meta de 3150 ml. Com a opção masculina, o resultado é 3307 ml, pois a conversão para número inteiro descarta a parte decimal. Essa é uma estimativa do projeto, não uma prescrição de saúde.
+FIGURA 2 – META DIÁRIA COMPARTILHADA
+
+Fonte: Código-fonte do Hidratapp, PerfilRepository.kt, Linhas 5 a 12.
+
+A conta base é 35ml/kg de peso. Se for menor de 18 anos, 40ml/kg. Acima de 55 anos, 30ml/kg. A atividade física acrescenta 0ml/kg, 5ml/kg, 10ml/kg, 15ml/kg. A opção masculina multiplica o resultado por 1,05. Esses valores são armazenados em AjustesDoApp. O cálculo é realizado em Calculos. Para um indivíduo de 70kg, 30 anos, opção feminina e atividade moderada, a meta é 3150ml. Com opção masculina, o resultado é 3307ml. A conversão para número inteiro descarta a parte decimal. A meta estimada é apenas uma estimativa do projeto. Não é recomendada como prescrição de saúde.
 
 ### 7.2 Validação gravação e manutenção do esquema
 
-![Figura 3 - Procedimento de migração do esquema](capturas/atualizadas/codigo-migracao.png)
+FIGURA 3 – MIGRAÇÃO DE ESQUEMA
 
-Ao atualizar o banco, o código olha a versão antiga para saber o que falta mudar. O comando ALTER TABLE adiciona o campo de horário sem apagar as bebidas existentes. Os testes usam bancos das versões 1 e 2 e conferem se os dados continuam disponíveis depois da atualização, além de testar o cadastro, a consulta, a edição e a exclusão.
+Fonte: Código-fonte do Hidratapp, BancoHelper.kt, Linhas 36 a 45.
 
-![Figura 4 - Validação do volume informado no cadastro](capturas/atualizadas/codigo-cadastro.png)
+Quando o banco é atualizado, a versão antiga é verificada para que o que precisa ser migrado seja identificado. O comando ALTER TABLE adiciona o novo campo de horário sem que as bebidas antigas sejam apagadas. Os testes utilizam versões 1 e 2 do banco. Verificam se os dados permanecem disponíveis após a atualização. Testes de cadastro, consulta, edição e exclusão também são realizados.
 
-O cadastro identifica qual opção de bebida foi selecionada e salva seu valorBanco. Os atalhos acrescentam quantidade ao campo de volume até o limite de AjustesDoApp. Antes de salvar, o código também confere a data e o horário, recusando valores inválidos ou momentos no futuro.
+FIGURA 4 – VALIDAÇÃO VOLUME CADASTRADO
 
-Depois dessas conferências, a tela cria um objeto Bebida e pede ao repositório para salvá-lo usando a função dados. Na edição, copy mantém o id e o favorito enquanto altera os campos escolhidos. O botão fica desativado durante a gravação para evitar novos cliques, e o app só confirma o sucesso após a resposta do banco. Se o Android recriar a tela, os campos e a seleção são recuperados.
+Fonte: Código-fonte do Hidratapp, CadastroBebidaActivity.kt, Linhas 146 a 149.
+
+O cadastro identifica qual opção de bebida foi selecionada. Salva o valorBanco. Os atalhos adicionam a quantidade ao volume até o limite de AjustesDoApp. A data e horário também são validados antes de salvar. Valores inválidos ou no futuro são rejeitados.
+
+Após as validações, a tela cria o objeto Bebida. Solicita ao repositório para que ele grave o registro. A função dados é utilizada. Na edição, a função copy mantém o id e o favorito. Altera os campos escolhidos. Durante a gravação, o botão é desativado para que o usuário não clique novamente. O app só confirma o sucesso após a resposta do banco. Caso o Android recrie a tela, os campos e seleção são recuperados.
 
 ### 7.3 Acompanhamento diário e lembretes
 
-![Figura 5 - Agrupamento dos registros por categoria](capturas/atualizadas/codigo-carrossel.png)
+FIGURA 5 – AGRUPAMENTO POR CATEGORIA
 
-ConsumoDoDia soma os registros do dia e separa as quantidades por tipo de bebida. Água fica sempre na primeira posição. Quando existe outra categoria, o painel também oferece uma página com o total que conta para a meta, sem álcool. Deslizar para os lados ou tocar nas setas só muda o que aparece na tela, sem alterar os registros. A rolagem vertical continua disponível.
+Fonte: Código-fonte do Hidratapp, ConsumoDoDia.kt, Linhas 9 a 16.
 
-![Figura 6 - Agendamento do próximo aviso local](capturas/atualizadas/codigo-lembretes.png)
+ConsumoDoDia soma os registros do dia. Separa o consumo por tipo de bebida. A categoria Água é sempre a primeira. Quando existir outra categoria, o painel exibe uma página com o total de consumo para a meta (sem álcool). Deslizar para os lados ou tocar nas setas apenas altera o que é exibido na tela. Não altera os registros. A rolagem vertical continua disponível.
 
-Lembretes calcula o próximo aviso e usa AlarmManager, o serviço de alarmes do Android, para programá-lo. Quando chega o momento, LembreteReceiver mostra a notificação, se houver permissão, e agenda a seguinte. O código também trata a reinicialização do celular, atualizações do app e mudanças de data ou fuso. Os horários são aproximados e dependem do Android. As notificações precisam estar autorizadas e com o canal de avisos habilitado.
+FIGURA 6 – AGENDAR PRÓXIMO AVISO LOCAL
+
+Fonte: Código-fonte do Hidratapp, Lembretes.kt, Linhas 22 a 29.
+
+Lembretes calcula o próximo aviso. Utiliza o serviço de alarmes do Android, AlarmManager, para agendar o aviso. Quando o momento chega, LembreteReceiver exibe a notificação (se houver permissão). Agenda o próximo aviso. O código também trata a reinicialização do celular, atualizações do app e mudanças de data ou fuso. Os horários são aproximados e dependem do Android. As notificações precisam estar autorizadas e com o canal de avisos habilitado.
 
 ### 7.4 Execução assíncrona e continuidade do uso
 
-![Figura 7 - Execução do trabalho e entrega do resultado à interface](capturas/atualizadas/codigo-assincrono.png)
+FIGURA 7 – EXECUTAR TRABALHO E ENTREGAR PARA INTERFACE
+
+Fonte: Código-fonte do Hidratapp, DadosActivity.kt, Linhas 17 a 26.
 
 BancoAsync faz as operações do banco em segundo plano para deixar a execução da tela disponível. runCatching guarda se a operação deu certo ou falhou, e Handler entrega a resposta à parte que atualiza a interface. Antes de mostrar o resultado, DadosActivity verifica se a tela ainda está aberta. Esse caminho é usado no cadastro, nos detalhes, no histórico, nas dicas, nos sintomas e nos atalhos.
 
@@ -144,41 +302,51 @@ Ao excluir uma bebida, DetalheBebidaActivity guarda uma cópia do registro por d
 
 ## 8 INTERFACE E JORNADA DE USO
 
-![Figura 8 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/abertura.png)
+FIGURA 8 – ABRIR E MOSTRAR AO USUÁRIO PELO PRIMEIRO VEZ
 
-![Figura 8 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/onboarding_bemvindo.png)
+
+
+Fonte: execução do Hidratapp em emulador Android 17, com dados de teste (2026).
 
 O app começa com uma tela ilustrada e depois apresenta a configuração do perfil. As cores azuis, a água e os fundos claros fazem parte da identidade visual. Se a tela de abertura for encerrada, o código cancela a passagem automática para a próxima tela, evitando abrir outra página depois que o usuário saiu.
 
 ### 8.1 Configuração do perfil
 
-![Figura 9 - Preenchimento das medidas e da atividade física](capturas/atualizadas/onboarding_medidas.png)
+FIGURA 9 – MEDIDAS E ATIVIDADE FÍSICA
 
-![Figura 9 - Preenchimento das medidas e da atividade física](capturas/atualizadas/onboarding_rotina.png)
+
+
+Fonte: execução do Hidratapp em emulador Android 17, com dados de teste (2026).
 
 O perfil é preenchido em quatro etapas, com a opção de sexo usada na fórmula, as medidas, a atividade física e os cuidados opcionais. No resumo, o usuário confere a meta e segue para o acompanhamento do dia. Se a tela for recriada pelo Android, o app recupera a etapa e os campos. O perfil também pode ser editado pelo menu inferior.
 
 ### 8.2 Registro e acompanhamento
 
-![Figura 10 - Cadastro de bebida e consulta do consumo por categoria](capturas/atualizadas/adicionar_bebida.png)
+FIGURA 10 – CADASTRO DE BEBIDA E CONSULTA DE CONSUMO POR CATEGORIA
 
-![Figura 10 - Cadastro de bebida e consulta do consumo por categoria](capturas/atualizadas/consumo_suco.png)
+
+
+Fonte: execução do Hidratapp em emulador Android 17, com dados de teste (2026).
 
 Na tela de cadastro, a quantidade fica em destaque, as bebidas aparecem agrupadas e o botão de salvar fica na parte inferior. As opções de seleção usam um mesmo layout XML e mudam de aparência quando escolhidas. Os nomes e as mensagens ficam em strings.xml, e as cores também têm arquivos próprios. No painel, alternar entre os tipos ajuda a entender de qual bebida vem cada quantidade.
 
 ### 8.3 Histórico estatísticas e lembretes
 
-![Figura 11 - Consulta semanal e configuração dos avisos](capturas/atualizadas/estatisticas.png)
+FIGURA 11 – CONSULTA SEMANAL E CONFIGURAÇÃO DE AVISOS
 
-![Figura 11 - Consulta semanal e configuração dos avisos](capturas/atualizadas/lembretes.png)
+
+
+Fonte: execução do Hidratapp em emulador Android 17, com dados de teste (2026).
 
 No histórico, o usuário pode combinar filtros para encontrar os registros. O gráfico continua mostrando o resumo da semana. Na tela de lembretes, ficam as opções de ativar, definir horários e intervalo, testar o aviso e conferir permissões. Cabeçalhos e cartões seguem o mesmo estilo entre as telas. Nas dicas, é possível abrir o texto completo e depois recolhê-lo.
 
 ### 8.4 Detalhes e recuperação de registros
 
-![Figura 12 - Detalhes de bebida e exclusão com possibilidade de desfazer](capturas/atualizadas/detalhe.png)
+FIGURA 12 – DETALHE DE BEBIDA E EXCLUSÃO COM DESCARTAR
 
-![Figura 12 - Detalhes de bebida e exclusão com possibilidade de desfazer](capturas/atualizadas/desfazer_exclusao.png)
+
+
+Fonte: execução do Hidratapp em emulador Android 17, com dados de teste (2026).
 
 Nos detalhes de uma bebida, é possível consultar o horário e a observação, marcar como favorita e editar. Ao confirmar a exclusão, o usuário tem dez segundos para desfazer. O cartão continua visível nesse período, mesmo se a tela for recriada. Ao desfazer, o app recupera as informações do registro.
 
@@ -201,18 +369,6 @@ A fórmula da meta e as mensagens não foram validadas para as necessidades de c
 Na nossa verificação, procuramos conferir as funções em situações que podem ser repetidas. O comando assembleDebug gerou a versão de teste do aplicativo com a mensagem BUILD SUCCESSFUL. O lintDebug, ferramenta que procura problemas no código, não encontrou erros nem avisos de HardcodedText nos layouts, que indicariam textos escritos diretamente nesses arquivos. Ainda existem outros avisos, então o resultado não significa que todos os possíveis problemas foram eliminados.
 
 Na execução registrada, passaram 21 testes unitários, voltados a funções isoladas, e 18 testes instrumentados, que rodam no ambiente Android. Os instrumentados foram executados no emulador Medium_Phone com Android 17. O quadro abaixo mostra quantos testes há em cada grupo.
-
-| Suíte | Testes | Resultado |
-|---|---|---|
-| CalculosTest | 10 | Aprovados |
-| ConsumoDoDiaTest | 5 | Aprovados |
-| TipoBebidaTest | 3 | Aprovados |
-| RotinaDiariaTest | 3 | Aprovados |
-| BancoMigrationTest | 3 | Aprovados |
-| FluxosTest | 11 | Aprovados |
-| MelhoriasTest | 3 | Aprovados |
-| NotificacaoTest | 1 | Aprovado |
-| Total | 39 | Sem falhas |
 
 Os testes unitários conferem os cálculos, os tipos de bebida, as somas do dia e as regras de data. Os instrumentados verificam a atualização do banco, o cadastro, a consulta, a edição e a exclusão, além do perfil, dos filtros, dos gestos e da recuperação das telas. Também conferem o desfazer e se o banco trabalha em segundo plano. O teste de mudança de dia verifica a nova consulta e o controle da comemoração da meta.
 
