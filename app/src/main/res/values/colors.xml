@@ -1,29 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-    <!-- Palette inspirada no aplicativo Flo (Hidratação) -->
-    <color name="blue_primary">#568FE0</color>
-    <color name="blue_pastel">#B8DCFA</color>
-    <color name="blue_light">#EAF5FF</color>
-    <color name="blue_dark_text">#203E73</color>
-    <color name="blue_gray_text">#7C91B0</color>
-    <color name="wellness_bg">#EAF5FF</color>
-    <color name="wellness_card_bg">#FFFFFF</color>
-
-    <!-- Compatibilidade com nomes anteriores -->
-    <color name="teal_primary">#568FE0</color>
-    <color name="teal_primary_dark">#203E73</color>
-    <color name="teal_light">#EAF5FF</color>
-    <color name="teal_accent">#B8DCFA</color>
-
-    <!-- Typography & Alerts -->
-    <color name="text_primary">#203E73</color>
-    <color name="text_secondary">#7C91B0</color>
-
-    <color name="alert_bg">#FEF2F2</color>
-    <color name="alert_text">#DC2626</color>
-    <color name="alert_border">#FCA5A5</color>
-    <color name="star_gold">#F59E0B</color>
+    <color name="black">#101F35</color><color name="white">#FFFFFF</color>
+    <color name="blue_primary">#2879B8</color><color name="blue_pastel">#CDE7F6</color>
+    <color name="blue_light">#EAF5FD</color><color name="blue_dark_text">#203B57</color><color name="blue_gray_text">#667E94</color>
+    <color name="wellness_bg">#F4F9FD</color><color name="wellness_card_bg">#FFFFFF</color>
+    <color name="teal_primary">#2879B8</color><color name="teal_primary_dark">#203B57</color>
+    <color name="teal_light">#EAF5FD</color><color name="teal_accent">#DDF3EF</color>
+    <color name="text_primary">#203B57</color><color name="text_secondary">#667E94</color>
+    <color name="aqua">#218578</color><color name="mint">#E2F3EE</color><color name="lavender">#EFEDFA</color>
+    <color name="line_soft">#E3EDF5</color>
+    <color name="alert_bg">#FFF3E8</color><color name="alert_text">#985421</color><color name="alert_border">#EBD2B7</color>
+    <color name="star_gold">#B98318</color>
 </resources>

@@ -1,10 +1,1 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Base.Theme.Hidratapp" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/teal_primary</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <item name="colorPrimaryContainer">@color/teal_light</item>
-        <item name="colorSecondary">@color/teal_accent</item>
-        <item name="android:colorBackground">@color/wellness_bg</item>
-        <item name="colorSurface">@color/wellness_card_bg</item>
-    </style>
-</resources>
+<resources><style name="Theme.Hidratapp" parent="Base.Theme.Hidratapp" /></resources>
