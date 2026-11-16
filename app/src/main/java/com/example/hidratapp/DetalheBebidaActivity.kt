@@ -27,6 +27,7 @@ class DetalheBebidaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_detalhe_bebida)
+        aplicarVisual()
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -49,7 +50,10 @@ class DetalheBebidaActivity : AppCompatActivity() {
         btnFavorito.setOnClickListener {
             val atual = bebida ?: return@setOnClickListener
             val novoEstado = !atual.favorito
-            BancoHelper(this).atualizar(atual.copy(favorito = novoEstado))
+            if (runCatching { BancoHelper(this).use { it.atualizar(atual.copy(favorito = novoEstado)) } }.getOrDefault(0) != 1) {
+                Toast.makeText(this, "Não foi possível atualizar o favorito", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
             Toast.makeText(
                 this,
                 if (novoEstado) "Adicionado aos favoritos" else "Removido dos favoritos",
@@ -69,7 +73,10 @@ class DetalheBebidaActivity : AppCompatActivity() {
                 .setTitle("Excluir bebida?")
                 .setMessage("Essa ação removerá o registro do histórico.")
                 .setPositiveButton("Excluir") { _, _ ->
-                    BancoHelper(this).excluir(id)
+                    if (runCatching { BancoHelper(this).use { it.excluir(id) } }.getOrDefault(0) != 1) {
+                        Toast.makeText(this, "Não foi possível excluir", Toast.LENGTH_LONG).show()
+                        return@setPositiveButton
+                    }
                     Toast.makeText(this, "Registro excluído", Toast.LENGTH_SHORT).show()
                     finish()
                 }
@@ -86,14 +93,18 @@ class DetalheBebidaActivity : AppCompatActivity() {
     }
 
     private fun carregar() {
-        bebida = BancoHelper(this).buscarPorId(id)
+        bebida = runCatching { BancoHelper(this).use { it.buscarPorId(id) } }.getOrElse {
+            Toast.makeText(this, "Não foi possível carregar a bebida", Toast.LENGTH_LONG).show()
+            finish()
+            return
+        }
         val b = bebida
         if (b == null) {
             finish()
             return
         }
         tvNome.text = "${b.tipo} • ${b.ml} ml"
-        tvInfo.text = "Registrado em ${b.data}"
+        tvInfo.text = "Registrado em ${b.data} ${b.hora.ifBlank { "(horário não registrado)" }}"
         tvObservacao.text = if (b.observacao.isEmpty()) "Nenhuma observação informada." else b.observacao
         if (b.favorito) {
             btnFavorito.text = "Desfavoritar"
