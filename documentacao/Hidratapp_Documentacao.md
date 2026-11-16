@@ -10,7 +10,7 @@ Disciplina: Desenvolvimento de Aplicativos Móveis.
 
 # RESUMO
 
-O Hidratapp é um aplicativo Android para registrar bebidas e acompanhar uma meta diária estimada de ingestão de líquidos. O projeto integra conteúdos de desenvolvimento mobile por meio de interfaces XML, lógica em Kotlin, persistência SQLite e preferências locais. A versão atual reúne configuração inicial em quatro etapas, cadastro visual com horário, histórico filtrável, favoritos, estatísticas semanais, registro de sintomas, dicas educativas e lembretes por notificações. Na tela inicial, o indicador circular permite alternar por gesto entre água, outros tipos registrados no dia e o total que participa da meta. Este relatório descreve arquitetura, banco versão 3, regras, decisões de interface e procedimentos de reprodução. A verificação registra compilação do APK, análise estática sem erros, dezoito testes unitários e quinze testes instrumentados aprovados em emulador Android 17. Os cenários abrangem cálculos, migrações, cadastro, edição, preservação de estado, filtros, primeiro acesso, notificações e gestos. Permanecem limitações relacionadas a bases extensas, diferentes aparelhos, acessibilidade, backup e validação clínica das estimativas. O aplicativo se destina à organização pessoal e não constitui instrumento de diagnóstico nem prescrição individual.
+O Hidratapp é um aplicativo Android desenvolvido para organizar registros de bebidas e acompanhar uma meta diária estimada de ingestão de líquidos. O trabalho descreve o processo de definição dos requisitos, modelagem dos dados, construção das interfaces, implementação das regras e verificação do sistema. A solução utiliza Kotlin, layouts XML, Material Components, SQLite e preferências locais. O perfil fornece os dados da estimativa; os registros alimentam o painel por categoria, o histórico e as estatísticas semanais. A interação inclui configuração inicial, favoritos, edição, exclusão com possibilidade de desfazer, relatos de sintomas, dicas educativas e lembretes locais. A organização do código reúne um catálogo de bebidas em enum, parâmetros compartilhados, um repositório de persistência e execução das operações SQLite em segundo plano. O painel trata a mudança de data e apresenta uma comemoração discreta da meta, limitada a uma vez por dia. A verificação compreende compilação do APK, análise estática sem erros, 21 testes unitários e 18 instrumentados aprovados em emulador Android 17. Esses resultados sustentam os cenários exercitados, sem demonstrar funcionamento em todos os aparelhos ou validação clínica das estimativas. O aplicativo se destina à organização pessoal e não constitui instrumento de diagnóstico ou prescrição individual.
 
 # LISTA DE ILUSTRAÇÕES
 
@@ -18,223 +18,249 @@ O Hidratapp é um aplicativo Android para registrar bebidas e acompanhar uma met
 
 ## 1 INTRODUÇÃO
 
-O Hidratapp organiza registros diários de bebidas em uma aplicação Android de uso local. O usuário informa seu perfil, registra o que consumiu e acompanha os volumes em uma interface visual. O objetivo acadêmico é demonstrar a integração entre interação, regras de negócio, persistência e verificação em um projeto executável.
+O registro do consumo de bebidas envolve informar o que foi consumido, em qual quantidade e em que momento. Quando essas informações ficam dispersas, a consulta do próprio histórico se torna menos prática. O Hidratapp reúne os registros em uma aplicação Android de uso local, com uma interface para acompanhar volumes e uma meta diária estimada.
 
-Esta atualização descreve o estado atual do aplicativo, incluindo recursos que não existiam na primeira versão do relatório: lembretes agendados, gráficos semanais, filtros, horário de consumo, cadastro por opções visuais e carrossel de bebidas. As imagens e as conclusões anteriores sobre testes de exemplo e divergência de meta foram substituídas pelas evidências atuais.
+O objetivo acadêmico do trabalho é integrar interface, regras de negócio, persistência e testes em um sistema executável. A exposição acompanha a passagem dos requisitos para o modelo de dados, a organização das classes, a construção da jornada de uso e a avaliação dos cenários implementados.
 
-A revisão de referência do repositório é cf9835a+enum. A revisão inclui a refatoração local TipoBebida ainda sem commit próprio. A identificação declarada do aplicativo permanece 1.0, e o banco local utiliza a versão 3. A exposição considera comportamentos presentes no código e verificações executadas, sem atribuir à dupla experiências, esforço em horas ou validações não registrados.
+A interação começa pela configuração do perfil. Em seguida, o usuário pode registrar bebidas e consultar seus dados no painel, no histórico e nas estatísticas. Favoritos, relatos de sintomas, conteúdo educativo e lembretes complementam essa organização. A apresentação dos volumes distingue cada categoria e o total considerado na meta.
 
-Conservamos a apresentação acadêmica do relatório anterior: papel A4, margens superior e esquerda de 3 cm, inferior e direita de 2 cm, corpo em Times New Roman 12 e espaçamento de 1,5. A organização reúne proposta, requisitos, arquitetura, explicação do código, telas, resultados e manual. Os modelos da biblioteca do COTUCA são indicados nas referências como apoio à normalização institucional.
+A finalidade do sistema é apoiar a organização pessoal. A meta utiliza uma regra estimativa do projeto, sem validação clínica individual. Relatos de sintomas não permitem determinar suas causas, e as mensagens educativas não substituem orientações profissionais. Esses limites também são apresentados na interface.
 
-A finalidade é organizar informações pessoais de consumo. A meta é uma regra estimativa do projeto, sem validação clínica individual. Registrar sintomas não permite determinar suas causas. As mensagens e a área de regras explicam esses limites.
+O relatório apresenta a proposta e os requisitos, descreve o processo de desenvolvimento e explica os componentes que sustentam o funcionamento. As seções finais reúnem os procedimentos de execução, os resultados dos testes e as limitações da avaliação. O texto adota apresentação acadêmica em A4, com corpo Times New Roman 12 e espaçamento de 1,5, com consulta ao material de normalização do COTUCA (Unicamp, s.d.).
 
 ## 2 PROPOSTA E OBJETIVOS
 
-Nossa proposta é reunir perfil, registro de bebidas e visualização do consumo em um único aplicativo. A ausência de conta e de servidor próprio reduz as etapas para começar e mantém as operações centrais disponíveis sem conexão com a internet.
+A proposta consiste em reunir perfil, registro de bebidas e consulta do consumo em um único aplicativo. O armazenamento local permite executar as operações centrais sem conta e sem conexão com um servidor próprio, mantendo o foco na implementação de uma aplicação mobile com persistência.
 
-O objetivo geral é demonstrar um sistema Android para acompanhar registros e uma meta estimada. Os objetivos específicos são configurar o perfil; calcular a meta de modo consistente; cadastrar, editar, consultar e excluir bebidas; manter favoritos; apresentar estatísticas; registrar sintomas; oferecer conteúdo educativo; e emitir lembretes configuráveis.
+O objetivo geral é desenvolver e verificar um sistema Android para organizar registros de consumo e apresentar uma meta estimada. Os objetivos específicos abrangem configurar o perfil; calcular a meta de modo consistente; cadastrar, editar, consultar e excluir bebidas; recuperar uma exclusão recente; manter favoritos; apresentar estatísticas; registrar sintomas; oferecer conteúdo educativo; e configurar lembretes.
 
-A jornada começa com uma abertura ilustrada e uma configuração em quatro etapas. Depois de salvar o perfil, a pessoa acessa o painel, registra água pelos atalhos ou abre o cadastro completo. Os registros alimentam o histórico, o gráfico e as páginas de consumo por categoria.
+O recorte funcional considera oito categorias de bebida e registros identificados por data e horário. A página inicial apresenta o consumo por categoria e permite navegar entre os tipos registrados no dia. O histórico oferece filtros, enquanto as estatísticas apresentam os últimos sete dias de forma independente desses filtros.
 
-A interface mantém a identidade da água com azul, branco e verde-água. A organização utiliza um destaque principal por tela, opções tocáveis, cartões arredondados e navegação simples. A intenção é facilitar o registro e a compreensão dos números; não foi conduzido estudo de mercado que comprove superioridade sobre outros produtos.
+A organização visual utiliza azul, branco e detalhes em verde-água. Os títulos, cartões, opções de seleção e ações de navegação procuram tornar o registro compreensível. Essa decisão constitui uma orientação de interface do projeto; não decorre de um estudo comparativo de mercado ou de uma avaliação formal com usuários.
 
-Permanecem fora do escopo autenticação, sincronização entre aparelhos, integração com relógios e exportação de dados pelo aplicativo. Lembretes locais e estatísticas, antes tratados como propostas futuras, fazem parte da versão atual.
+Autenticação, sincronização entre aparelhos, integração com relógios e exportação de dados pelo aplicativo não integram o escopo. O trabalho também não pretende estabelecer uma recomendação clínica individual de ingestão de líquidos.
 
-## 3 METODOLOGIA E AMBIENTE TÉCNICO
+## 3 PROCESSO DE DESENVOLVIMENTO E AMBIENTE
 
-A atualização foi realizada por leitura das classes, dos layouts e do manifesto, revisão de regras e execução de verificações automatizadas. As imagens da interface foram obtidas em emulador com dados de teste. Os trechos de código foram regenerados a partir dos arquivos atuais, com linhas e resumos criptográficos registrados em capturas.json.
+O processo é apresentado a partir de cinco atividades relacionadas: delimitar os requisitos, modelar os registros, organizar a interface, implementar os fluxos e verificar os resultados. Essa organização permite explicar como uma necessidade de uso se relaciona com uma estrutura de dados, uma ação na tela e um cenário de teste.
 
-O projeto utiliza Kotlin, layouts XML e Material Components. compileSdk e targetSdk são 37; minSdk é 24. O Gradle utiliza Kotlin DSL e daemon configurado para JDK 17, com compatibilidade do código Java definida como Java 11. A verificação utiliza JUnit, AndroidJUnitRunner e Espresso.
+Na definição dos requisitos, foram considerados o perfil, o registro de consumo, a consulta do histórico e as informações complementares. A modelagem distingue os dados persistidos das regras de apresentação. A implementação conecta os eventos das Activities às operações do repositório e às funções compartilhadas de cálculo.
 
-A persistência utiliza SQLiteOpenHelper e SharedPreferences. As APIs SQLite permitem trabalhar com dados estruturados; neste projeto, a conversão entre cursores e modelos é feita diretamente em BancoHelper (Google, s.d.a). Não há Room ou DataStore implementados.
+O ambiente utiliza Kotlin, layouts XML e Material Components. compileSdk e targetSdk são 37; minSdk é 24. O Gradle utiliza Kotlin DSL e daemon configurado para JDK 17, com compatibilidade Java 11. A verificação utiliza JUnit, AndroidJUnitRunner e Espresso.
 
-Foram utilizados o Gradle Wrapper do repositório e o emulador Medium_Phone com Android 17. As verificações reuniram assembleDebug, testDebugUnitTest, lintDebug e a suíte instrumentada completa. Os resultados consolidados são apresentados na seção 10.
+SQLiteOpenHelper fornece o gerenciamento do banco estruturado, e SharedPreferences guarda configurações pequenas. BancoHelper executa consultas e converte cursores, enquanto o repositório oferece operações para as telas. O uso de SQLite segue o modelo de armazenamento local descrito pela documentação Android (Google, s.d.a).
 
-Os testes confirmam os cenários exercitados nesse ambiente. Não foram realizados estudo com usuários, avaliação clínica, ensaio prolongado de bateria, teste físico em vários fabricantes ou certificação de acessibilidade. A aprovação não demonstra funcionamento irrestrito em todos os aparelhos.
+As verificações empregam o Gradle Wrapper e o emulador Medium_Phone com Android 17. O conjunto de fontes analisado tem identificador d9922fad, calculado a partir dos arquivos locais; capturas.json registra os trechos e os resumos SHA-256 de suas fontes. As imagens da interface utilizam dados de teste. Os resultados de compilação, lint e testes são consolidados na seção 10.
+
+Não foram conduzidos estudo com usuários, avaliação clínica, medição prolongada de bateria ou certificação de acessibilidade. O alcance das conclusões permanece vinculado aos cenários e ao ambiente de execução registrados.
 
 ## 4 REQUISITOS DO SISTEMA
 
-O perfil deve receber sexo usado na estimativa, peso, altura, idade, atividade física e condições declaradas opcionalmente. O formulário valida faixas técnicas e permite editar os dados. Essas faixas não comprovam adequação clínica da fórmula para todos os valores aceitos.
+O perfil deve receber sexo usado na estimativa, peso, altura, idade, atividade física e condições declaradas opcionalmente. O formulário deve validar as entradas, permitir edição e disponibilizar uma meta consistente nas telas que a utilizam.
 
-O cadastro deve permitir água, suco, refrigerante, café, energético, cerveja, vinho e destilado. O volume deve ser inteiro entre 1 e 5000 ml; data e horário são verificados para evitar instantes futuros. A observação é opcional, e a edição preserva o identificador e o favorito.
+O cadastro deve oferecer água, suco, refrigerante, café, energético, cerveja, vinho e destilado. O volume deve ser inteiro entre 1 e 5000 ml na configuração adotada. Data e horário devem ser válidos e não representar um instante futuro. A edição deve preservar identificador e favorito.
 
-O painel deve apresentar Água como primeira página, somar registros de um mesmo tipo no dia e permitir a troca por gesto ou setas. Uma página de total aparece quando há outro tipo registrado. Bebidas alcoólicas permanecem visíveis, mas não aumentam o progresso da meta.
+A consulta deve permitir filtros por período, categoria e favorito. A exclusão de uma bebida deve solicitar confirmação e oferecer um prazo para desfazer, preservando os campos do registro restaurado. As estatísticas devem mostrar os últimos sete dias, com zeros nos dias sem registros e comparação com a meta vigente.
 
-O histórico deve combinar filtros por período, tipo e favorito. O gráfico deve apresentar os últimos sete dias, média incluindo zeros e contagem de dias que atingiram a meta atual. Os filtros do histórico não alteram esse resumo semanal.
+O painel deve iniciar pela categoria Água e permitir navegação por gesto ou setas. Outros tipos aparecem quando há registros na data consultada. Bebidas alcoólicas permanecem visíveis, mas ficam fora do total válido da meta. O painel deve atualizar o dia consultado e limitar a comemoração da meta a uma vez por data.
 
-Os lembretes devem oferecer intervalo, início e fim no mesmo dia, ativação, teste e acesso às permissões. A aplicação deve reagendar o próximo aviso após eventos previstos no manifesto. As notificações são aproximadas e dependem da autorização e das condições de execução do Android.
+Os lembretes devem oferecer intervalo, início e fim no mesmo dia, ativação, teste e acesso às permissões. Os relatos de sintomas e as dicas devem comunicar sua finalidade educativa, sem produzir diagnóstico ou afirmar que água neutraliza álcool.
 
-Como requisitos de qualidade, o sistema deve preservar registros durante a atualização do banco, confirmar os retornos de gravação, manter informações relevantes após recriação das telas e distinguir dados registrados de orientação profissional.
+Como requisitos de qualidade, o sistema deve conferir o resultado das gravações, preservar dados em migrações, manter estado relevante na recriação das telas e executar as operações SQLite fora da thread principal. Textos, parâmetros compartilhados e papéis de cor devem ter pontos definidos de manutenção.
 
 ## 5 ARQUITETURA E ORGANIZAÇÃO DO PROJETO
 
-O sistema utiliza Activities para telas e eventos, modelos para os registros e auxiliares para persistência, regras e apresentação. Existem onze Activities declaradas: abertura, início, perfil, cadastro, detalhes, histórico e estatísticas, sintomas, dicas, Sobre, lembretes e regras e fontes.
+A estrutura utiliza Activities para eventos e componentes visuais, modelos para os registros e auxiliares para regras, apresentação e persistência. Onze Activities concretas são declaradas: abertura, início, perfil, cadastro, detalhes, histórico e estatísticas, sintomas, dicas, Sobre, lembretes e regras e fontes.
 
-Bebida e Sintoma representam os registros. BancoHelper cria o esquema, executa consultas parametrizadas e converte as linhas. Calculos concentra fórmulas e regras de domínio. PerfilRepository lê as preferências e fornece a mesma meta ao início, ao resumo do perfil, às estatísticas e às dicas.
+Bebida e Sintoma representam os dados persistidos. TipoBebida reúne a identificação da categoria, o recurso de nome, o ícone, o ID do chip e as classificações de álcool e cafeína. O cadastro percorre o catálogo para criar as opções; filtros, detalhes, carrossel e regras consultam a mesma definição.
 
-TipoBebida centraliza as oito categorias. O cadastro percorre suas entradas e infla item_tipo_bebida.xml, mantendo IDs estáveis na recriação. Não há listas paralelas de nomes e IDs. ConsumoDoDia monta páginas agrupadas por categoria. SwipeConsumoLayout reconhece movimento lateral preservando a rolagem vertical. HydrationProgressView desenha o indicador e o preenchimento de água com base no valor de progresso do controle nativo.
+BebidaRepository concentra as operações de registros e utiliza BancoHelper para acessar o SQLite. DadosActivity oferece a ligação entre as telas e esse repositório. BancoAsync executa o trabalho em uma fila de segundo plano e devolve o resultado à thread principal, onde os componentes da interface são atualizados.
 
-Lembretes utiliza AlarmManager, PendingIntent e notificações. LembreteReceiver recebe o alarme e eventos do sistema, publica o aviso quando permitido e agenda o próximo horário. DicasEngine produz mensagens educativas; a Activity correspondente organiza os cartões e permite expandir o texto.
+Calculos reúne as funções de domínio, e PerfilRepository fornece os dados da meta. AjustesDoApp concentra coeficientes, volumes dos atalhos, limite de cadastro e tempos de interação. Os rótulos dos atalhos e a mensagem de limite utilizam esses parâmetros, evitando que a ação e o texto apresentem valores diferentes.
 
-Visual, PageComponents e PaginaSimples compartilham aparência, cabeçalhos, seções e respostas ao toque. WaterIllustrationView desenha a ilustração da abertura e do perfil. A divisão reduz repetição, mas não equivale a uma arquitetura completa com ViewModel e camadas de persistência independentes.
+ConsumoDoDia agrupa os volumes por categoria; SwipeConsumoLayout reconhece gestos; HydrationProgressView desenha o indicador. Lembretes e LembreteReceiver tratam alarmes e notificações. DicasEngine produz mensagens educativas. Visual, PageComponents, PaginaSimples e WaterIllustrationView compartilham elementos de apresentação.
 
-Parte das consultas ainda ocorre diretamente nos fluxos das Activities. Em uma evolução com mais dados, será necessário avaliar acesso assíncrono e observação de estado. Essas alternativas são propostas de manutenção, e não tecnologias já presentes.
+A divisão de responsabilidades não corresponde a uma implementação completa de MVVM. O sistema não utiliza ViewModel, Room ou DataStore. As Activities ainda coordenam eventos e a montagem de parte do conteúdo visual; a separação existente concentra o acesso ao banco e as regras reutilizadas.
 
 ## 6 MODELO DE DADOS E PERSISTÊNCIA
 
-A tabela bebidas possui id, tipo, ml, data, hora, observacao e favorito. O identificador é autoincrementável, o volume é inteiro e favorito é representado por 0 ou 1. Data e hora são strings nos padrões dd/MM/yyyy e HH:mm.
+A modelagem de bebidas utiliza id, tipo, ml, data, hora, observacao e favorito. O identificador é autoincrementável, o volume é inteiro e favorito é representado por 0 ou 1. Data e hora utilizam os formatos dd/MM/yyyy e HH:mm. O valor de categoria gravado é separado do recurso do nome visível, permitindo alterar o rótulo sem renomear registros.
 
-A tabela sintomas mantém id, data, sintomas, nivel_sede e observacao. Os itens selecionados são unidos em texto. As tabelas não possuem chave estrangeira entre si; a associação de consultas ocorre pela data.
+A tabela sintomas contém id, data, sintomas, nivel_sede e observacao. Os itens selecionados são unidos em texto. As tabelas não possuem chave estrangeira entre si; consultas relacionadas ao dia utilizam a data.
 
-O banco hidrata.db utiliza a versão 3. Para instalações anteriores à versão 2, onUpgrade cria sintomas. Para versões anteriores à 3, adiciona hora com valor vazio. Registros antigos continuam disponíveis sem inventar um horário que não foi informado.
+O banco hidrata.db utiliza o esquema 3. O procedimento de migração cria sintomas para instalações anteriores à versão 2 e adiciona hora para versões anteriores à 3. O valor padrão vazio conserva a ausência de horário nos registros que não possuem essa informação.
 
-O histórico de bebidas é ordenado pelos componentes de ano, mês e dia da data, seguidos por horário e identificador. Isso organiza o consumo cronologicamente mesmo com cadastros retroativos. Registros anteriores sem horário conservam essa informação como desconhecida.
+A ordenação do histórico considera ano, mês e dia, seguidos por horário e identificador. Como a data é armazenada em texto, a consulta utiliza seus componentes para produzir uma ordem cronológica. O identificador permite localizar uma linha sem depender de sua posição na lista.
 
-SharedPreferences mantém medidas, idade, sexo, atividade e condições declaradas. Outro conjunto guarda os lembretes. O armazenamento é local, sujeito às regras de backup do Android; não há sincronização própria nem uma camada adicional de criptografia implementada no banco.
+SharedPreferences mantém perfil, configurações de lembretes e o marcador da comemoração diária. O armazenamento é local e sujeito às regras de backup do Android. O aplicativo não oferece sincronização própria ou uma camada adicional de criptografia do banco.
 
-Consultas por data e identificador usam parâmetros separados do SQL. Inserções retornam identificador ou falha; alterações e exclusões retornam linhas afetadas. Os fluxos revistos verificam esses resultados antes de confirmar sucesso. Os testes exercitam migrações das versões 1 e 2 até o esquema atual.
+Inserções retornam identificador; alterações e exclusões retornam linhas afetadas. A aplicação verifica esses resultados antes de confirmar a operação. Para desfazer a exclusão, conserva uma cópia temporária da bebida e tenta inseri-la com o mesmo ID; uma colisão não deve sobrescrever outra linha. Os testes verificam migrações, operações CRUD e preservação dos campos.
 
-## 7 EXPLICAÇÃO DOS BLOCOS DO CÓDIGO
+## 7 IMPLEMENTAÇÃO DOS FLUXOS
 
-### 7.1 Modelos enum e meta centralizada
+### 7.1 Modelos catálogo e cálculo da meta
 
-![Figura 1 - Enum de bebidas com identificação estável](capturas/atualizadas/codigo-modelo.png)
+![Figura 1 - Definição do catálogo de bebidas](capturas/atualizadas/codigo-modelo.png)
 
-Bebida utiliza val e copy para preservar campos na edição. TipoBebida é o enum que reúne valorBanco, nome, ícone, ID do chip e indicadores de álcool e cafeína. valorBanco conserva as strings existentes; nome pode mudar sem renomear registros. doBanco reconhece categorias conhecidas e nomeExibido preserva textos desconhecidos.
+O enum associa valorBanco a nomeRes, ícone, ID e classificações. valorBanco identifica a categoria persistida; nomeRes aponta para strings.xml. O método de consulta reconhece as categorias do catálogo e mantém legíveis textos desconhecidos. Bebida utiliza val e copy para preservar campos na edição.
 
-![Figura 2 - Leitura compartilhada das entradas de cálculo](capturas/atualizadas/codigo-meta.png)
+![Figura 2 - Obtenção compartilhada da meta diária](capturas/atualizadas/codigo-meta.png)
 
-PerfilRepository inclui atividade física em todas as leituras da meta, corrigindo a divergência anterior. O fator é 35 ml/kg, passa a 40 abaixo de 18 anos e a 30 acima de 55. Atividade acrescenta 0, 5, 10 ou 15 ml/kg; o indicador masculino aplica 1,05. Int descarta a fração. Para 70 kg, 30 anos, feminino e esporte moderado, o resultado é 3150 ml; com indicador masculino, 3307 ml. São regras do projeto, não uma prescrição clínica.
+A regra parte de 35 ml/kg, usa 40 abaixo de 18 anos e 30 acima de 55. A atividade acrescenta 0, 5, 10 ou 15 ml/kg; o indicador masculino aplica 1,05. Os coeficientes ficam em AjustesDoApp e a função em Calculos. Para 70 kg, 30 anos, feminino e atividade moderada, o resultado é 3150 ml; no indicador masculino, 3307 ml após a conversão para Int. A estimativa não é uma prescrição clínica.
 
-### 7.2 Migração cadastro e validação
+### 7.2 Validação gravação e manutenção do esquema
 
-![Figura 3 - Evolução do banco sem apagar registros](capturas/atualizadas/codigo-migracao.png)
+![Figura 3 - Procedimento de migração do esquema](capturas/atualizadas/codigo-migracao.png)
 
-ALTER TABLE adiciona horário sem remover bebidas. A criação de sintomas permanece condicionada à versão antiga. O ensaio de migração utiliza bancos separados e confirma a preservação de dados, seguida de inclusão, leitura, atualização e exclusão.
+O gerenciamento do esquema utiliza a versão de origem para decidir quais comandos executar. ALTER TABLE acrescenta o horário sem remover bebidas. A verificação utiliza bancos de teste das versões 1 e 2, confere a preservação dos dados e exercita as operações de persistência.
 
-![Figura 4 - Seleção dos campos e validação do volume](capturas/atualizadas/codigo-cadastro.png)
+![Figura 4 - Validação do volume informado no cadastro](capturas/atualizadas/codigo-cadastro.png)
 
-O cadastro cria os chips a partir de TipoBebida. A seleção é única e obrigatória; a tag guarda o enum, e salvar usa valorBanco, sem ler o texto do botão. Os atalhos somam volume. Data e horário são interpretados com formato estrito, e instantes futuros são recusados. Inserir deve retornar um identificador positivo; atualizar deve afetar uma linha. O uso de copy mantém favorito e identificador na edição. O IMC usa altura em metros; menores de 20 anos não recebem classificação adulta.
+O cadastro lê a categoria da tag do chip e utiliza valorBanco na gravação. Os atalhos somam ao campo de volume até o limite definido em AjustesDoApp. A interpretação estrita da data e do horário recusa entradas inválidas e instantes futuros.
 
-### 7.3 Carrossel lembretes e dicas
+Depois da validação, a Activity monta Bebida e chama o repositório pela função dados. Na edição, copy conserva identificador e favorito. O botão fica desabilitado durante a gravação e o sucesso depende do retorno esperado do banco. A restauração de estado preserva a seleção e os campos ao recriar a tela.
 
-![Figura 5 - Agrupamento das páginas de consumo diário](capturas/atualizadas/codigo-carrossel.png)
+### 7.3 Acompanhamento diário e lembretes
 
-A primeira página é Água; outros tipos aparecem quando registrados hoje. Uma última página reúne o total válido, sem álcool. Trocar de página não modifica os dados. O gesto reconhece predominância horizontal e distância mínima, deixando a rolagem vertical disponível. A seleção é preservada ao recriar a Activity; se o tipo desaparecer, o painel retorna para Água.
+![Figura 5 - Agrupamento dos registros por categoria](capturas/atualizadas/codigo-carrossel.png)
 
-![Figura 6 - Agendamento do próximo lembrete local](capturas/atualizadas/codigo-lembretes.png)
+ConsumoDoDia soma os registros da data e organiza as páginas conforme o catálogo. Água permanece na primeira posição. Havendo outra categoria, uma página reúne o total válido sem álcool. O gesto horizontal e as setas mudam a seleção sem alterar o banco, enquanto a rolagem vertical continua disponível.
 
-O alarme anterior é cancelado e o próximo horário é calculado. O receptor trata alarme, reinicialização, atualização do pacote e mudanças de data e fuso. Horários são aproximados e podem atrasar por condições do Android (Google, s.d.b). No Android 13 ou posterior, é necessária a permissão de notificações. Dicas e sintomas permanecem educativos: não diagnosticam causas nem apresentam água como forma de neutralizar álcool.
+![Figura 6 - Agendamento do próximo aviso local](capturas/atualizadas/codigo-lembretes.png)
+
+Lembretes calcula o próximo horário e programa AlarmManager. O receptor publica o aviso quando permitido e reagenda o próximo. Reinicialização, atualização do pacote e mudanças de data ou fuso também são tratadas. Os horários são aproximados e dependem das condições do Android (Google, s.d.b); notificações exigem autorização e canal habilitado (Google, s.d.c).
+
+### 7.4 Execução assíncrona e continuidade do uso
+
+![Figura 7 - Execução do trabalho e entrega do resultado à interface](capturas/atualizadas/codigo-assincrono.png)
+
+A fila de BancoAsync executa a operação do repositório fora da thread principal. runCatching representa sucesso ou falha, e Handler agenda a entrega à interface. DadosActivity confere se a tela não foi destruída ou encerrada antes de atualizar seus componentes. Esse fluxo é utilizado por cadastro, detalhes, histórico, dicas, sintomas e atalhos.
+
+A continuidade diária utiliza RotinaDiaria para calcular a próxima meia-noite no fuso local. MainActivity atualiza a data e consulta os registros quando o horário é alcançado, quando recebe os eventos previstos de mudança de horário e quando volta ao primeiro plano. Ao deixar de estar visível, cancela o agendamento da tela.
+
+Ao atingir a meta válida, o painel apresenta uma mensagem e um pulso discreto. Uma preferência registra a data da comemoração para impedir repetição na mesma data; a animação respeita sua desativação no sistema. A opção Desfazer do registro rápido permanece disponível, sem ser substituída por outra barra de mensagem.
+
+Na exclusão, DetalheBebidaActivity conserva a bebida e o prazo de dez segundos. Durante esse intervalo, mantém os dados visíveis e oferece a restauração. A cópia e o prazo são preservados na recriação da tela. O repository utiliza inserção que falha em colisões de ID, preservando uma linha já existente.
 
 ## 8 INTERFACE E JORNADA DE USO
 
-![Figura 7 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/abertura.png)
+![Figura 8 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/abertura.png)
 
-![Figura 7 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/onboarding_bemvindo.png)
+![Figura 8 - Abertura e apresentação do primeiro acesso](capturas/atualizadas/onboarding_bemvindo.png)
 
-A abertura e as boas-vindas compartilham uma ilustração nativa de água. A identidade mantém azul, branco e verde-água, títulos claros, cartões e espaços para leitura. A transição da abertura é cancelada se a tela for encerrada.
+A jornada começa com uma abertura ilustrada e uma apresentação do perfil. A identidade visual utiliza água, azul e superfícies claras. O encerramento da abertura cancela sua transição pendente, evitando navegação depois que a tela deixa de ser utilizada.
 
 ### 8.1 Configuração do perfil
 
-![Figura 8 - Etapas de medidas e atividade física](capturas/atualizadas/onboarding_medidas.png)
+![Figura 9 - Preenchimento das medidas e da atividade física](capturas/atualizadas/onboarding_medidas.png)
 
-![Figura 8 - Etapas de medidas e atividade física](capturas/atualizadas/onboarding_rotina.png)
+![Figura 9 - Preenchimento das medidas e da atividade física](capturas/atualizadas/onboarding_rotina.png)
 
-O perfil passa por sexo usado na fórmula, medidas, atividade física e cuidados opcionais. A etapa e os campos são preservados na recriação. O resumo permite revisar a meta e seguir para o dia. Os coeficientes e as limitações ficam disponíveis na área de regras.
+A configuração organiza sexo usado na fórmula, medidas, atividade física e cuidados opcionais em quatro etapas. O resumo permite conferir a meta e acessar o dia. A etapa e os campos são preservados na recriação da Activity, e o perfil pode ser editado pela navegação inferior.
 
 ### 8.2 Registro e acompanhamento
 
-![Figura 9 - Cadastro visual e carrossel de bebidas](capturas/atualizadas/adicionar_bebida.png)
+![Figura 10 - Cadastro de bebida e consulta do consumo por categoria](capturas/atualizadas/adicionar_bebida.png)
 
-![Figura 9 - Cadastro visual e carrossel de bebidas](capturas/atualizadas/consumo_suco.png)
+![Figura 10 - Cadastro de bebida e consulta do consumo por categoria](capturas/atualizadas/consumo_suco.png)
 
-O cadastro separa tipo, quantidade, data e horário e observação. O botão de salvar permanece acessível na base. No início, o gesto lateral alterna registros agrupados por tipo; os atalhos rápidos continuam dedicados à água. O texto diferencia participação na meta total e registros alcoólicos fora da meta.
+O cadastro destaca a quantidade, agrupa as opções e mantém a ação de salvar na base. Os chips compartilham um XML e seletores de estado. Nomes e mensagens ficam em strings.xml; a paleta e as cores de seleção utilizam recursos definidos. No painel, a navegação por tipo esclarece a origem do volume exibido.
 
-### 8.3 Evolução e lembretes
+### 8.3 Histórico estatísticas e lembretes
 
-![Figura 10 - Estatísticas semanais e configuração de notificações](capturas/atualizadas/estatisticas.png)
+![Figura 11 - Consulta semanal e configuração dos avisos](capturas/atualizadas/estatisticas.png)
 
-![Figura 10 - Estatísticas semanais e configuração de notificações](capturas/atualizadas/lembretes.png)
+![Figura 11 - Consulta semanal e configuração dos avisos](capturas/atualizadas/lembretes.png)
 
-As estatísticas combinam gráfico, média e filtros. Lembretes agrupam ativação, horários, intervalo, teste e permissões. As demais telas usam os mesmos cabeçalhos e cartões; as dicas permitem expandir ou recolher seu conteúdo.
+O histórico combina filtros, enquanto o gráfico apresenta o resumo semanal. Os lembretes agrupam ativação, período, intervalo, teste e permissões. Componentes de cabeçalho e cartões mantêm continuidade visual entre as telas. As dicas permitem expandir e recolher seu conteúdo.
+
+### 8.4 Detalhes e recuperação de registros
+
+![Figura 12 - Detalhes de bebida e exclusão com possibilidade de desfazer](capturas/atualizadas/detalhe.png)
+
+![Figura 12 - Detalhes de bebida e exclusão com possibilidade de desfazer](capturas/atualizadas/desfazer_exclusao.png)
+
+Os detalhes permitem consultar horário e observação, favoritar e editar. Após confirmar uma exclusão, o usuário dispõe de dez segundos para desfazer. O cartão permanece visível durante esse prazo, inclusive depois de recriar a tela; a restauração recupera os campos do registro.
 
 ## 9 DECISÕES TÉCNICAS E LIMITAÇÕES
 
-Componentes nativos e armazenamento local mantêm o projeto próximo dos fundamentos da disciplina. SQLiteOpenHelper permite estudar o esquema e as consultas; SharedPreferences atende às configurações pequenas. A escolha exige manutenção manual de consultas e migrações.
+A escolha de componentes Android e armazenamento local aproxima o projeto dos fundamentos da disciplina. SQLiteOpenHelper permite explicitar esquema, consultas e migrações, mas exige sua manutenção manual. O repositório e a fila separam o trabalho de persistência da atualização dos componentes visuais.
 
-A meta compartilhada evita leituras diferentes de atividade física. O total soma integralmente volumes de bebidas sem álcool: é uma definição do aplicativo, e não uma equivalência nutricional entre categorias. As páginas por tipo deixam mais claro o que cada número representa.
+A execução em segundo plano evita realizar as operações SQLite na thread principal; isso não constitui medição de desempenho. Não foram executados ensaios com bases extensas nem medições sistemáticas de memória, tempo ou bateria. A fila é serial e as Activities continuam responsáveis por coordenar parte dos fluxos.
 
-Datas e horários em texto preservam o modelo anterior, mas exigem interpretação e ordenação explícitas. Uma representação temporal estruturada poderá simplificar consultas. O projeto não separa instante de inclusão e instante de consumo. A sequência alcoólica não mede doses, teor ou intervalo, e o diálogo de inclusão consulta hoje, mesmo em um cadastro retroativo; a edição não repete esse diálogo.
+Datas e horários em texto exigem interpretação e ordenação explícitas. O sistema não separa o instante de inclusão do instante de consumo. O gráfico utiliza a meta vigente nos sete dias e não armazena metas históricas. A sequência de álcool não considera doses, teor ou intervalo; o diálogo de inclusão consulta o dia corrente mesmo em um cadastro retroativo.
 
-Consultas ainda ocorrem em fluxos de Activities. Não foram realizados ensaios com bases extensas, medições de tempo, memória e bateria, nem validação de virada do dia com a tela continuamente aberta. O gráfico usa a meta atual em todos os sete dias, sem guardar metas históricas por data.
+A virada diária é verificada com relógio controlado e acionamento do callback empregado pelo agendamento. Há teste da próxima meia-noite em mudança de ano e horário de verão. Esses cenários não equivalem a um ensaio prolongado aguardando a virada real em vários aparelhos.
 
-A verificação em Android 17 não substitui testes físicos, leitor de tela, fontes ampliadas e diferentes fabricantes. Backup, restauração em outro aparelho e atrasos prolongados de notificação precisam de avaliação adicional. A análise estática não demonstra proteção integral dos dados pessoais.
+A execução em Android 17 não substitui testes físicos, leitor de tela, fonte ampliada ou diferentes fabricantes. A restauração do backup do Android e atrasos prolongados de notificações exigem avaliação adicional. O aplicativo não oferece exportação ou importação de backup em arquivo.
 
-A fórmula e as mensagens não têm validação clínica individual. As referências educativas contextualizam o tema, mas não validam seus coeficientes. O aplicativo comunica que sintomas podem ter várias causas e orientações profissionais devem ser respeitadas (CDC, 2026; NHS, s.d.).
+A fórmula e as mensagens não possuem validação clínica individual. O total considera integralmente o volume sem álcool como uma regra do sistema, sem afirmar equivalência nutricional entre bebidas. As referências educativas contextualizam o tema, mas não validam os coeficientes adotados (CDC, 2026; NHS, s.d.).
 
 ## 10 VERIFICAÇÃO E RESULTADOS
 
-A revisão cf9835a+enum foi compilada em depuração. assembleDebug terminou com BUILD SUCCESSFUL e lintDebug não registrou erros. O projeto possui avisos de análise estática; o resultado não significa ausência de todos os problemas potenciais.
+A verificação relaciona requisitos a cenários reproduzíveis. A compilação de depuração com assembleDebug terminou com BUILD SUCCESSFUL. lintDebug não registrou erros e não apontou HardcodedText nos layouts; permanecem avisos estáticos, de modo que o resultado não demonstra ausência de todos os problemas potenciais.
 
-A execução consolidada registra 18 testes unitários e 15 instrumentados aprovados no emulador Medium_Phone com Android 17. Os antigos testes de exemplo foram substituídos. O quadro resume as suítes atuais.
+A execução reúne 21 testes unitários e 18 instrumentados aprovados no emulador Medium_Phone com Android 17. O quadro apresenta a distribuição por suíte.
 
 | Suíte | Testes | Resultado |
 |---|---|---|
 | CalculosTest | 10 | Aprovados |
 | ConsumoDoDiaTest | 5 | Aprovados |
 | TipoBebidaTest | 3 | Aprovados |
+| RotinaDiariaTest | 3 | Aprovados |
 | BancoMigrationTest | 3 | Aprovados |
 | FluxosTest | 11 | Aprovados |
+| MelhoriasTest | 3 | Aprovados |
 | NotificacaoTest | 1 | Aprovado |
-| Total | 33 | Sem falhas |
+| Total | 39 | Sem falhas |
 
-As regras unitárias abrangem meta, IMC, sequência de álcool, soma válida, lembretes e páginas de consumo. TipoBebidaTest verifica valores legados, classificações e categorias desconhecidas. Um fluxo troca o rótulo de um chip e confirma a gravação do valor estável. Os testes de banco verificam migrações das versões 1 e 2 e operações CRUD. Os fluxos cobrem primeiro acesso, perfil, cadastro, edição, favorito preservado, filtros, Desfazer, coerência de meta, gestos, setas e recriação.
+Os testes unitários exercitam cálculos, classificação de bebidas, agrupamento diário e regras temporais. Os instrumentados verificam migrações e CRUD, perfil, validação, edição, filtros, gestos, recriação, exclusão com restauração e execução do repository fora da thread principal. O cenário diário verifica o marcador de comemoração e a consulta após a mudança de data.
 
-NotificacaoTest verifica a publicação de uma notificação pelo serviço do Android. Não comprova pontualidade em repouso prolongado. Não foram medidos cobertura percentual de código, desempenho ou eficácia clínica. As capturas utilizam dados de teste removidos ao final dos cenários.
+NotificacaoTest verifica a publicação pelo serviço Android, sem comprovar pontualidade em repouso prolongado. Não foram medidos cobertura percentual de código, desempenho ou eficácia clínica. Os registros de teste são removidos ao final dos cenários.
 
-## 11 MANUAL DE EXECUÇÃO E USO
+## 11 PROCEDIMENTOS DE EXECUÇÃO E USO
 
-Abra no Android Studio a pasta que contém settings.gradle.kts. Sincronize o Gradle e disponibilize JDK 17 e SDK 37. Para uso, utilize um emulador ou aparelho com API 24 ou superior. A resolução das dependências pode exigir internet no ambiente de desenvolvimento.
+Para reproduzir o projeto, abra no Android Studio a pasta que contém settings.gradle.kts. Sincronize o Gradle e disponibilize JDK 17 e SDK 37. A execução requer emulador ou aparelho com API 24 ou superior. A resolução das dependências pode exigir acesso à internet no ambiente de desenvolvimento.
 
-No Windows, execute .\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --console=plain. O APK é gerado em app/build/outputs/apk/debug/app-debug.apk. O relatório unitário fica em app/build/reports/tests/testDebugUnitTest/index.html, e o de lint em app/build/reports/lint-results-debug.html.
+No Windows, execute .\gradlew.bat :app:assembleDebug :app:testDebugUnitTest :app:lintDebug --console=plain. O APK fica em app/build/outputs/apk/debug/app-debug.apk. Os relatórios unitários e estáticos ficam nos diretórios app/build/reports/tests e app/build/reports.
 
-Com um emulador de teste conectado, utilize .\gradlew.bat :app:connectedDebugAndroidTest. A alternativa usada na consolidação instala os APKs principal e de teste e executa am instrument com AndroidJUnitRunner. O registro está em app/build/qa/validacao_enum_instrumentados.txt.
+Com um emulador de teste conectado, utilize .\gradlew.bat :app:connectedDebugAndroidTest. Na execução registrada, os APKs principal e de teste foram instalados e a suíte foi acionada por am instrument com AndroidJUnitRunner. O log consolidado está em app/build/qa/guia_ajustes_instrumentados.txt.
 
-No primeiro acesso, toque em Vamos começar e percorra as quatro etapas. Informe medidas válidas, escolha a atividade e marque cuidados apenas se desejar. Confira o resumo e toque em Ir para meu dia. O perfil pode ser editado depois pela navegação inferior.
+No primeiro acesso, toque em Vamos começar e percorra as quatro etapas. Informe medidas válidas, escolha a atividade e revise o resumo. A meta de 3150 ml pode ser reproduzida com 70 kg, 30 anos, feminino e atividade moderada.
 
-No início, os atalhos +200, +300 e +500 ml registram água imediatamente, com Desfazer por seis segundos. O botão principal abre o cadastro completo. Escolha a categoria, toque no número ou some volume pelos atalhos, confira data e horário e salve. A observação não é obrigatória.
+No painel, os atalhos de 200, 300 e 500 ml registram água com possibilidade de desfazer por seis segundos. O botão principal abre o cadastro completo. Selecione a bebida, informe quantidade, data, horário e observação opcional e confirme. O limite de volume e os atalhos são definidos em AjustesDoApp.
 
-### 11.1 Consulta lembretes e informações
+### 11.1 Consulta edição e informações complementares
 
-Deslize horizontalmente no círculo ou use as setas para mudar de bebida. A primeira página mostra Água; outros tipos aparecem quando registrados hoje. Havendo outros tipos, a última página mostra o total que participa da meta. Álcool permanece indicado como Fora da meta. Trocar de página não altera dados.
+Deslize no círculo ou utilize as setas para consultar as categorias do dia. Água aparece primeiro; outros tipos dependem dos registros. O total válido exclui álcool. A troca de página não grava ou altera dados. A data é recalculada na virada e ao retomar a tela, e a comemoração considera o total válido e a meta vigente.
 
-Em Evolução, consulte os sete dias e combine filtros do histórico. Toque em um item para ver detalhes, marcar favorito, editar ou excluir após confirmação. A edição mantém identificador e favorito. Os filtros não modificam o resumo semanal.
+Em Evolução, consulte o resumo semanal e combine os filtros do histórico. Abra um item para consultar, favoritar, editar ou excluir. Após confirmar a exclusão, Desfazer permanece disponível por dez segundos. Na recuperação, identificador, horário, favorito e observação são preservados.
 
-Em Lembretes, escolha início, fim e intervalo e salve. Autorize notificações quando solicitado. Use o envio de teste e as permissões para verificar a habilitação. O período deve começar e terminar no mesmo dia. Os horários são aproximados; forçar a parada suspende o trabalho até reabrir o aplicativo.
+Em Lembretes, escolha início, fim e intervalo e salve. Autorize notificações quando solicitado e utilize o teste de publicação para conferir a habilitação. Os horários são aproximados; forçar a parada do aplicativo suspende seu trabalho até reabri-lo.
 
-Em sintomas, selecione os itens percebidos, informe sede e observação se desejar e salve. O histórico permite excluir relatos. Em dicas, use Ler dica para expandir e Recolher para voltar à apresentação resumida. As mensagens não identificam a causa de sintomas.
+Em sintomas, selecione os itens percebidos, informe sede e observação se desejar e salve. O histórico permite excluir relatos. Em dicas, Ler dica expande o conteúdo e Recolher retorna à apresentação resumida. As mensagens não identificam a causa de um sintoma.
 
-Regras e fontes estão acessíveis por No seu ritmo e pela tela Sobre. O aplicativo não tem conta, sincronização própria nem exportação do histórico. A recuperação por backup depende das configurações do Android e não foi validada nesta revisão.
+A área de regras e fontes apresenta os coeficientes e os limites de uso. O aplicativo funciona sem conta e sem sincronização própria. A recuperação de dados por mecanismos de backup do Android depende das configurações do sistema e não integra os cenários aprovados neste trabalho.
 
-## 12 RELATÓRIO TÉCNICO DE AVALIAÇÃO
+## 12 AVALIAÇÃO TÉCNICA
 
-O objeto avaliado é o Hidratapp 1.0, com banco SQLite 3 e revisão identificada neste relatório. O conjunto integra onze Activities, persistência, cálculo compartilhado, componentes visuais, gráfico, registro de sintomas e lembretes locais.
+A avaliação considera a relação entre os requisitos, a organização do código e os comportamentos exercitados. O fluxo de registro conecta seleção de categoria, validação, construção do modelo, persistência e consulta. A edição e a restauração verificam continuidade dos dados, enquanto a recriação das telas verifica a preservação de estado relevante.
 
-As principais correções em relação ao documento anterior são a unificação da meta com esporte, a revisão dos textos de saúde, a verificação dos retornos de gravação, a preservação de estado e a migração com horário. A ausência de notificações e a existência de apenas um teste aritmético deixaram de descrever o projeto.
+O catálogo em enum permite utilizar a mesma identificação em cadastro, filtros, histórico e regras. Os recursos de texto separam rótulos de valores persistidos. Os parâmetros compartilhados mantêm coerência entre volumes, mensagens e coeficientes, e os recursos visuais distinguem aparência de comportamento.
 
-A evolução visual reorganizou abertura, configuração e menus. O cadastro utiliza escolhas por categoria e volume destacado; o painel permite percorrer registros agrupados por bebida. O gráfico e os filtros ampliam a consulta. Os lembretes possuem configuração própria e teste de publicação.
+O repository e a fila fornecem um caminho definido para as operações SQLite. A verificação da thread de execução confirma esse comportamento no cenário testado, mas não quantifica ganho de desempenho. O controle diário articula consulta por data, agendamento e marcador de comemoração, com testes que utilizam relógio controlado.
 
-A refatoração substitui listas paralelas pelo enum, compartilhado pelo cadastro, filtros, carrossel, detalhes e regras de álcool e cafeína. As cores continuam nos recursos XML e no selector de seleção. O SQLite permanece na versão 3, sem migração nesta alteração. A avaliação reúne 33 testes aprovados e inspeção de imagens da execução. Isso sustenta a demonstração dos cenários exercitados, sem constituir certificação de qualidade, segurança ou adequação clínica. As limitações da seção 9 continuam relevantes antes de uma distribuição pública.
+Os 39 testes aprovados e a compilação sustentam a reprodução dos cenários descritos. As capturas e os trechos de código permitem relacionar os resultados às responsabilidades das classes. A análise estática complementa essa verificação, sem substituir avaliação de segurança, acessibilidade ou uso prolongado.
 
-O parecer é favorável à apresentação acadêmica dos recursos implementados e testados. As prioridades futuras são avaliar acessibilidade e mais aparelhos, medir desempenho em bases maiores, revisar backup e proteção dos dados e ampliar as camadas de persistência conforme a escala do sistema.
+O alcance da avaliação é acadêmico e técnico. As próximas investigações devem incluir aparelhos físicos, configurações de acessibilidade, bases maiores, backup e proteção dos dados. Esses pontos decorrem das limitações registradas, e não são apresentados como resultados já demonstrados.
 
 ## 13 CONSIDERAÇÕES FINAIS
 
-O Hidratapp demonstra a integração de interface Android, regras em Kotlin, persistência relacional e testes. A pessoa pode registrar bebidas, acompanhar volumes, consultar histórico, configurar lembretes e manter relatos em uma experiência visual consistente.
+O desenvolvimento do Hidratapp relaciona requisitos de organização pessoal à modelagem dos registros, à implementação de interfaces Android, às regras em Kotlin e à persistência local. A jornada permite configurar o perfil, registrar bebidas, consultar volumes e histórico e utilizar informações complementares e lembretes.
 
-A atualização evidencia a necessidade de alinhar documentação e implementação. A meta foi centralizada, o esquema passou a guardar horário, os lembretes foram implementados e os testes de exemplo deram lugar a cenários de domínio e interface. Essas mudanças alteram a demonstração e as conclusões técnicas.
+A estrutura do sistema associa cada operação a responsabilidades definidas: o catálogo identifica categorias, as funções compartilhadas calculam a meta, as Activities coordenam a interação e o repositório encaminha a persistência. A execução em segundo plano e a preservação de estado sustentam a continuidade dos fluxos de consulta, edição e restauração.
 
-As capturas e os trechos atuais permitem conferir como as classes contribuem para o funcionamento. O resultado consolidado é a aprovação dos testes executados e a compilação do APK, com limites documentados. A próxima evolução deve ampliar aparelhos e configurações avaliados, preservando a finalidade de organização pessoal e os limites das estimativas de saúde.
+A verificação apresenta compilação concluída, análise estática sem erros e aprovação dos cenários unitários e instrumentados executados. Esses resultados permitem demonstrar o funcionamento descrito, respeitando os limites do ambiente de teste e das estimativas de saúde. O trabalho estabelece uma base para avaliações posteriores de uso, acessibilidade, desempenho e proteção dos dados.
 
 ## REFERÊNCIAS
 
@@ -246,24 +272,26 @@ GOOGLE. Schedule alarms. Android Developers, s.d.b. Disponível em: https://deve
 
 GOOGLE. Notification runtime permission. Android Developers, s.d.c. Disponível em: https://developer.android.com/develop/ui/compose/notifications/notification-permission. Acesso em: 15 nov. 2026.
 
-HIDRATAPP. Código-fonte do aplicativo. Versão 1.0, revisão cf9835a+enum. Curitiba, 2026. Disponível em: https://github.com/CaleffiGuilherme/Hidratapp. Analisado em: 16/11/2026.
+HIDRATAPP. Código-fonte do aplicativo. Versão 1.0, conjunto de fontes locais d9922fad. Curitiba, 2026. Repositório do projeto: https://github.com/CaleffiGuilherme/Hidratapp. Analisado em: 16/11/2026.
 
-HIDRATAPP. Relatórios de testes e análise estática. 2026. Arquivos locais: app/build/test-results/testDebugUnitTest, app/build/qa/validacao_enum_instrumentados.txt e app/build/reports/lint-results-debug.xml.
+HIDRATAPP. Relatórios de testes e análise estática. 2026. Arquivos locais: app/build/test-results/testDebugUnitTest, app/build/qa/guia_ajustes_instrumentados.txt e app/build/reports/lint-results-debug.xml.
 
 NATIONAL HEALTH SERVICE. Water drinks and hydration. NHS, s.d. Disponível em: https://www.nhs.uk/live-well/eat-well/food-guidelines-and-food-labels/water-drinks-nutrition/. Acesso em: 15 nov. 2026.
 
 UNIVERSIDADE ESTADUAL DE CAMPINAS. Colégio Técnico de Campinas. Normas e modelos. Biblioteca do COTUCA, s.d. Disponível em: https://www.cotuca.unicamp.br/biblioteca/normas-e-modelos/. Acesso em: 15 nov. 2026.
 
-## APÊNDICE A ROTEIRO DE DEMONSTRAÇÃO
+## APÊNDICE A ROTEIRO DE VERIFICAÇÃO
 
-Apresentar a abertura, percorrer as quatro etapas e cadastrar 70 kg, 175 cm, 30 anos, feminino e esporte moderado. Conferir 3150 ml no resumo. O teste correspondente verifica salvamento e exibição da meta.
+Percorrer as quatro etapas e cadastrar 70 kg, 175 cm, 30 anos, feminino e atividade moderada. Conferir 3150 ml no resumo e nas telas que utilizam a meta.
 
-Escolher Café, somar 200 e 300 ml e conferir 500 ml. Salvar data e horário válidos, favoritar e editar. Demonstrar preservação do identificador e do favorito. Há testes para seleção, validação, soma e recriação.
+Escolher Café, somar 200 e 300 ml e conferir 500 ml. Salvar data e horário válidos, favoritar e editar. Conferir identificador, favorito, horário e observação.
 
-Registrar água e outra bebida hoje. Deslizar no círculo, usar as setas e mostrar o total. Conferir a rolagem vertical e a seleção após recriar a tela. Esses comportamentos são exercitados pelo teste de gestos.
+Excluir uma bebida de teste, recriar a tela durante o prazo e tocar em Desfazer. Conferir a recuperação dos campos. O teste de colisão de ID deve manter intacta uma linha já existente.
 
-Combinar filtros, abrir detalhes e consultar o gráfico. Salvar um período de lembretes, autorizar notificações e enviar um teste. Distinguir publicação imediata de uma verificação prolongada de pontualidade.
+Registrar água e outra categoria na data consultada. Navegar por gesto e setas, conferir a soma por tipo, o total sem álcool e a preservação da seleção após recriar a tela.
 
-Expandir uma dica, registrar um sintoma e abrir regras e fontes. Explicar a finalidade de organização e o caráter estimativo da fórmula, sem tratar números ou mensagens como diagnóstico.
+Combinar filtros, consultar o gráfico e verificar que eles não alteram o resumo semanal. Salvar lembretes, autorizar notificações e testar a publicação, distinguindo esse teste de uma avaliação prolongada de pontualidade.
 
-Planejar aparelhos físicos, versões Android adicionais, leitor de tela, fonte ampliada, bases extensas, restauração de backup e virada do dia com a tela aberta. Esses ensaios não foram concluídos e não devem ser apresentados como aprovados.
+Executar RotinaDiariaTest e o cenário diário de MelhoriasTest. Conferir a próxima meia-noite, a consulta após a mudança de data e o marcador de comemoração. O relógio controlado deve ser restaurado ao final do teste.
+
+Planejar aparelhos físicos, leitor de tela, fonte ampliada, bases extensas, recuperação de backup e comportamento prolongado de alarmes. Esses ensaios não compõem os resultados aprovados apresentados.
