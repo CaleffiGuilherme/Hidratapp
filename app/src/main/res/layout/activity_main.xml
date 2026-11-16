@@ -1,527 +1,433 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@drawable/bg_flo_gradient">
-
     <ScrollView
+        android:id="@+id/scrollInicio"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/layoutBottomButton"
-        android:fillViewport="true"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingBottom="16dp">
-
+        android:fillViewport="true"
+        android:scrollbars="none">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:paddingTop="16dp">
-
-            <!-- Cabeçalho Topo -->
-            <RelativeLayout
+            android:paddingTop="16dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_water_drop"
+                    app:tint="@color/blue_primary"
+                    android:importantForAccessibility="no" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentStart="true"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <com.google.android.material.card.MaterialCardView
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        app:cardBackgroundColor="@color/blue_primary"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp"
-                        app:strokeWidth="0dp">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Hidratapp"
-                            android:src="@drawable/ic_water_drop"
-                            app:tint="@color/white" />
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Hidratapp"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="22sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Seu companheiro de hidratação ♡"
-                            android:textColor="@color/blue_gray_text"
-                            android:textSize="12sp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <!-- Ícone Notificação no Canto Superior Direito -->
-                <com.google.android.material.card.MaterialCardView
+                    android:layout_marginStart="8dp"
+                    android:text="hidratapp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="22sp"
+                    android:letterSpacing="-0.03"
+                    android:textColor="@color/text_primary" />
+                <ImageButton
                     android:id="@+id/btnNotificacoes"
-                    android:layout_width="42dp"
-                    android:layout_height="42dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="21dp"
-                    app:cardElevation="2dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_centerInParent="true"
-                            android:contentDescription="Notificações"
-                            android:src="@drawable/ic_bell_notification"
-                            app:tint="@color/blue_primary" />
-
-                        <!-- Badge Vermelha -->
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="8dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginEnd="10dp"
-                            android:background="@drawable/circle_pulse_bg"
-                            android:backgroundTint="#FF5252" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-            </RelativeLayout>
-
-            <!-- Indicador Principal de Hidratação Circular (Hero Element) -->
-            <com.google.android.material.card.MaterialCardView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_white_round"
+                    android:src="@drawable/ic_heart_health"
+                    android:padding="13dp"
+                    app:tint="@color/blue_primary"
+                    android:contentDescription="Dicas para cuidar de você" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvDataHoje"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                app:cardBackgroundColor="#F7FAFF"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="0dp"
-                app:strokeColor="#E2EEFA"
-                app:strokeWidth="1dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
+                android:layout_marginTop="24dp"
+                android:text="HOJE, SEU DIA DE SE CUIDAR"
+                android:textSize="11sp"
+                android:letterSpacing="0.13"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/text_secondary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Um gole de cada vez."
+                android:textSize="30sp"
+                android:letterSpacing="-0.04"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/text_primary" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Pequenos hábitos. Mais cuidado com você."
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary" />
+            <com.example.hidratapp.SwipeConsumoLayout
+                android:layout_width="match_parent"
+                android:layout_height="276dp"
+                android:layout_marginTop="16dp"
+                android:id="@+id/areaConsumo">
+                <com.example.hidratapp.HydrationProgressView
+                    android:id="@+id/pbMeta"
+                    android:layout_width="264dp"
+                    android:layout_height="264dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no" />
+                <LinearLayout
+                    android:layout_width="230dp"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="20dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="16dp">
-
-                    <!-- Arco/Anel Circular de Progresso -->
-                    <ProgressBar
-                        android:id="@+id/pbMeta"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="270dp"
-                        android:layout_height="270dp"
-                        android:layout_centerHorizontal="true"
-                        android:progressDrawable="@drawable/custom_progress_bar"
-                        android:progressTint="@color/blue_primary" />
-
-                    <!-- Informações Dentro do Arco -->
-                    <LinearLayout
-                        android:id="@+id/layoutInfoMeta"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:id="@+id/infoConsumo">
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_water_drop"
+                        app:tint="@color/blue_primary"
+                        android:importantForAccessibility="no"
+                        android:id="@+id/ivBebidaAtual" />
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="32dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Água"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        android:id="@+id/tvBebidaAtual" />
+                    <TextView
+                        android:id="@+id/tvTotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:orientation="vertical">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="Gota"
-                            android:src="@drawable/ic_water_drop"
-                            app:tint="@color/blue_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="Progresso de hoje"
-                            android:textColor="@color/blue_gray_text"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvTotal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="0 / 2520 ml"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="28sp"
-                            android:textStyle="bold" />
-
-                        <!-- Chip de Porcentagem -->
-                        <TextView
-                            android:id="@+id/tvPercentual"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:paddingHorizontal="14dp"
-                            android:paddingVertical="5dp"
-                            android:text="0% da meta"
-                            android:textColor="@color/blue_primary"
-                            android:textSize="13sp"
-                            android:textStyle="bold" />
-
-                    </LinearLayout>
-
-                    <!-- Mascote Ilustrado Integrado -->
-                    <ImageView
-                        android:id="@+id/ivMascote"
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
-                        android:layout_below="@id/layoutInfoMeta"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="10dp"
-                        android:contentDescription="Mascote Gotinha de Água"
-                        android:src="@drawable/ic_mascot_water_drop" />
-
-                </RelativeLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Card de Alerta Alcoólico/Geral -->
+                        android:text="0 ml"
+                        android:textSize="42sp"
+                        android:letterSpacing="-0.05"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/text_primary"
+                        android:maxLines="1"
+                        app:autoSizeTextType="uniform"
+                        app:autoSizeMinTextSize="24sp"
+                        app:autoSizeMaxTextSize="42sp" />
+                    <TextView
+                        android:id="@+id/tvMetaDia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="da sua meta diária"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/tvPercentual"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/bg_white_round"
+                        android:text="0% da meta"
+                        android:textSize="12sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/blue_primary"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp" />
+                </LinearLayout>
+            </com.example.hidratapp.SwipeConsumoLayout>
+            <LinearLayout
+                android:id="@+id/navegacaoBebidas"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:visibility="gone">
+                <ImageButton
+                    android:id="@+id/btnBebidaAnterior"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_arrow_back"
+                    android:background="@drawable/bg_white_round"
+                    app:tint="@color/blue_primary"
+                    android:contentDescription="Bebida anterior" />
+                <TextView
+                    android:id="@+id/tvPaginaBebida"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_secondary" />
+                <ImageButton
+                    android:id="@+id/btnProximaBebida"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:padding="14dp"
+                    android:src="@drawable/ic_chevron_right"
+                    android:background="@drawable/bg_white_round"
+                    app:tint="@color/blue_primary"
+                    android:contentDescription="Próxima bebida" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvIncentivo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Seu próximo gole pode ser agora."
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary" />
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardAviso"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
+                android:layout_marginTop="14dp"
                 android:visibility="gone"
                 app:cardBackgroundColor="@color/alert_bg"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
                 app:strokeColor="@color/alert_border"
-                app:strokeWidth="1dp">
-
-                <LinearLayout
+                app:cardCornerRadius="20dp">
+                <TextView
+                    android:id="@+id/tvAviso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="16dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:contentDescription="Alerta"
-                        android:src="@drawable/ic_warning"
-                        app:tint="@color/alert_text" />
-
-                    <TextView
-                        android:id="@+id/tvAviso"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:textColor="@color/alert_text"
-                        android:textSize="14sp" />
-                </LinearLayout>
+                    android:padding="16dp"
+                    android:textColor="@color/alert_text"
+                    android:textSize="14sp" />
             </com.google.android.material.card.MaterialCardView>
-
-            <!-- Menu Principal (5 Cards Arredondados estilo Flo) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <!-- 1. Minha meta diária -->
-                <com.google.android.material.card.MaterialCardView
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="26dp"
+                android:layout_marginBottom="6dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Um toque, um gole"
+                    android:textColor="@color/text_primary"
+                    android:textSize="18sp"
+                    android:fontFamily="sans-serif-medium" />
+                <TextView
                     android:id="@+id/btnMenuMeta"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:id="@+id/iconMeta"
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_target" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="14dp"
-                            android:layout_toEndOf="@id/iconMeta"
-                            android:text="Minha meta diária"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_chevron_right" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 2. Estatísticas e histórico -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnMenuEstatisticas"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:id="@+id/iconEstatisticas"
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_chart_bar" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="14dp"
-                            android:layout_toEndOf="@id/iconEstatisticas"
-                            android:text="Estatísticas e histórico"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_chevron_right" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 3. Lembretes e alarmes (Dicas & Recomendações) -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnMenuLembretes"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:id="@+id/iconLembretes"
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_bell_notification" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="14dp"
-                            android:layout_toEndOf="@id/iconLembretes"
-                            android:text="Lembretes e alarmes"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_chevron_right" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 4. Registro de hábitos (Sintomas & Registro) -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnMenuHabitos"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:id="@+id/iconHabitos"
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_calendar_habit" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="14dp"
-                            android:layout_toEndOf="@id/iconHabitos"
-                            android:text="Registro de hábitos"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_chevron_right" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- 5. Perfil -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/btnMenuPerfil"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardBackgroundColor="@color/white"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="1dp"
-                    app:strokeWidth="0dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="16dp">
-
-                        <ImageView
-                            android:id="@+id/iconPerfil"
-                            android:layout_width="38dp"
-                            android:layout_height="38dp"
-                            android:layout_centerVertical="true"
-                            android:background="@drawable/bg_circle_icon_blue"
-                            android:padding="8dp"
-                            android:src="@drawable/ic_person"
-                            app:tint="@color/blue_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginStart="14dp"
-                            android:layout_toEndOf="@id/iconPerfil"
-                            android:text="Perfil"
-                            android:textColor="@color/blue_dark_text"
-                            android:textSize="15sp"
-                            android:textStyle="bold" />
-
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/ic_chevron_right" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Área Secundária: Sobre o App -->
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSobre"
-                    style="@style/Widget.Material3.Button.TextButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:layout_marginTop="4dp"
-                    android:text="Sobre o Hidratapp"
-                    android:textColor="@color/blue_gray_text"
-                    android:textSize="13sp"
-                    app:icon="@drawable/ic_info"
-                    app:iconGravity="textStart"
-                    app:iconPadding="6dp"
-                    app:iconTint="@color/blue_gray_text" />
-
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:gravity="center"
+                    android:text="Minha meta  ›"
+                    android:textColor="@color/blue_primary"
+                    android:textSize="12sp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/agua200"
+                    style="@style/HomeQuick"
+                    android:text="+200 ml" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/agua300"
+                    style="@style/HomeQuick"
+                    android:text="+300 ml" />
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/agua500"
+                    style="@style/HomeQuick"
+                    android:text="+500 ml" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:orientation="horizontal">
+                <LinearLayout
+                    android:id="@+id/btnMenuHabitos"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="132dp"
+                    android:layout_marginEnd="6dp"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_soft_mint"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_heart_health"
+                        app:tint="@color/aqua"
+                        android:importantForAccessibility="no" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Como você está?"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/text_primary" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Registre seus sinais  ↗"
+                        android:textSize="11sp"
+                        android:textColor="@color/aqua" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnRegras"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="132dp"
+                    android:layout_marginStart="6dp"
+                    android:padding="16dp"
+                    android:background="@drawable/bg_soft_blue"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:orientation="vertical">
+                    <ImageView
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
+                        android:src="@drawable/ic_info"
+                        app:tint="@color/blue_primary"
+                        android:importantForAccessibility="no" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="No seu ritmo"
+                        android:textSize="15sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textColor="@color/text_primary" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Entenda sua meta  ↗"
+                        android:textSize="11sp"
+                        android:textColor="@color/blue_primary" />
+                </LinearLayout>
+            </LinearLayout>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSobre"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="12dp"
+                android:text="Feito para o seu bem-estar · Sobre o app"
+                android:textColor="@color/text_secondary"
+                android:textSize="11sp" />
         </LinearLayout>
     </ScrollView>
-
-    <!-- Botão Principal Fixo na Parte Inferior (+ Adicionar água) -->
     <LinearLayout
         android:id="@+id/layoutBottomButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#00FFFFFF"
-        android:paddingHorizontal="20dp"
-        android:paddingBottom="20dp">
-
+        android:orientation="vertical"
+        android:background="@color/wellness_bg"
+        android:paddingTop="6dp">
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNovaBebida"
             android:layout_width="match_parent"
             android:layout_height="58dp"
-            android:text="Adicionar bebida"
+            android:text="Registrar uma bebida"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/blue_primary"
-            app:cornerRadius="29dp"
-            app:elevation="6dp"
+            app:cornerRadius="28dp"
             app:icon="@drawable/ic_add"
             app:iconGravity="textStart"
-            app:iconPadding="10dp"
-            app:iconTint="@color/white" />
+            app:iconTint="@color/white"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="8dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_home"
+                android:drawablePadding="4dp"
+                android:paddingTop="10dp"
+                android:text="Hoje"
+                android:textSize="10sp"
+                android:textColor="@color/blue_primary"
+                android:fontFamily="sans-serif-medium"
+                android:importantForAccessibility="yes"
+                android:drawableTint="@color/blue_primary" />
+            <TextView
+                android:id="@+id/btnMenuEstatisticas"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_chart_bar"
+                android:drawablePadding="4dp"
+                android:paddingTop="10dp"
+                android:text="Evolução"
+                android:textSize="10sp"
+                android:textColor="@color/text_secondary"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:drawableTint="@color/text_secondary" />
+            <TextView
+                android:id="@+id/btnMenuLembretes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_bell_notification"
+                android:drawablePadding="4dp"
+                android:paddingTop="10dp"
+                android:text="Lembretes"
+                android:textSize="10sp"
+                android:textColor="@color/text_secondary"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:drawableTint="@color/text_secondary" />
+            <TextView
+                android:id="@+id/btnMenuPerfil"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:drawableTop="@drawable/ic_person"
+                android:drawablePadding="4dp"
+                android:paddingTop="10dp"
+                android:text="Perfil"
+                android:textSize="10sp"
+                android:textColor="@color/text_secondary"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:drawableTint="@color/text_secondary" />
+        </LinearLayout>
     </LinearLayout>
-
-</RelativeLayout>
+</LinearLayout>
